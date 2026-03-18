@@ -1,0 +1,51 @@
+/*!
+ * 🐉 404.css v0.1.0-alpha.1
+ * https://github.com/junglesta/404css
+ *
+ * Copyright (c) 2024–2025 Toybreaker
+ * Released under the MIT License
+ *
+ * An unknown modern CSS framework.
+ * Implementing issues gone 404. SMILING DX!
+ *
+ * ─────────────────────────────────────────────
+ * USAGE
+ *
+ * This file imports only the framework (omg/) layers.
+ * You must also supply your brand's 000/ files:
+ *
+ *   your-project/404.css
+ *   ├── @import "@junglesta/404css";          ← this file (tokens + layout + components + utils)
+ *   ├── @import "./000/1client_vars.css"  layer(tokens);
+ *   ├── @import "./000/2client_datatheme.css" layer(theme);
+ *   └── @import "./000/3client_theme.css"     layer(theme);
+ *
+ * Starter 000/ templates are in node_modules/@junglesta/404css/template/000/
+ * ─────────────────────────────────────────────
+ */
+
+/* CASCADING ORDER — declared first so all @imports know their place */
+@layer reset, tokens, theme, layout, components, utilities;
+
+/* RESET */
+@import url(omg/0reset.css) layer(reset);
+
+/* TOKENS — framework spacing, typography, motion */
+@import url(omg/1vars.css) layer(tokens);
+
+/* LAYOUT — element defaults, grid, container, states */
+@import url(omg/3base.css)   layer(layout);
+@import url(omg/4layout.css) layer(layout);
+@import url(omg/6states.css) layer(layout);
+
+/* COMPONENTS — buttons, links, controls */
+@import url(omg/5components.css) layer(components);
+
+/* UTILITIES — highest priority, no !important needed */
+@import url(omg/utils/text.css)       layer(utilities);
+@import url(omg/utils/visibility.css) layer(utilities);
+@import url(omg/utils/layout.css)     layer(utilities);
+@import url(omg/utils/spacing.css)    layer(utilities);
+@import url(omg/utils/aspect.css)     layer(utilities);
+@import url(omg/utils/gradients.css)  layer(utilities);
+@import url(omg/utils/misc.css)       layer(utilities);

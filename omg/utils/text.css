@@ -1,0 +1,27 @@
+/*! 🐉 404.css | MIT License */
+/* utils/text.css — text alignment, transform, wrap */
+
+.center,
+.centre,
+.centered {
+  text-align: center;
+}
+
+.uppercase,
+.uppercase > * {
+  text-transform: uppercase !important;
+}
+
+.capitalize,
+.capitalise,
+.titlecase {
+  text-transform: capitalize;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.pretty {
+  text-wrap: pretty;
+}

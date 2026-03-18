@@ -1,0 +1,40 @@
+/*! 🐉 404.css | MIT License */
+/* utils/spacing.css — gap, padding, spacer blocks */
+/* No !important needed — utilities layer is highest priority in cascade */
+
+/* ── GAPS ─────────────────────────────────────────── */
+
+.gap_sm { gap: var(--spaceV) var(--spaceH); }
+.gap_md { gap: calc(var(--spaceV) * 2) calc(var(--spaceH) * 2); }
+.gap_lg { gap: calc(var(--spaceV) * 3) calc(var(--spaceH) * 3); }
+
+/* ── PADDING BLOCKS ──────────────────────────────── */
+
+.pad_block_sm  { padding-block: calc(var(--spaceV) * 1.5); }
+.pad_block_md  { padding-block: calc(var(--spaceV) * 3);   }
+.pad_block_lg  { padding-block: calc(var(--spaceV) * 6);   }
+.pad_block_xl  { padding-block: calc(var(--spaceV) * 9);   }
+.pad_block_xxl { padding-block: calc(var(--spaceV) * 12);  }
+
+.pad_top_sm  { padding-top: calc(var(--spaceV) * 1.5); }
+.pad_top_md  { padding-top: calc(var(--spaceV) * 3);   }
+.pad_top_lg  { padding-top: calc(var(--spaceV) * 6);   }
+.pad_top_xl  { padding-top: calc(var(--spaceV) * 9);   }
+.pad_top_xxl { padding-top: calc(var(--spaceV) * 12);  }
+
+.pad_bottom_sm  { padding-bottom: calc(var(--spaceV) * 1.5); }
+.pad_bottom_md  { padding-bottom: calc(var(--spaceV) * 3);   }
+.pad_bottom_lg  { padding-bottom: calc(var(--spaceV) * 6);   }
+.pad_bottom_xl  { padding-bottom: calc(var(--spaceV) * 9);   }
+.pad_bottom_xxl { padding-bottom: calc(var(--spaceV) * 12);  }
+
+.top_padding { padding-top: var(--spaceV); }
+
+/* ── SPACER BLOCKS ───────────────────────────────── */
+
+.spacer_block_xs  { min-height: 1svh;   max-height: 88px;  }
+.spacer_block_sm  { min-height: 2.5svh; max-height: 100px; }
+.spacer_block_md  { min-height: 5svh;   max-height: 133px; }
+.spacer_block_lg  { min-height: 10svh;  max-height: 200px; }
+.spacer_block_xl  { min-height: 15svh;  max-height: 250px; }
+.spacer_block_xxl { min-height: 20svh;  max-height: 400px; }

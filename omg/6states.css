@@ -1,0 +1,16 @@
+/*! 🐉 404.css | MIT License */
+/* 6states.css */
+
+[data-state="loading"] {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+[data-state="disabled"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+[data-state="empty"] {
+  display: none;
+}

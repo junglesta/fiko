@@ -1,0 +1,34 @@
+/*! 🐉 404.css | MIT License */
+/* 000/2client_datatheme.css — semantic theme aliases
+ *
+ * Maps raw palette tokens (from 1client_vars.css) to semantic roles.
+ * This file loads in the `theme` layer.
+ * Permanent light mode — dark mode intentionally excluded.
+ */
+
+:root {
+  /* ── SURFACE & TEXT ───────────────────────────────── */
+  --surface:            var(--light);
+  --surface_inverse:    var(--dark);
+  --surfaceT25:         var(--lightT25);
+  --surface_inverseT25: var(--darkT25);
+  --text:               var(--dark);
+  --textT50:            var(--darkT50);
+
+  /* ── LOGO ─────────────────────────────────────────── */
+  --logo: var(--dark);
+
+  /* ── BRAND — identity (logo, icons, decorative) ───── */
+  --primary:       var(--brand);
+  --primary_hover: var(--brand_lighter);
+  --contrast:      var(--brand_darker);
+
+  /* ── CTA — interactive (buttons, links, actions) ──── */
+  --cta:       var(--brand);
+  --cta_text:  var(--light);
+  --cta_hover: var(--brand_lighter);
+
+  /* ── BORDERS & FOCUS ──────────────────────────────── */
+  --border_color: var(--dark);
+  --focus_color:  var(--brand);
+}

@@ -1,0 +1,37 @@
+/*! 🐉 404.css | MIT License */
+/* 000/3client_theme.css — element & component defaults
+ *
+ * Brand-specific overrides that sit on top of the framework.
+ * Loaded in the `theme` layer — below utilities, above components.
+ * Customize freely. All rules here are brand-specific, not framework rules.
+ */
+
+/* ── TYPOGRAPHY SCALE ─────────────────────────────────────────── */
+
+.h1 { font-size: calc(var(--font_size) * 2.5)  !important; font-weight: var(--weight_light) !important; }
+.h2 { font-size: calc(var(--font_size) * 2.0)  !important; font-weight: var(--weight_light) !important; }
+.h3 { font-size: calc(var(--font_size) * 1.75) !important; font-weight: var(--weight_thin)  !important; }
+.h4 { font-size: calc(var(--font_size) * 1.5)  !important; font-weight: var(--weight_thin)  !important; }
+.h5 { font-size: calc(var(--font_size) * 1.25) !important; font-weight: var(--weight_thin)  !important; }
+.h6 { font-size: calc(var(--font_size) * 1.0)  !important; font-weight: var(--weight_light) !important; }
+
+/* ── DIM — secondary text ──────────────────────────────────────── */
+
+.dim {
+  color: var(--textT50);
+  font-size: calc(var(--font_size) * 0.85);
+}
+
+/* ── UNDERLINE LINK ─────────────────────────────────────────────  */
+
+.underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── TYPEWRITER — constrained readable prose column ─────────────── */
+
+.typewriter {
+  max-width: 66ch;
+  margin-inline: auto;
+}

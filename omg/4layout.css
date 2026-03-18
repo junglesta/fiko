@@ -1,0 +1,76 @@
+/*! 🐉 404.css | MIT License */
+/* 4layout.css */
+
+/* Container implementation using container queries */
+.container {
+  /* Container query setup */
+  container-type: inline-size;
+  container-name: main-container;
+
+  /* Simplified width calculation using the pre-defined container width variables */
+  width: min(100% - (var(--breath) * 2), var(--container_xl));
+  margin-inline: auto;
+}
+
+/* Modern grid system with CSS Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid_cols, 1), 1fr);
+  gap: var(--breath);
+}
+
+/* Responsive grid using container queries
+     This leverages the breakpoint variables defined in 1vars.css */
+@container main-container (min-width: var(--bp_sm)) {
+  .grid {
+    --grid_cols: 2;
+  }
+}
+
+@container main-container (min-width: var(--bp_md)) {
+  .grid {
+    --grid_cols: 3;
+  }
+}
+
+@container main-container (min-width: var(--bp_lg)) {
+  .grid {
+    --grid_cols: 4;
+  }
+}
+
+/* Modern navigation layout */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1px;
+}
+
+nav ul,
+nav ol {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+}
+
+/* Optional: Add responsive navigation behavior */
+@container main-container (max-width: var(--bp_sm)) {
+  nav {
+    flex-direction: column;
+  }
+
+  nav ul,
+  nav ol {
+    flex-direction: column;
+    width: 100%;
+  }
+}

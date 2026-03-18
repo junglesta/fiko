@@ -1,0 +1,36 @@
+{
+  "name": "@junglesta/404css",
+  "version": "0.1.0-alpha.1",
+  "description": "An unknown modern CSS framework. Implementing issues gone 404. SMILING DX!",
+  "license": "MIT",
+  "author": "Toybreaker <hello@junglestar.co>",
+  "homepage": "https://github.com/junglesta/404css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/junglesta/404css.git"
+  },
+  "bugs": {
+    "url": "https://github.com/junglesta/404css/issues"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "cascade-layers",
+    "oklch",
+    "design-tokens",
+    "utility-css",
+    "modern-css"
+  ],
+  "main": "index.css",
+  "style": "index.css",
+  "exports": {
+    ".": "./index.css",
+    "./template/*": "./template/*",
+    "./omg/*": "./omg/*"
+  },
+  "files": [
+    "index.css",
+    "omg/",
+    "template/"
+  ]
+}

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404.css — Component Showcase</title>
+
+  <!-- 1. Load the framework -->
+  <link rel="stylesheet" href="../index.css" />
+
+  <!-- 2. Load your brand tokens (copy template/000/ to your project) -->
+  <style>
+    /* Inline 000/ for demo purposes */
+    :root {
+      --dark:    oklch(0.20 0 0);
+      --darkT25: color-mix(in oklch, var(--dark),  transparent 75%);
+      --darkT50: color-mix(in oklch, var(--dark),  transparent 50%);
+      --light:    oklch(0.97 0.005 74);
+      --lightT25: color-mix(in oklch, var(--light), transparent 75%);
+      --lightT50: color-mix(in oklch, var(--light), transparent 50%);
+      --brand:         oklch(0.55 0.19 28);
+      --brand_lighter: oklch(from var(--brand) calc(l + 0.08) c h);
+      --brand_darker:  oklch(from var(--brand) calc(l - 0.18) c h);
+      --brandT25:      color-mix(in oklch, var(--brand), transparent 75%);
+      --brandT50:      color-mix(in oklch, var(--brand), transparent 50%);
+      --surface:         var(--light);
+      --surface_inverse: var(--dark);
+      --surfaceT25:      var(--lightT25);
+      --text:            var(--dark);
+      --textT50:         var(--darkT50);
+      --logo:            var(--dark);
+      --primary:         var(--brand);
+      --primary_hover:   var(--brand_lighter);
+      --contrast:        var(--brand_darker);
+      --cta:             var(--brand);
+      --cta_text:        var(--light);
+      --cta_hover:       var(--brand_lighter);
+      --border_color:    var(--dark);
+      --focus_color:     var(--brand);
+      --gradient_brand: conic-gradient(from 180deg at 50% 50% in oklch, oklch(80% 0.3 42) 5%, oklch(80% 0.3 81) 80%);
+      --gradient_warm:  conic-gradient(from 180deg at 50% 50%, oklch(65% 0.22 40) 5%, oklch(75% 0.18 80) 80%);
+    }
+    /* demo-only helpers */
+    .demo-section { padding-block: calc(var(--spaceV) * 4); border-bottom: 1px solid var(--darkT25); }
+    .demo-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.4; margin-bottom: 1rem; }
+    .swatch { display: inline-block; width: 3rem; height: 3rem; border-radius: var(--radius); border: 1px solid var(--darkT25); }
+    .token-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .spacer-demo { background: var(--brandT25); width: 100%; }
+    h1,h2,h3,h4,h5,h6 { margin-block: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────────── -->
+<nav style="background: var(--text); color: var(--surface); padding-inline: var(--spaceH);">
+  <span style="color: var(--surface); font-weight: 800; font-size: 1.2rem;">🐉 404.css</span>
+  <ul>
+    <li><a href="#tokens" style="color: var(--surface);">Tokens</a></li>
+    <li><a href="#typography" style="color: var(--surface);">Type</a></li>
+    <li><a href="#layout" style="color: var(--surface);">Layout</a></li>
+    <li><a href="#components" style="color: var(--surface);">Components</a></li>
+    <li><a href="#utilities" style="color: var(--surface);">Utilities</a></li>
+    <li><a href="#states" style="color: var(--surface);">States</a></li>
+  </ul>
+</nav>
+
+<main>
+<div class="container">
+
+<!-- ─── HERO ──────────────────────────────────────────────────── -->
+<section class="demo-section" style="padding-top: calc(var(--spaceV) * 6);">
+  <h1 style="font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 1;">🐉 404.css</h1>
+  <p class="typewriter" style="font-size: 1.2rem; margin-top: 1rem;">
+    An unknown modern CSS framework. Implementing issues gone 404.
+    Six cascade layers. Zero specificity wars. SMILING DX.
+  </p>
+  <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+    <a class="button button_cta" href="#components"><button>Get Started</button></a>
+    <a class="button" href="https://github.com/junglesta/404css"><button>GitHub</button></a>
+  </div>
+</section>
+
+<!-- ─── TOKENS ────────────────────────────────────────────────── -->
+<section class="demo-section" id="tokens">
+  <div class="demo-label">Design Tokens</div>
+
+  <h3>Brand Colors</h3>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+    <div>
+      <div class="swatch" style="background: var(--brand);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--brand</div>
+    </div>
+    <div>
+      <div class="swatch" style="background: var(--brand_lighter);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--brand_lighter</div>
+    </div>
+    <div>
+      <div class="swatch" style="background: var(--brand_darker);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--brand_darker</div>
+    </div>
+    <div>
+      <div class="swatch" style="background: var(--brandT25); border: 1px solid var(--darkT25);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--brandT25</div>
+    </div>
+  </div>
+
+  <h3>Neutrals</h3>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+    <div>
+      <div class="swatch" style="background: var(--dark);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--dark</div>
+    </div>
+    <div>
+      <div class="swatch" style="background: var(--light); border: 1px solid var(--darkT25);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--light</div>
+    </div>
+    <div>
+      <div class="swatch" style="background: var(--surface); border: 1px solid var(--darkT25);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--surface</div>
+    </div>
+    <div>
+      <div class="swatch" style="background: var(--text);"></div>
+      <div style="font-size:0.75rem; margin-top:0.25rem;">--text</div>
+    </div>
+  </div>
+
+  <h3>Gradients</h3>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+    <div class="swatch gradient_brand" style="width: 8rem; height: 3rem; border-radius: var(--radius);"></div>
+    <div class="swatch gradient_warm"  style="width: 8rem; height: 3rem; border-radius: var(--radius);"></div>
+  </div>
+</section>
+
+<!-- ─── TYPOGRAPHY ────────────────────────────────────────────── -->
+<section class="demo-section" id="typography">
+  <div class="demo-label">Typography</div>
+
+  <div style="margin-bottom: 2rem;">
+    <h1 class="h1">Heading 1 — .h1</h1>
+    <h2 class="h2">Heading 2 — .h2</h2>
+    <h3 class="h3">Heading 3 — .h3</h3>
+    <h4 class="h4">Heading 4 — .h4</h4>
+    <h5 class="h5">Heading 5 — .h5</h5>
+    <h6 class="h6">Heading 6 — .h6</h6>
+  </div>
+
+  <p class="typewriter">
+    Body text uses <code>--font_size: clamp(1.1rem, 0.34vw + 0.92rem, 1.21rem)</code>
+    and <code>--line_height: 1.5</code>. The <code>.typewriter</code> class constrains
+    prose to <code>66ch</code> for comfortable reading. Text wrapping is
+    <code>pretty</code> on paragraphs and <code>balance</code> on headings.
+  </p>
+
+  <p style="margin-top: 1rem;">
+    <span class="uppercase">Uppercase utility</span> ·
+    <span class="capitalize">capitalize utility</span> ·
+    <span class="strikethrough">strikethrough utility</span> ·
+    <span style="color: var(--textT50);">--textT50 dimmed text</span>
+  </p>
+
+  <h3 style="margin-top: 2rem;">Font Weight Scale</h3>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem;">
+    <span style="font-weight: var(--weight_100);">100 ultralight</span>
+    <span style="font-weight: var(--weight_300);">300 light</span>
+    <span style="font-weight: var(--weight_400);">400 thin (default)</span>
+    <span style="font-weight: var(--weight_500);">500 light alias</span>
+    <span style="font-weight: var(--weight_600);">600 regular alias</span>
+    <span style="font-weight: var(--weight_700);">700 medium alias</span>
+    <span style="font-weight: var(--weight_800);">800 bold alias</span>
+  </div>
+</section>
+
+<!-- ─── LAYOUT ────────────────────────────────────────────────── -->
+<section class="demo-section" id="layout">
+  <div class="demo-label">Layout</div>
+
+  <h3>Responsive Grid — <code>.grid</code></h3>
+  <p style="margin-bottom: 1rem;">1 col → 2 col (sm) → 3 col (md) → 4 col (lg), via container queries.</p>
+  <div class="grid" style="margin-bottom: 2rem;">
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">Cell 1</div>
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">Cell 2</div>
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">Cell 3</div>
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">Cell 4</div>
+  </div>
+
+  <h3>Spacing Tokens</h3>
+  <div class="token-row"><div class="swatch" style="background: var(--brand); width: var(--spaceH); height: 1rem;"></div><code>--spaceH: 1.75svw</code></div>
+  <div class="token-row"><div class="swatch" style="background: var(--brand); width: 1rem; height: var(--spaceV);"></div><code>--spaceV: 1.5svh</code></div>
+  <div class="token-row"><div class="swatch" style="background: var(--brand); width: var(--breath); height: 1rem;"></div><code>--breath: calc(--space * 1.5)</code></div>
+
+  <h3 style="margin-top: 2rem;">Spacer Blocks</h3>
+  <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+    <div class="spacer-demo spacer_block_xs"></div>
+    <div style="font-size: 0.75rem; opacity: 0.5;">.spacer_block_xs (1svh / 88px max)</div>
+    <div class="spacer-demo spacer_block_sm"></div>
+    <div style="font-size: 0.75rem; opacity: 0.5;">.spacer_block_sm (2.5svh / 100px max)</div>
+    <div class="spacer-demo spacer_block_md"></div>
+    <div style="font-size: 0.75rem; opacity: 0.5;">.spacer_block_md (5svh / 133px max)</div>
+  </div>
+</section>
+
+<!-- ─── COMPONENTS ───────────────────────────────────────────── -->
+<section class="demo-section" id="components">
+  <div class="demo-label">Components</div>
+
+  <h3>Buttons</h3>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin: 1rem 0;">
+    <button>Default button</button>
+    <a class="button button_cta"><button>CTA button</button></a>
+    <a class="button"><button>Link button</button></a>
+    <button data-state="disabled">Disabled state</button>
+  </div>
+
+  <h3>Form Elements</h3>
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 400px; margin: 1rem 0;">
+    <input type="text" placeholder="Text input" style="padding: 0.5rem var(--spaceH); border: var(--borderpx) solid var(--border_color); border-radius: var(--radius); width: 100%;" />
+    <input type="email" placeholder="Email input" style="padding: 0.5rem var(--spaceH); border: var(--borderpx) solid var(--border_color); border-radius: var(--radius); width: 100%;" />
+    <textarea placeholder="Textarea" rows="3" style="padding: 0.5rem var(--spaceH); border: var(--borderpx) solid var(--border_color); border-radius: var(--radius); width: 100%; resize: vertical;"></textarea>
+    <select style="padding: 0.5rem var(--spaceH); border: var(--borderpx) solid var(--border_color); border-radius: var(--radius); width: 100%; height: var(--tap_size);">
+      <option>Select option</option>
+      <option>Option A</option>
+      <option>Option B</option>
+    </select>
+    <a class="button button_cta" style="width: 100%;"><button style="width: 100%;">Submit</button></a>
+  </div>
+
+  <h3>Tap Target Sizes</h3>
+  <p style="margin-bottom: 0.5rem;">All interactive elements meet <code>--tap_size: clamp(42px, 5vw, 52px)</code>.</p>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+    <button>42–52px height</button>
+    <a href="#" style="display: flex; align-items: center; padding-inline: var(--spaceH); border: var(--borderpx) solid var(--border_color); border-radius: var(--radius);">Link tap target</a>
+  </div>
+
+  <h3 style="margin-top: 2rem;">Focus Visible</h3>
+  <p>Tab through these to see <code>--focus_color</code> (brand color) outline at 2px offset:</p>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+    <button>Focus me</button>
+    <input type="text" placeholder="Focus me" style="padding: 0.5rem; border: var(--borderpx) solid var(--border_color); border-radius: var(--radius);" />
+    <a href="#">Focus link</a>
+  </div>
+</section>
+
+<!-- ─── ASPECT RATIOS ─────────────────────────────────────────── -->
+<section class="demo-section">
+  <div class="demo-label">Aspect Ratios — utils/aspect.css</div>
+  <div class="grid" style="margin-top: 1rem;">
+    <div>
+      <div class="aspect aspect1_1" style="background: var(--brandT25);">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">.aspect1_1</div>
+      </div>
+    </div>
+    <div>
+      <div class="aspect aspect4_3" style="background: var(--brandT25);">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">.aspect4_3</div>
+      </div>
+    </div>
+    <div>
+      <div class="aspect aspect16_9" style="background: var(--brandT25);">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">.aspect16_9</div>
+      </div>
+    </div>
+    <div>
+      <div class="aspect aspect3_4" style="background: var(--brandT25);">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">.aspect3_4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── UTILITIES ─────────────────────────────────────────────── -->
+<section class="demo-section" id="utilities">
+  <div class="demo-label">Utilities</div>
+
+  <h3>Visibility</h3>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin: 1rem 0;">
+    <span style="background: var(--brandT25); padding: 0.25rem 0.5rem; border-radius: var(--radius);">.hide → <span class="hide">hidden</span>not visible</span>
+    <span style="background: var(--brandT25); padding: 0.25rem 0.5rem; border-radius: var(--radius);">.maybe_hide → <span class="maybe_hide">shows ≥480px</span></span>
+    <span class="sr_only">Screen-reader only — visually hidden</span>
+    <span style="background: var(--brandT25); padding: 0.25rem 0.5rem; border-radius: var(--radius);">.sr_only — in DOM, invisible</span>
+  </div>
+
+  <h3>Text Utilities</h3>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0;">
+    <span class="center" style="background: var(--brandT25); padding: 0.25rem 0.5rem; width: 160px; border-radius: var(--radius);">.center</span>
+    <span class="uppercase" style="background: var(--brandT25); padding: 0.25rem 0.5rem; border-radius: var(--radius);">uppercase</span>
+    <span class="capitalize" style="background: var(--brandT25); padding: 0.25rem 0.5rem; border-radius: var(--radius);">capitalize me</span>
+    <span class="strikethrough" style="background: var(--brandT25); padding: 0.25rem 0.5rem; border-radius: var(--radius);">strikethrough</span>
+  </div>
+
+  <h3>Layout Utilities</h3>
+  <div class="flex gap_sm" style="margin: 1rem 0; flex-wrap: wrap;">
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">.flex item 1</div>
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">.flex item 2</div>
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">.flex item 3</div>
+  </div>
+
+  <h3>Padding Utilities</h3>
+  <div style="display: flex; flex-direction: column; gap: 0.25rem; margin: 1rem 0;">
+    <div class="pad_block_sm" style="background: var(--brandT25); border-radius: var(--radius);">.pad_block_sm</div>
+    <div class="pad_block_md" style="background: var(--brandT25); border-radius: var(--radius);">.pad_block_md</div>
+    <div class="pad_block_lg" style="background: var(--brandT25); border-radius: var(--radius);">.pad_block_lg</div>
+  </div>
+</section>
+
+<!-- ─── STATES ────────────────────────────────────────────────── -->
+<section class="demo-section" id="states">
+  <div class="demo-label">Data States — 6states.css</div>
+  <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin: 1rem 0; align-items: center;">
+    <div data-state="loading" style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
+      data-state="loading" (cursor: progress, opacity 0.7)
+    </div>
+    <div data-state="disabled" style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
+      data-state="disabled" (opacity 0.5, no pointer)
+    </div>
+    <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
+      <span data-state="empty">hidden by data-state="empty"</span>
+      Sibling visible (empty state hidden)
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+<section class="demo-section center" style="border-bottom: none;">
+  <p>🐉 404.css — MIT License © 2024–2025 Toybreaker</p>
+  <p style="margin-top: 0.5rem; opacity: 0.4; font-size: 0.85rem;">
+    <a href="https://github.com/junglesta/404css">github.com/junglesta/404css</a>
+  </p>
+</section>
+
+</div><!-- /container -->
+</main>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+/*! 🐉 404.css | MIT License */
+/* 3base.css — element defaults */
+
+body {
+  font-family: var(--font_family);
+  font-size: var(--font_size);
+  line-height: var(--line_height);
+  background: var(--surface);
+  color: var(--text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus_color, var(--primary));
+  outline-offset: 2px;
+}
+
+/* minimum tap target for accessibility */
+a {
+  min-height: var(--tap_size);
+}
+
+img,
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

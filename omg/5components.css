@@ -1,0 +1,101 @@
+/*! 🐉 404.css | MIT License */
+/* 5components.css — interactive elements */
+
+/* BUTTON / INPUT — shape & layout */
+button,
+.button input[type="submit"],
+input[type="button"],
+input[type="reset"],
+[role="button"] {
+  height: var(--tap_size);
+  padding-inline: var(--spaceH);
+  border: var(--borderpx) solid var(--border_color, currentColor);
+  border-radius: var(--radius);
+  outline: none;
+  background-color: transparent;
+  color: inherit;
+  font-size: var(--font_size);
+  font-weight: var(--weight_bold);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition);
+  user-select: none;
+}
+
+/* BUTTON CLASS — wraps a <button> inside an <a> */
+.button {
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text);
+  display: inline-flex;
+  font-weight: var(--weight_bold);
+  gap: var(--spaceV) var(--spaceH);
+  padding: calc(var(--spaceV) / 3) calc(var(--spaceH) / 3);
+  transition: transform 0.2s var(--ease_out);
+  user-select: none;
+}
+
+.button:hover,
+button:hover {
+  transform: translateY(3px);
+}
+
+/* LINK defaults */
+a:not(.underline),
+[role="link"] {
+  outline: none;
+  background-color: transparent;
+  color: var(--text);
+  text-decoration: var(--text_decoration);
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    text-decoration var(--transition),
+    box-shadow var(--transition);
+  user-select: none;
+}
+
+/* button inside link — reset decoration, inherit color from context */
+a button,
+a [role="button"],
+a input[type="submit"],
+a input[type="button"],
+a input[type="reset"] {
+  color: inherit;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* CTA BUTTON — filled, primary action */
+.button_cta button {
+  background-color: var(--cta);
+  border-color: var(--cta);
+  color: var(--cta_text);
+}
+.button_cta:hover button {
+  background-color: var(--cta_hover);
+  border-color: var(--cta_hover);
+}
+
+/* SVG overflow fix */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* STICKY HEADER */
+.controls {
+  height: var(--sticky_header_height);
+  min-height: var(--sticky_header_height);
+  max-height: var(--sticky_header_height);
+  user-select: none;
+}
+.controls.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}

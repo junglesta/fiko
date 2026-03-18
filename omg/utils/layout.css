@@ -1,0 +1,27 @@
+/*! 🐉 404.css | MIT License */
+/* utils/layout.css — flex, positioning, writing mode */
+
+.flex {
+  display: flex;
+}
+
+.flex_col {
+  flex-direction: column;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.vertical {
+  display: block;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-transform: uppercase;
+  position: relative;
+  top: -10px;
+  .active & {
+    font-size: 200%;
+  }
+}
