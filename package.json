@@ -4,13 +4,13 @@
   "description": "An unknown modern CSS framework. Implementing issues gone 404. SMILING DX!",
   "license": "MIT",
   "author": "Toybreaker <hello@junglestar.co>",
-  "homepage": "https://github.com/junglesta/404css",
+  "homepage": "https://github.com/junglesta/404",
   "repository": {
     "type": "git",
-    "url": "https://github.com/junglesta/404css.git"
+    "url": "https://github.com/junglesta/404.git"
   },
   "bugs": {
-    "url": "https://github.com/junglesta/404css/issues"
+    "url": "https://github.com/junglesta/404/issues"
   },
   "keywords": [
     "css",
