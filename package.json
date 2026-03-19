@@ -1,16 +1,16 @@
 {
-  "name": "@junglesta/404",
+  "name": "@junglesta/fiko",
   "version": "0.1.0-alpha.1",
   "description": "An unknown modern CSS framework. Implementing issues gone 404. SMILING DX!",
   "license": "MIT",
   "author": "Toybreaker <hello@junglestar.co>",
-  "homepage": "https://github.com/junglesta/404",
+  "homepage": "https://github.com/junglesta/fiko",
   "repository": {
     "type": "git",
-    "url": "https://github.com/junglesta/404.git"
+    "url": "https://github.com/junglesta/fiko.git"
   },
   "bugs": {
-    "url": "https://github.com/junglesta/404/issues"
+    "url": "https://github.com/junglesta/fiko/issues"
   },
   "keywords": [
     "css",
