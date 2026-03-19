@@ -2,7 +2,7 @@
 
 **A minimal, layered CSS foundation you override by design, not by accident.**
 
-[![npm](https://img.shields.io/npm/v/@junglesta/fiko)](https://www.npmjs.com/package/@junglesta/fiko)
+[![npm](https://img.shields.io/npm/v/@toybreaker/fiko)](https://www.npmjs.com/package/@toybreaker/fiko)
 [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ---
@@ -21,9 +21,9 @@ Modern CSS frameworks fall into two traps:
 ## Install
 
 ```bash
-npm install @junglesta/fiko
+npm install @toybreaker/fiko
 # or
-pnpm add @junglesta/fiko
+pnpm add @toybreaker/fiko
 ```
 
 ---
@@ -34,7 +34,7 @@ pnpm add @junglesta/fiko
 
 ```css
 /* your project's index.css */
-@import "@junglesta/fiko";
+@import "@toybreaker/fiko";
 ```
 
 This imports `omg/` — the brand-agnostic framework. It declares six cascade layers and imports all `omg/` sheets in the correct order.
@@ -43,13 +43,13 @@ This imports `omg/` — the brand-agnostic framework. It declares six cascade la
 
 ```bash
 # copy the starter brand files into your project
-cp node_modules/@junglesta/fiko/template/000/ src/assets/404/000/ -r
+cp node_modules/@toybreaker/fiko/template/000/ src/assets/404/000/ -r
 ```
 
 Then import your brand tokens **after** the framework, inside the same layers:
 
 ```css
-@import "@junglesta/fiko";
+@import "@toybreaker/fiko";
 
 /* brand palette — loads in the tokens layer */
 @import url(./000/1client_vars.css) layer(tokens);
