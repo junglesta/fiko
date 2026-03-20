@@ -1,13 +1,13 @@
 {
   "name": "@toybreaker/fiko",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An unknown modern CSS framework. Implementing issues gone 404. SMILING DX!",
   "license": "MIT",
   "author": "Toybreaker <hello@junglestar.co>",
   "homepage": "https://github.com/junglesta/fiko",
   "repository": {
     "type": "git",
-    "url": "https://github.com/junglesta/fiko.git"
+    "url": "git+https://github.com/junglesta/fiko.git"
   },
   "bugs": {
     "url": "https://github.com/junglesta/fiko/issues"
