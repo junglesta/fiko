@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 — 2026-03-21
+
+### Fixed
+- **Package renamed to `@toybreaker/fiko`** — the unscoped `fiko` name on npm belongs to a different package (Fiko classless CSS, v0.1.1–0.17.0). Scoped name prevents version collision and ensures correct package is installed.
+- CI workflow: `npm publish --access public` (required for scoped packages)
+
 ## 0.3.1 — 2026-03-21
 
 ### Fixed
