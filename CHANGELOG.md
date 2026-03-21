@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 — 2026-03-21
+
+### Fixed
+- **Cascade layer bug** — `3base.css` moved from `layout` layer to new `base` layer, inserted between `tokens` and `theme`. Client brand overrides in `3client_theme.css` now correctly win over framework element defaults (h1–h6, p, ol/ul, blockquote, hr). Layer order: `reset → tokens → base → theme → layout → components → utilities`.
+
 ## 0.3.0 — 2026-03-21
 
 ### New
