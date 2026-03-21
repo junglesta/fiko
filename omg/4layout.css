@@ -74,3 +74,31 @@ nav li {
     width: 100%;
   }
 }
+
+/* ── BENTO BOX ──────────────────────────────────── */
+/* Mosaic product grid. Wrap cards in <div class="bento"> */
+
+.bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--spaceV) * 0.5) calc(var(--spaceH) * 0.5);
+  width: 100%;
+}
+
+.bento > :first-child { grid-column: 1 / -1; }
+
+.bento > :nth-child(7n + 1):not(:first-child) { grid-column: 1 / -1; }
+
+@container main-container (min-width: 480px) {
+  .bento { grid-template-columns: 1fr 1fr; }
+}
+
+@container main-container (min-width: 640px) {
+  .bento { grid-template-columns: 1fr 1fr 1fr; }
+  .bento > :first-child { grid-column: 1 / 3; grid-row: 1 / 3; }
+}
+
+@container main-container (min-width: 960px) {
+  .bento { grid-template-columns: repeat(4, 1fr); }
+  .bento > :first-child { grid-column: 1 / 3; grid-row: 1 / 3; }
+}

@@ -2,7 +2,7 @@
  * 🐉 404.css v0.1.0-alpha.1
  * https://github.com/junglesta/404css
  *
- * Copyright (c) 2024–2025 Toybreaker
+ * Copyright (c) 2024–2026 Toybreaker
  * Released under the MIT License
  *
  * An unknown modern CSS framework.
@@ -34,7 +34,7 @@
 @import url(omg/1vars.css) layer(tokens);
 
 /* LAYOUT — element defaults, grid, container, states */
-@import url(omg/3base.css)   layer(layout);
+@import url(omg/3base.css) layer(layout);
 @import url(omg/4layout.css) layer(layout);
 @import url(omg/6states.css) layer(layout);
 
@@ -42,10 +42,10 @@
 @import url(omg/5components.css) layer(components);
 
 /* UTILITIES — highest priority, no !important needed */
-@import url(omg/utils/text.css)       layer(utilities);
+@import url(omg/utils/text.css) layer(utilities);
 @import url(omg/utils/visibility.css) layer(utilities);
-@import url(omg/utils/layout.css)     layer(utilities);
-@import url(omg/utils/spacing.css)    layer(utilities);
-@import url(omg/utils/aspect.css)     layer(utilities);
-@import url(omg/utils/gradients.css)  layer(utilities);
-@import url(omg/utils/misc.css)       layer(utilities);
+@import url(omg/utils/layout.css) layer(utilities);
+@import url(omg/utils/spacing.css) layer(utilities);
+@import url(omg/utils/aspect.css) layer(utilities);
+@import url(omg/utils/gradients.css) layer(utilities);
+@import url(omg/utils/misc.css) layer(utilities);

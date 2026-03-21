@@ -1,7 +1,7 @@
 {
   "name": "fiko",
-  "version": "0.1.1",
-  "description": "An unknown modern CSS framework. Implementing issues gone 404. SMILING DX!",
+  "version": "0.3.0",
+  "description": "LOOK GOOD OR DIE! — cascade layers, OKLCH colors, design tokens. Zero specificity wars. Smiling DX.",
   "license": "MIT",
   "author": "Toybreaker <hello@junglestar.co>",
   "homepage": "https://junglesta.github.io/fiko/demo/",

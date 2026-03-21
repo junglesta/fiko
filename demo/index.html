@@ -24,38 +24,42 @@
       --lightT25: color-mix(in oklch, var(--light), transparent 75%);
       --lightT50: color-mix(in oklch, var(--light), transparent 50%);
 
-      /* brand — a vivid electric teal */
-      --brand:         oklch(0.60 0.22 195);
+      /* brand — punchy OKLCH orange */
+      --brand:         oklch(0.68 0.26 38);
       --brand_lighter: oklch(from var(--brand) calc(l + 0.10) c h);
       --brand_darker:  oklch(from var(--brand) calc(l - 0.20) c h);
+      --brand_invert:  oklch(from var(--brand) l c calc(h + 180));
       --brandT25:      color-mix(in oklch, var(--brand), transparent 75%);
       --brandT50:      color-mix(in oklch, var(--brand), transparent 50%);
 
-      /* semantic roles */
-      --surface:         var(--light);
-      --surface_inverse: var(--dark);
-      --surfaceT25:      var(--lightT25);
-      --text:            var(--dark);
-      --textT50:         var(--darkT50);
-      --logo:            var(--dark);
+      /* semantic roles — dark palette */
+      --surface:         var(--dark);
+      --surface_inverse: var(--light);
+      --surfaceT25:      var(--darkT25);
+      --text:            var(--light);
+      --textT50:         var(--lightT50);
+      --logo:            var(--light);
       --primary:         var(--brand);
       --primary_hover:   var(--brand_lighter);
-      --contrast:        var(--brand_darker);
+      --contrast:        var(--brand_lighter);
       --cta:             var(--brand);
       --cta_text:        var(--light);
       --cta_hover:       var(--brand_lighter);
-      --border_color:    var(--darkT50);
+      --border_color:    var(--lightT25);
       --focus_color:     var(--brand);
+
+      /* demo: larger base type for readability */
+      --font_size: clamp(1.15rem, 0.6vw + 1rem, 1.35rem);
 
       /* gradients */
       --gradient_brand: conic-gradient(from 180deg at 50% 50% in oklch,
-        oklch(75% 0.28 195) 0%,
-        oklch(75% 0.22 250) 40%,
-        oklch(80% 0.18 80)  80%,
-        oklch(75% 0.28 195) 100%);
-      --gradient_warm: conic-gradient(from 180deg at 50% 50%,
-        oklch(65% 0.22 40) 5%,
-        oklch(75% 0.18 80) 80%);
+        oklch(0.72 0.28 38)  0%,
+        oklch(0.78 0.24 65)  40%,
+        oklch(0.68 0.26 20)  80%,
+        oklch(0.72 0.28 38)  100%);
+      --gradient_warm: linear-gradient(105deg in oklch,
+        oklch(0.65 0.26 38) 0%,
+        oklch(0.90 0.16 88) 100%);
     }
   </style>
 </head>
@@ -71,6 +75,7 @@
       <ul>
         <li><a href="#tokens">tokens</a></li>
         <li><a href="#components">components</a></li>
+        <li><a href="#accordion">accordion</a></li>
         <li><a href="#layout">layout</a></li>
         <li><a href="#utilities">utilities</a></li>
         <li><a href="#install">install</a></li>
@@ -94,7 +99,7 @@
       <div class="fiko-hero-badge uppercase dim">v0.1.1 · MIT · npm install fiko</div>
 
       <h1 class="fiko-hero-title">
-        <span class="fiko-hero-word">fi</span><span class="fiko-hero-word accent">ko</span>
+        <span class="fiko-hero-word accent">FIKO</span>
       </h1>
 
       <p class="fiko-hero-tagline typewriter">
@@ -112,7 +117,7 @@
       </div>
 
       <div class="flex gap_sm" style="margin-top: calc(var(--spaceV) * 3); flex-wrap: wrap;">
-        <a class="button button_cta" href="#install"><button>Install</button></a>
+        <a class="button button_cta" href="#install"><button style="background: var(--gradient_warm); border-color: var(--border_color);">Install</button></a>
         <a class="button" href="#tokens"><button>Explore tokens</button></a>
       </div>
 
@@ -230,6 +235,16 @@
         <div class="fiko-swatch-value dim">color-mix 50% transparent</div>
       </div>
       <div class="fiko-swatch-card">
+        <div class="fiko-swatch" style="background: var(--cta);"></div>
+        <div class="fiko-swatch-name">--cta</div>
+        <div class="fiko-swatch-value dim">= --brand</div>
+      </div>
+      <div class="fiko-swatch-card">
+        <div class="fiko-swatch" style="background: var(--brand_invert);"></div>
+        <div class="fiko-swatch-name">--brand_invert</div>
+        <div class="fiko-swatch-value dim">oklch(l c h+180)</div>
+      </div>
+      <div class="fiko-swatch-card">
         <div class="fiko-swatch" style="background: var(--dark);"></div>
         <div class="fiko-swatch-name">--dark</div>
         <div class="fiko-swatch-value dim">oklch(0.18 0.01 265)</div>
@@ -243,11 +258,6 @@
         <div class="fiko-swatch" style="background: var(--surface); outline: 1px solid var(--darkT25);"></div>
         <div class="fiko-swatch-name">--surface</div>
         <div class="fiko-swatch-value dim">= --light</div>
-      </div>
-      <div class="fiko-swatch-card">
-        <div class="fiko-swatch" style="background: var(--cta);"></div>
-        <div class="fiko-swatch-name">--cta</div>
-        <div class="fiko-swatch-value dim">= --brand</div>
       </div>
       <div class="fiko-swatch-card">
         <div class="fiko-swatch gradient_brand" style="border-radius: var(--radius);"></div>
@@ -564,6 +574,76 @@
       </div>
     </div>
 
+    <!-- Accordion -->
+    <div id="accordion" class="fiko-showcase">
+      <div class="fiko-showcase-header">
+        <h3 class="h4">Accordion</h3>
+        <span class="dim">details, summary — zero JS, semantic HTML</span>
+      </div>
+      <div class="fiko-showcase-live fiko-showcase-live-col">
+
+        <!-- default: + / × icons -->
+        <details class="accordion">
+          <summary>Default accordion — icon: + / ×</summary>
+          <div>Cascade layers are the single biggest shift in CSS architecture in a decade. Override in order, no specificity wars.</div>
+        </details>
+        <details class="accordion" open>
+          <summary>Open by default</summary>
+          <div>Add the <code>open</code> attribute to start expanded. The close icon is <code>×</code> by default.</div>
+        </details>
+
+        <!-- custom icons via CSS token -->
+        <details class="accordion" style="--accordion_icon_closed: '↓'; --accordion_icon_open: '↑'; margin-top: calc(var(--spaceV) * 1.5);">
+          <summary>Custom icon — ↓ / ↑</summary>
+          <div>Override <code>--accordion_icon_closed</code> and <code>--accordion_icon_open</code> per element or globally in your brand layer.</div>
+        </details>
+        <details class="accordion" style="--accordion_icon_closed: '▶'; --accordion_icon_open: '▼';">
+          <summary>Custom icon — ▶ / ▼</summary>
+          <div>Any character works — emoji, arrows, symbols. Set the tokens once on a wrapper to apply to all children.</div>
+        </details>
+
+      </div>
+      <div class="fiko-code-block">
+        <div class="fiko-code-header">
+          <span class="fiko-code-lang">html</span>
+          <button class="fiko-copy-btn" data-copy='<!-- default icons -->
+<details class="accordion">
+  <summary>Title</summary>
+  <div>Content goes here.</div>
+</details>
+
+<!-- custom icons via CSS token -->
+<details style="--accordion_icon_closed: &apos;↓&apos;; --accordion_icon_open: &apos;↑&apos;;">
+  <summary>Custom icon</summary>
+  <div>Content goes here.</div>
+</details>
+
+<!-- set icons for a whole group -->
+<div style="--accordion_icon_closed: &apos;▶&apos;; --accordion_icon_open: &apos;▼&apos;;">
+  <details class="accordion"><summary>Item 1</summary><div>…</div></details>
+  <details class="accordion"><summary>Item 2</summary><div>…</div></details>
+</div>' aria-label="Copy accordion code">copy</button>
+        </div>
+        <pre><code>&lt;!-- default icons --&gt;
+&lt;details&gt;
+  &lt;summary&gt;Title&lt;/summary&gt;
+  &lt;div&gt;Content goes here.&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;!-- custom icons via CSS token --&gt;
+&lt;details style="--accordion_icon_closed: '↓'; --accordion_icon_open: '↑';"&gt;
+  &lt;summary&gt;Custom icon&lt;/summary&gt;
+  &lt;div&gt;Content goes here.&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;!-- set icons for a whole group --&gt;
+&lt;div style="--accordion_icon_closed: '▶'; --accordion_icon_open: '▼';"&gt;
+  &lt;details&gt;&lt;summary&gt;Item 1&lt;/summary&gt;&lt;div&gt;…&lt;/div&gt;&lt;/details&gt;
+  &lt;details&gt;&lt;summary&gt;Item 2&lt;/summary&gt;&lt;div&gt;…&lt;/div&gt;&lt;/details&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -579,7 +659,7 @@
         <h3 class="h4">Container</h3>
         <span class="dim">.container — max-width + container query context</span>
       </div>
-      <div class="fiko-showcase-live fiko-showcase-live-col">
+      <div class="fiko-showcase-live fiko-showcase-live-col resizable">
         <div style="border: var(--borderpx) dashed var(--border_color); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
           .container — <code>width: min(100% - breath*2, --container_xl)</code><br>
           Sets up container query context for responsive children.
@@ -604,7 +684,7 @@
         <h3 class="h4">Responsive grid</h3>
         <span class="dim">.grid — 1 &rarr; 2 &rarr; 3 &rarr; 4 cols via container queries</span>
       </div>
-      <div class="fiko-showcase-live fiko-showcase-live-col">
+      <div class="fiko-showcase-live fiko-showcase-live-col resizable">
         <div class="grid">
           <div class="fiko-grid-cell">Cell 1</div>
           <div class="fiko-grid-cell">Cell 2</div>
@@ -641,7 +721,7 @@
         <h3 class="h4">Bento box</h3>
         <span class="dim">.bento — mosaic product grid, first child spans</span>
       </div>
-      <div class="fiko-showcase-live fiko-showcase-live-col">
+      <div class="fiko-showcase-live fiko-showcase-live-col resizable">
         <div class="bento">
           <div class="fiko-grid-cell fiko-bento-hero">Featured — first child spans 2 cols</div>
           <div class="fiko-grid-cell">Card 2</div>
@@ -677,7 +757,7 @@
         <h3 class="h4">Navigation</h3>
         <span class="dim">nav — flex, space-between, wraps on mobile</span>
       </div>
-      <div class="fiko-showcase-live fiko-showcase-live-col">
+      <div class="fiko-showcase-live fiko-showcase-live-col resizable">
         <nav style="background: var(--dark); color: var(--light); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
           <span style="font-weight: 800;">brand</span>
           <ul>
@@ -888,7 +968,7 @@
         <span class="dim">.maximise — negative container margin bleed</span>
       </div>
       <div class="fiko-showcase-live fiko-showcase-live-col">
-        <div class="maximise gradient_brand" style="height: 60px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">.maximise — bleeds past container padding</div>
+        <div class="maximise gradient_warm" style="height: 60px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">.maximise — bleeds past container padding</div>
       </div>
       <div class="fiko-code-block">
         <div class="fiko-code-header">
@@ -911,7 +991,8 @@
   <div class="container">
     <div class="fiko-footer-inner pad_block_lg center">
       <div class="fiko-footer-logo">fiko</div>
-      <p class="dim" style="margin-top: var(--spaceV);">
+      <p style="margin-top: var(--spaceV);">LOOK GOOD OR DIE!</p>
+      <p class="dim" style="margin-top: calc(var(--spaceV) * 0.5);">
         An unknown modern CSS framework.<br>
         Cascade layers. OKLCH colors. Design tokens.
       </p>

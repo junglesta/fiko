@@ -7,14 +7,20 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* on dark bg, .dim needs more opacity than the default --textT50 */
+.dim { color: color-mix(in oklch, var(--text), transparent 30%); }
+
+/* demo link styling */
+a { color: var(--cta); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--cta_hover, var(--primary_hover)); }
+
 /* ── NAV ──────────────────────────────────────────────── */
 
 .fiko-nav {
-  background: var(--surface);
-  border-bottom: 1px solid var(--darkT25);
+  background: color-mix(in oklch, var(--surface), transparent 8%);
+  border-bottom: 1px solid var(--border_color);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in oklch, var(--surface), transparent 8%);
 }
 
 .fiko-nav .container { padding-block: 0; }
@@ -30,7 +36,7 @@
   align-items: center;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius);
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: background-color var(--transition), color var(--transition);
 }
 
@@ -52,11 +58,7 @@
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: var(--text);
-  background: var(--gradient_brand);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--light);
   line-height: 1;
 }
 
@@ -66,7 +68,7 @@
   position: relative;
   overflow: hidden;
   background: var(--surface);
-  border-bottom: 1px solid var(--darkT25);
+  border-bottom: 1px solid var(--border_color);
 }
 
 .fiko-hero .container { position: relative; z-index: 1; }
@@ -74,16 +76,16 @@
 .fiko-hero-inner { max-width: 680px; }
 
 .fiko-hero-badge {
-  font-size: 0.78rem;
+  font-size: 1rem;
   letter-spacing: 0.1em;
   margin-bottom: calc(var(--spaceV) * 2);
 }
 
 .fiko-hero-title {
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 800;
+  font-size: clamp(5rem, 22vw, 16rem);
+  font-weight: 100;
   line-height: 1;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
   margin: 0 0 calc(var(--spaceV) * 2);
   user-select: none;
 }
@@ -93,7 +95,7 @@
 }
 
 .fiko-hero-word.accent {
-  background: var(--gradient_brand);
+  background: var(--gradient_warm);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -123,14 +125,14 @@
 }
 
 .fiko-pill {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   padding: 0.25rem 0.75rem;
-  border: 1.5px solid var(--brandT50);
+  border: 1.5px solid color-mix(in oklch, var(--brand_darker), transparent 20%);
   border-radius: 99px;
-  color: var(--brand);
-  background: var(--brandT25);
+  color: oklch(from var(--brand_darker) calc(l + 0.3) c h);
+  background: color-mix(in oklch, var(--brand_darker), transparent 70%);
   text-transform: lowercase;
   white-space: nowrap;
 }
@@ -148,7 +150,7 @@
 .fiko-orb-1 {
   width: 500px;
   height: 500px;
-  background: var(--brand);
+  background: oklch(0.65 0.22 40);
   top: -120px;
   right: -100px;
   animation: fiko-orb-drift 9s ease-in-out infinite;
@@ -157,7 +159,7 @@
 .fiko-orb-2 {
   width: 300px;
   height: 300px;
-  background: oklch(0.75 0.22 80);
+  background: oklch(0.72 0.20 65);
   bottom: -60px;
   right: 200px;
   animation: fiko-orb-drift 13s ease-in-out infinite reverse;
@@ -166,7 +168,7 @@
 .fiko-orb-3 {
   width: 200px;
   height: 200px;
-  background: oklch(0.70 0.20 250);
+  background: oklch(0.60 0.18 25);
   top: 50%;
   right: 40%;
   animation: fiko-orb-drift 7s ease-in-out infinite 2s;
@@ -183,15 +185,15 @@
 
 .fiko-section {
   padding-block: calc(var(--spaceV) * 8);
-  border-bottom: 1px solid var(--darkT25);
+  border-bottom: 1px solid var(--border_color);
 }
 
 .fiko-section-alt {
-  background: oklch(from var(--surface) calc(l - 0.02) c h);
+  background: color-mix(in oklch, var(--surface), white 4%);
 }
 
 .fiko-section-label {
-  font-size: 0.72rem;
+  font-size: 1rem;
   letter-spacing: 0.12em;
   margin-bottom: calc(var(--spaceV) * 1.5);
 }
@@ -218,23 +220,23 @@
 
 .fiko-swatch-checkered {
   background-image:
-    linear-gradient(45deg, #ccc 25%, transparent 25%),
-    linear-gradient(-45deg, #ccc 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #ccc 75%),
-    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    linear-gradient(45deg, oklch(0.38 0 0) 25%, transparent 25%),
+    linear-gradient(-45deg, oklch(0.38 0 0) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, oklch(0.38 0 0) 75%),
+    linear-gradient(-45deg, transparent 75%, oklch(0.38 0 0) 75%);
   background-size: 12px 12px;
   background-position: 0 0, 0 6px, 6px -6px, -6px 0;
 }
 
 .fiko-swatch-name {
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-weight: 600;
   font-family: var(--font_serif);
   word-break: break-all;
 }
 
 .fiko-swatch-value {
-  font-size: 0.7rem;
+  font-size: 1rem;
   font-family: var(--font_serif);
 }
 
@@ -254,7 +256,7 @@
 
 .fiko-token-name {
   font-family: var(--font_serif);
-  font-size: 0.82rem;
+  font-size: 1rem;
   min-width: 160px;
   flex-shrink: 0;
 }
@@ -278,13 +280,13 @@
   align-items: baseline;
   gap: 1.5rem;
   flex-wrap: wrap;
-  border-bottom: 0.5px solid var(--darkT25);
+  border-bottom: 0.5px solid var(--border_color);
   padding-bottom: calc(var(--spaceV) * 0.75);
 }
 
 .fiko-type-row code {
   font-family: var(--font_serif);
-  font-size: 0.75rem;
+  font-size: 1rem;
   opacity: 0.5;
   flex-shrink: 0;
 }
@@ -302,7 +304,7 @@
 
 .fiko-showcase {
   margin-bottom: calc(var(--spaceV) * 5);
-  border: 1px solid var(--darkT25);
+  border: 1px solid var(--border_color);
   border-radius: calc(var(--radius) * 2);
   overflow: hidden;
 }
@@ -313,8 +315,8 @@
   gap: 1rem;
   flex-wrap: wrap;
   padding: calc(var(--spaceV) * 1.5) calc(var(--spaceH) * 1.5);
-  border-bottom: 1px solid var(--darkT25);
-  background: oklch(from var(--surface) calc(l - 0.01) c h);
+  border-bottom: 1px solid var(--border_color);
+  background: color-mix(in oklch, var(--surface), white 4%);
 }
 
 .fiko-showcase-header h3 { margin: 0; }
@@ -332,18 +334,41 @@
   align-items: stretch;
 }
 
+.fiko-showcase-live.resizable {
+  resize: horizontal;
+  overflow: auto;
+  min-width: 240px;
+  max-width: 100%;
+  position: relative;
+  padding-bottom: calc(var(--spaceV) * 2.5);
+  container-type: inline-size;
+  container-name: main-container;
+}
+
+.fiko-showcase-live.resizable::after {
+  content: '↔ drag to resize';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  opacity: 0.35;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
 /* ── CODE BLOCKS ──────────────────────────────────────── */
 
 .fiko-code-block {
-  border: 1px solid var(--darkT25);
+  border: 1px solid var(--border_color);
   border-radius: var(--radius);
   overflow: hidden;
-  font-size: 0.85rem;
+  font-size: 1rem;
 }
 
 .fiko-showcase .fiko-code-block {
   border: none;
-  border-top: 1px solid var(--darkT25);
+  border-top: 1px solid var(--border_color);
   border-radius: 0;
 }
 
@@ -352,13 +377,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.4rem 1rem;
-  background: oklch(from var(--dark) l c h / 0.06);
-  border-bottom: 1px solid var(--darkT25);
+  background: color-mix(in oklch, var(--surface), white 6%);
+  border-bottom: 1px solid var(--border_color);
 }
 
 .fiko-code-lang {
   font-family: var(--font_serif);
-  font-size: 0.72rem;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   opacity: 0.45;
@@ -368,13 +393,13 @@
   margin: 0;
   padding: 1rem 1.25rem;
   overflow-x: auto;
-  background: oklch(from var(--dark) l c h / 0.04);
+  background: color-mix(in oklch, var(--surface), white 3%);
   line-height: 1.6;
 }
 
 .fiko-code-block code {
   font-family: var(--font_serif);
-  font-size: 0.83rem;
+  font-size: 1rem;
   color: var(--text);
   white-space: pre;
 }
@@ -383,11 +408,11 @@
 .fiko-copy-btn {
   height: auto !important;
   padding: 0.2rem 0.6rem !important;
-  font-size: 0.72rem !important;
+  font-size: 1rem !important;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  border: 1.5px solid var(--darkT50) !important;
+  border: 1.5px solid var(--border_color) !important;
   border-radius: var(--radius) !important;
   background: transparent !important;
   color: var(--text) !important;
@@ -419,7 +444,7 @@
 
 .fiko-feature-card {
   padding: calc(var(--spaceV) * 2) calc(var(--spaceH) * 1.5);
-  border: 1px solid var(--darkT25);
+  border: 1px solid var(--border_color);
   border-radius: calc(var(--radius) * 2);
   transition: border-color var(--transition), box-shadow var(--transition);
 }
@@ -442,7 +467,7 @@
 .fiko-feature-card p {
   margin: 0;
   padding: 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 /* ── GRID / BENTO demo cells ──────────────────────────── */
@@ -451,7 +476,7 @@
   background: var(--brandT25);
   padding: var(--spaceV) var(--spaceH);
   border-radius: var(--radius);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .fiko-bento-hero {
@@ -465,8 +490,9 @@
 /* ── FOOTER ───────────────────────────────────────────── */
 
 .fiko-footer {
-  background: var(--dark);
+  background: oklch(0.10 0.01 265);
   color: var(--light);
+  border-top: 1px solid var(--border_color);
 }
 
 .fiko-footer .dim {
@@ -481,7 +507,7 @@
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 800;
   letter-spacing: -0.04em;
-  background: var(--gradient_brand);
+  background: var(--gradient_warm);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

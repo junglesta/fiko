@@ -99,3 +99,118 @@ svg:not(:root) {
   top: 0;
   z-index: 20;
 }
+
+/* ── HEADING SCALE ──────────────────────────────── */
+
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  user-select: none !important;
+  line-height: 1.2 !important;
+  font-family: var(--font_family) !important;
+}
+.h1 { font-size: calc(var(--font_size) * 2.5)  !important; font-weight: var(--weight_light) !important; }
+.h2 { font-size: calc(var(--font_size) * 2.0)  !important; font-weight: var(--weight_light) !important; }
+.h3 { font-size: calc(var(--font_size) * 1.75) !important; font-weight: var(--weight_thin)  !important; }
+.h4 { font-size: calc(var(--font_size) * 1.5)  !important; font-weight: var(--weight_thin)  !important; }
+.h5 { font-size: calc(var(--font_size) * 1.25) !important; font-weight: var(--weight_thin)  !important; }
+.h6 { font-size: calc(var(--font_size) * 1.0)  !important; font-weight: var(--weight_light) !important; }
+
+/* ── TEXT UTILITIES ─────────────────────────────── */
+
+.dim {
+  color: var(--textT50);
+  font-size: calc(var(--font_size) * 0.85);
+}
+
+.underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.typewriter {
+  max-width: 66ch;
+  margin-inline: auto;
+}
+
+.cat { text-transform: capitalize; }
+
+/* ── LAYOUT UTILITIES ───────────────────────────── */
+
+.maximise {
+  margin-left: var(--maximise);
+  margin-right: var(--maximise);
+}
+
+.clipped-circle {
+  clip-path: circle(50px at center);
+}
+
+/* ── ACCORDION ──────────────────────────────────── */
+/* Usage: <details class="accordion"><summary>Title</summary><div>…</div></details>
+ * Icon tokens: --accordion_icon_open / --accordion_icon_closed (default + / ×)
+ * Override per-element: style="--accordion_icon_closed: '▶'; --accordion_icon_open: '▼'"
+ */
+
+details.accordion {
+  border: var(--borderpx) solid var(--border_color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+details.accordion + details.accordion {
+  margin-top: calc(var(--spaceV) * 0.5);
+}
+
+details.accordion > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: var(--spaceV) var(--spaceH);
+  cursor: pointer;
+  list-style: none;
+  font-weight: var(--weight_regular);
+  user-select: none;
+  min-height: unset;
+  transition: background-color var(--transition);
+}
+
+details.accordion > summary::-webkit-details-marker { display: none; }
+
+details.accordion > summary::after {
+  content: var(--accordion_icon_closed, '+');
+  font-size: 1.4em;
+  font-weight: 300;
+  color: var(--cta);
+  flex-shrink: 0;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+details.accordion[open] > summary {
+  border-bottom: var(--borderpx) solid var(--border_color);
+}
+
+details.accordion[open] > summary::after {
+  content: var(--accordion_icon_open, '×');
+}
+
+details.accordion > summary:hover {
+  background: color-mix(in oklch, var(--cta), transparent 90%);
+}
+
+details.accordion > :not(summary) {
+  padding: var(--spaceV) var(--spaceH);
+}
+
+/* ── DOT LEADER ─────────────────────────────────── */
+/* Usage: <span class="dots"> between label and value in menus/TOC */
+
+.dots {
+  flex: 8;
+  border-bottom: var(--borderpx) dotted currentColor;
+  margin: 0 0 0 8px;
+  height: var(--borderpx);
+  position: relative;
+  top: 0;
+  opacity: 0.25;
+}

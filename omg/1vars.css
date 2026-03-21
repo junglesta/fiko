@@ -1,8 +1,17 @@
 /*! 🐉 404.css | MIT License */
-/* 1vars.css — layout, spacing, typography tokens */
-/* Color tokens live in 000/1client_vars.css        */
+/* 1vars.css — layout, spacing, typography tokens   */
+/* Brand palette overrides live in branding/1client_vars.css */
 
 :root {
+  /* ── COLOR NEUTRALS ──────────────────────────── */
+  --dark:    oklch(0.20 0 0);
+  --darkT25: color-mix(in oklch, var(--dark),  transparent 75%);
+  --darkT50: color-mix(in oklch, var(--dark),  transparent 50%);
+
+  --light:    oklch(0.97 0 0);
+  --lightT25: color-mix(in oklch, var(--light), transparent 75%);
+  --lightT50: color-mix(in oklch, var(--light), transparent 50%);
+
   /* ── MOTION ─────────────────────────────────── */
   --transition: 200ms ease-out;
   --ease_out:   cubic-bezier(0.22, 1, 0.36, 1);

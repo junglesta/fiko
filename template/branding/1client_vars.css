@@ -1,40 +1,32 @@
 /*! 🐉 404.css | MIT License */
-/* 000/1client_vars.css — brand palette tokens
+/* branding/1client_vars.css — brand palette tokens
  *
- * Copy this file into your project's 000/ folder.
- * Customize the values below for your brand.
- * This file loads in the `tokens` layer alongside omg/1vars.css.
+ * Neutrals (--dark, --light and alpha variants) are defined in
+ * omg/1vars.css — override here only if your brand uses a tinted surface.
+ *
+ * Add brand-specific tokens: --brand, --nobori, --surface_*, gradients, etc.
  */
 
 :root {
-  /* ── NEUTRALS ──────────────────────────────────── */
-  --dark:    oklch(0.20 0 0);
-  --darkT25: color-mix(in oklch, var(--dark),  transparent 75%);
-  --darkT50: color-mix(in oklch, var(--dark),  transparent 50%);
+  /* ── LIGHT OVERRIDE (optional) ──────────────────── */
+  /* Uncomment and set if your brand uses a tinted surface instead of neutral white:
+   * --light: oklch(0.84 0.028 74);  ← warm sand example
+   */
 
-  --light:    oklch(0.97 0 0);
-  --lightT25: color-mix(in oklch, var(--light), transparent 75%);
-  --lightT50: color-mix(in oklch, var(--light), transparent 50%);
-
-  /* ── BRAND COLOR ───────────────────────────────── */
+  /* ── BRAND COLOR ────────────────────────────────── */
   /* Change the hue (0–360) to match your brand.
-   * Lightness (0–1) and chroma (0–0.37) control shade and saturation.
-   * Examples:
-   *   red       oklch(0.55 0.22   20)
-   *   orange    oklch(0.55 0.19   40)
-   *   green     oklch(0.45 0.18  145)
-   *   blue      oklch(0.50 0.20  250)
-   *   purple    oklch(0.45 0.22  290)
+   * red oklch(0.55 0.22 20) · orange oklch(0.55 0.19 40)
+   * green oklch(0.45 0.18 145) · blue oklch(0.50 0.20 250)
    */
   --brand:         oklch(0.55 0.19 28);   /* ← change me */
   --brand_lighter: oklch(from var(--brand) calc(l + 0.08) c h);
   --brand_darker:  oklch(from var(--brand) calc(l - 0.18) c h);
+  --brand_invert:  oklch(from var(--brand) l c calc(h + 180)); /* complementary — auto-updates with --brand */
   --brandT25:      color-mix(in oklch, var(--brand), transparent 75%);
   --brandT50:      color-mix(in oklch, var(--brand), transparent 50%);
 
-  /* ── PAGE SURFACES ─────────────────────────────── */
-  /* --surface is defined in 2client_datatheme.css as var(--light).
-   * Add custom section surfaces here as needed, e.g.:
-   *   --surface_hero: oklch(0.92 0.02 var(--brand-hue));
+  /* ── PAGE SURFACES ──────────────────────────────── */
+  /* Add named surfaces for sections, e.g.:
+   * --surface_hero: oklch(0.92 0.02 28);
    */
 }
