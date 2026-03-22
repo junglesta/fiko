@@ -795,6 +795,37 @@
       </div>
     </div>
 
+    <!-- Accordion chevron -->
+    <div id="accordion_chevron" class="fiko_showcase" style="margin-top: calc(var(--spaceV) * 3);">
+      <div class="fiko_showcase_header">
+        <h3 class="h4">Accordion chevron</h3>
+        <span class="dim">details.accordion.accordion_chevron — SVG arrow via mask-image</span>
+      </div>
+      <div class="fiko_showcase_live fiko_showcase_live_col">
+        <details class="accordion accordion_chevron">
+          <summary>Chevron accordion — closed</summary>
+          <div>The chevron rotates 90° on open. Pure CSS — no inline SVG, no JS. Color inherits <code>--cta</code>.</div>
+        </details>
+        <details class="accordion accordion_chevron" open>
+          <summary>Chevron accordion — open</summary>
+          <div>Stack with other modifiers freely. Override the color with <code>style="--cta: var(--brand)"</code>.</div>
+        </details>
+      </div>
+      <div class="fiko_code_block">
+        <div class="fiko_code_header">
+          <span class="fiko_code_lang">html</span>
+          <button class="fiko_copy_btn" data-copy='<details class="accordion accordion_chevron">
+  <summary>Title</summary>
+  <div>Content goes here.</div>
+</details>' aria-label="Copy accordion chevron code">copy</button>
+        </div>
+        <pre><code>&lt;details class="accordion accordion_chevron"&gt;
+  &lt;summary&gt;Title&lt;/summary&gt;
+  &lt;div&gt;Content goes here.&lt;/div&gt;
+&lt;/details&gt;</code></pre>
+      </div>
+    </div>
+
   </div>
 </section>
 
