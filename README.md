@@ -144,6 +144,9 @@ All color tokens use OKLCH:
 | `.prose` | `max-width: 66ch; margin-inline: auto` |
 | `.aspect_square` | `aspect-ratio: 1` |
 | `.aspect_video` | `aspect-ratio: 16/9` |
+| `.accordion` | expandable `<details>` component with token-driven icons |
+| `.accordion_chevron` | modifier — replaces `+`/`×` with animated SVG chevron |
+| `.fiko` | animated warm orb glow background (override with `--fiko_orb_a` / `--fiko_orb_b`) |
 
 ---
 

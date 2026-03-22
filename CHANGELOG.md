@@ -6,6 +6,8 @@
 - **CNAME now copied to `dist/`** — custom domain `fiko.junglestar.org` no longer breaks on CI deploy
 - **Homepage URL** — `package.json` homepage corrected to `https://fiko.junglestar.org`
 - **Copyright year** — updated to 2024–2026 in README and LICENSE
+- **Duplicate CI workflow removed** — two `publish.yml` files were both firing on tag push; kept the one with `--provenance`
+- **gzip size badge** added to README (12.1 kB packed)
 
 ## 0.5.0 — 2026-03-22
 

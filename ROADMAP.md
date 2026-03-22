@@ -11,11 +11,14 @@
 - [x] `pnpm dev` auto-opens demo URL
 - [x] Demo build pipeline (`scripts/build-demo.mjs` → `dist/`)
 - [x] CLAUDE.md with CSS conventions
+- [x] CNAME in `demo/` — custom domain survives CI rebuilds
+- [x] Single CI workflow — duplicate `publish.yml` removed
+- [x] `@toybreaker/fiko@0.5.1` live on npm + deployed to `fiko.junglestar.org`
 
 ## NEXT
 - [ ] `apple-touch-icon.png` generated from `favicon.svg`
 - [ ] Update CA/DV/mom monorepo packages to use `.accordion_chevron` (replace inline Accordion component)
-- [ ] Publish `@toybreaker/fiko@0.5.0` to npm via `vX.Y.Z` tag push
+- [ ] Update CA monorepo: `pnpm fiko:npm` to pull `@toybreaker/fiko@0.5.1`
 
 ## LATER
 - [ ] Dark mode token layer (opt-in)
