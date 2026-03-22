@@ -82,7 +82,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 }
 
 .fiko_hero_title {
-  animation: fiko_shake_vertical 1.2s linear both;
+  animation: fiko_shake_vertical 0.8s linear both;
   font-size: clamp(5rem, 22vw, 16rem);
   font-weight: 100;
   line-height: 1;
@@ -518,7 +518,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 }
 
 .fiko_footer_logo.shake {
-  animation: fiko_shake_vertical 1.2s linear both;
+  animation: fiko_shake_vertical 0.8s linear both;
 }
 
 .fiko_footer_logo {
@@ -540,7 +540,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 .fiko_pill:hover,
 .fiko_feature_card:hover,
 .fiko_footer a:hover {
-  animation: fiko_shake_vertical 0.7s linear both;
+  animation: fiko_shake_vertical 0.55s linear both;
 }
 
 /* ── RESPONSIVE TWEAKS ────────────────────────────────── */
