@@ -180,6 +180,13 @@ details.accordion > summary {
 
 details.accordion > summary::-webkit-details-marker { display: none; }
 
+/* link inside summary — takes all space so chevron/icon stays right-aligned */
+details.accordion > summary a {
+  flex: 1;
+  color: inherit;
+  text-decoration: none;
+}
+
 details.accordion > summary::after {
   content: var(--accordion_icon_closed, '+');
   font-size: 1.4em;

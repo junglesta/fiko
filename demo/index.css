@@ -756,7 +756,6 @@ body.nav_open { overflow: hidden; }
   }
 
   .fiko_aside_nav .accordion > summary { font-size: 0.8rem; }
-  .fiko_aside_nav .accordion > summary a { color: inherit; text-decoration: none; }
 
   .fiko_aside_h3 {
     font-size: 0.75rem;
