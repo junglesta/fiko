@@ -82,7 +82,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 }
 
 .fiko_hero_title {
-  animation: fiko_shake_vertical 1.6s ease-out both;
+  animation: fiko_shake_vertical 1.2s linear both;
   font-size: clamp(5rem, 22vw, 16rem);
   font-weight: 100;
   line-height: 1;
@@ -177,11 +177,12 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 @keyframes fiko_shake_vertical {
   0%   { transform: translateY(0); }
-  15%  { transform: translateY(-8px); }
-  30%  { transform: translateY(6px); }
-  50%  { transform: translateY(-5px); }
-  65%  { transform: translateY(3px); }
-  82%  { transform: translateY(-1px); }
+  10%  { transform: translateY(-9px); }
+  22%  { transform: translateY(7px); }
+  36%  { transform: translateY(-5px); }
+  50%  { transform: translateY(4px); }
+  64%  { transform: translateY(-2px); }
+  78%  { transform: translateY(1px); }
   100% { transform: translateY(0); }
 }
 
@@ -517,7 +518,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 }
 
 .fiko_footer_logo.shake {
-  animation: fiko_shake_vertical 1.6s ease-out both;
+  animation: fiko_shake_vertical 1.2s linear both;
 }
 
 .fiko_footer_logo {
@@ -539,7 +540,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 .fiko_pill:hover,
 .fiko_feature_card:hover,
 .fiko_footer a:hover {
-  animation: fiko_shake_vertical 0.8s ease-out both;
+  animation: fiko_shake_vertical 0.7s linear both;
 }
 
 /* ── RESPONSIVE TWEAKS ────────────────────────────────── */
