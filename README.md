@@ -184,4 +184,4 @@ fiko was designed to pair with Astro scoped styles:
 
 ## License
 
-MIT — Copyright (c) 2024–2025 Toybreaker
+MIT — Copyright (c) 2024–2026 Toybreaker

@@ -18,7 +18,7 @@ await copyFile(path.join(root, 'index.css'), path.join(dist, 'fiko.css'))
 // demo assets
 await copyFile(path.join(root, 'demo', 'index.css'), path.join(dist, 'index.css'))
 
-for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'og-image.jpg']) {
+for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'og-image.jpg', 'CNAME']) {
   const src = path.join(root, 'demo', f)
   if (existsSync(src)) await copyFile(src, path.join(dist, f))
 }
