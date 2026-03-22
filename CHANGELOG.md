@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.4.0 — 2026-03-22
+
+### Breaking
+- **Branding template files renamed** — `1client_vars.css` → `palette.css`, `2client_datatheme.css` → `roles.css`, `3client_theme.css` → `overrides.css`. Update your project's import paths accordingly.
+- **`.typewriter` repurposed** — now sets `font-family: var(--font_serif)` (Courier New). The previous 66ch layout behaviour moves to new `.prose` class.
+
+### New
+- **`.prose`** — `max-width: 66ch; margin-inline: auto` (was `.typewriter`)
+- **`.mono`** — `ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace`
+- **`.gradient_o`** — radial brand gradient (replaces `gradient_brand`)
+- **`.gradient_h`** — horizontal linear brand gradient
+- **`.gradient_v`** — vertical linear brand gradient
+
+### Updated
+- Gradient tokens `--gradient_brand` / `--gradient_linear` renamed to `--gradient_o` / `--gradient_h` / `--gradient_v`
+- `--gradient_o` uses brand-only OKLCH colors (no warm tones)
+
+### Demo
+- Heading scale showcase: 2-col grid, label left / styled text right
+- Text utilities: 2-col grid with semantic example phrases
+- Shake animation on hero title (page load + click to replay)
+- Shake animation on footer logo (1s after scroll into view)
+- Hover shake on nav links, copy buttons, pills, feature cards
+- SVG favicon + `scripts/build-demo.mjs` for self-contained `dist/`
+- GitHub Pages workflow updated — builds `dist/`, deploys to `fiko.junglestar.org`
+
+### Next
+- `apple-touch-icon.png` generation from `favicon.svg`
+- Consider `--gradient_o` center position as a token
+
 ## 0.3.2 — 2026-03-21
 
 ### Fixed

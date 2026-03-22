@@ -1,5 +1,7 @@
 /*! 🐉 404.css | MIT License */
 /* utils/gradients.css — gradient utility classes */
 
-.gradient_brand { background: var(--gradient_brand); }
-.gradient_warm  { background: var(--gradient_warm);  }
+.gradient_o { background: var(--gradient_o); }
+.gradient_h { background: var(--gradient_h); }
+.gradient_v { background: var(--gradient_v); }
+.gradient_warm        { background: var(--gradient_warm);        }

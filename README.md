@@ -52,18 +52,18 @@ Then import your brand tokens **after** the framework, inside the same layers:
 @import "@toybreaker/fiko";
 
 /* brand palette — loads in the tokens layer */
-@import url(./branding/1client_vars.css) layer(tokens);
+@import url(./branding/palette.css) layer(tokens);
 
 /* semantic aliases (surface, text, cta) — loads in the theme layer */
-@import url(./branding/2client_datatheme.css) layer(theme);
+@import url(./branding/roles.css) layer(theme);
 
 /* element defaults, heading scale — loads in the theme layer */
-@import url(./branding/3client_theme.css) layer(theme);
+@import url(./branding/overrides.css) layer(theme);
 ```
 
 ### 3. Customize your brand
 
-Edit `branding/1client_vars.css` — change the hue angle for your brand color:
+Edit `branding/palette.css` — change the hue angle for your brand color:
 
 ```css
 --brand: oklch(0.55 0.19 28);   /* orange — change the hue (0–360) */
@@ -85,9 +85,9 @@ fiko/
 │   └── utils/          ← atomic utility classes
 │
 └── branding/     ← YOUR BRAND — per-client, fully owned, never extracted
-    ├── 1client_vars.css      ← raw palette (OKLCH colors)
-    ├── 2client_datatheme.css ← semantic aliases (surface, text, cta…)
-    └── 3client_theme.css     ← element defaults, heading scale, brand specifics
+    ├── palette.css   ← raw brand colors (OKLCH tokens)
+    ├── roles.css     ← semantic aliases (surface, text, cta…)
+    └── overrides.css ← element defaults, heading scale, brand specifics
 ```
 
 **The rule:** if it could work on any website → `omg/`. If it's specific to one brand → `branding/`.
@@ -138,7 +138,8 @@ All color tokens use OKLCH:
 | `.pad_block_sm` | block padding small |
 | `.h1` – `.h6` | heading scale classes |
 | `.dim` | secondary text color + smaller size |
-| `.typewriter` | `max-width: 66ch; margin-inline: auto` |
+| `.typewriter` | `font-family: var(--font_serif)` — "Courier New", Courier, monospace |
+| `.prose` | `max-width: 66ch; margin-inline: auto` |
 | `.aspect_square` | `aspect-ratio: 1` |
 | `.aspect_video` | `aspect-ratio: 16/9` |
 

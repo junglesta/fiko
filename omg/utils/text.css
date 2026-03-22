@@ -25,3 +25,7 @@
 .pretty {
   text-wrap: pretty;
 }
+
+.mono {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+}

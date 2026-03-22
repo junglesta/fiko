@@ -126,9 +126,13 @@ svg:not(:root) {
   text-underline-offset: 3px;
 }
 
-.typewriter {
+.prose {
   max-width: 66ch;
   margin-inline: auto;
+}
+
+.typewriter {
+  font-family: var(--font_serif);
 }
 
 .cat { text-transform: capitalize; }

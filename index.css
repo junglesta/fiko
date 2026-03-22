@@ -16,11 +16,11 @@
  *
  *   your-project/404.css
  *   ├── @import "@junglesta/404css";          ← this file (tokens + layout + components + utils)
- *   ├── @import "./000/1client_vars.css"  layer(tokens);
- *   ├── @import "./000/2client_datatheme.css" layer(theme);
- *   └── @import "./000/3client_theme.css"     layer(theme);
+ *   ├── @import "./000/palette.css"   layer(tokens);
+ *   ├── @import "./000/roles.css"     layer(theme);
+ *   └── @import "./000/overrides.css" layer(theme);
  *
- * Starter 000/ templates are in node_modules/@junglesta/404css/template/000/
+ * Starter templates are in node_modules/fiko/template/branding/
  * ─────────────────────────────────────────────
  */
 
