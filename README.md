@@ -42,7 +42,7 @@ This imports `omg/` — the brand-agnostic framework. It declares seven cascade 
 
 ```bash
 # copy the starter brand files into your project
-cp node_modules/@toybreaker/fiko/template/branding/ src/assets/fiko/branding/ -r
+cp node_modules/@toybreaker/fiko/template/branding/ src/assets/branding/ -r
 ```
 
 Then import your brand tokens **after** the framework, inside the same layers:

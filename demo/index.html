@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
   <!-- fiko CSS — relative path for local dev -->
-  <!-- CDN: <link rel="stylesheet" href="https://unpkg.com/fiko/index.css" /> -->
+  <!-- CDN: <link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" /> -->
   <link rel="stylesheet" href="../index.css" />
 
   <!-- demo-specific styles -->
@@ -166,7 +166,7 @@
   <div class="container">
     <div class="fiko_hero_inner pad_block_xl">
 
-      <div class="fiko_hero_badge uppercase dim">v0.1.1 · MIT · npm install fiko</div>
+      <div class="fiko_hero_badge uppercase dim">v__FIKO_VERSION__ · MIT · pnpm add @toybreaker/fiko</div>
 
       <h1 class="fiko_hero_title">
         <span class="fiko_hero_word accent">FIKO</span>
@@ -209,27 +209,27 @@
     <div class="fiko_code_block">
       <div class="fiko_code_header">
         <span class="fiko_code_lang">shell</span>
-        <button class="fiko_copy_btn" data-copy="npm install fiko" aria-label="Copy install command">copy</button>
+        <button class="fiko_copy_btn" data-copy="pnpm add @toybreaker/fiko" aria-label="Copy install command">copy</button>
       </div>
-      <pre><code>npm install fiko</code></pre>
+      <pre><code>pnpm add @toybreaker/fiko</code></pre>
     </div>
 
     <div class="fiko_code_block" style="margin-top: calc(var(--spaceV) * 2);">
       <div class="fiko_code_header">
         <span class="fiko_code_lang">css</span>
-        <button class="fiko_copy_btn" data-copy="@import &quot;fiko&quot;;
+        <button class="fiko_copy_btn" data-copy="@import &quot;@toybreaker/fiko&quot;;
 
 /* then layer your brand tokens on top */
-@import &quot;./000/palette.css&quot;   layer(tokens);
-@import &quot;./000/roles.css&quot;     layer(theme);
-@import &quot;./000/overrides.css&quot; layer(theme);" aria-label="Copy CSS import">copy</button>
+@import &quot;./branding/palette.css&quot;   layer(tokens);
+@import &quot;./branding/roles.css&quot;     layer(theme);
+@import &quot;./branding/overrides.css&quot; layer(theme);" aria-label="Copy CSS import">copy</button>
       </div>
-      <pre><code>@import "fiko";
+      <pre><code>@import "@toybreaker/fiko";
 
 /* then layer your brand tokens on top */
-@import "./000/palette.css"   layer(tokens);
-@import "./000/roles.css"     layer(theme);
-@import "./000/overrides.css" layer(theme);</code></pre>
+@import "./branding/palette.css"   layer(tokens);
+@import "./branding/roles.css"     layer(theme);
+@import "./branding/overrides.css" layer(theme);</code></pre>
     </div>
 
     <p class="dim" style="margin-top: calc(var(--spaceV) * 2);">
@@ -239,9 +239,9 @@
     <div class="fiko_code_block" style="margin-top: var(--spaceV);">
       <div class="fiko_code_header">
         <span class="fiko_code_lang">html</span>
-        <button class="fiko_copy_btn" data-copy='<link rel="stylesheet" href="https://unpkg.com/fiko/index.css" />' aria-label="Copy CDN link">copy</button>
+        <button class="fiko_copy_btn" data-copy='<link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" />' aria-label="Copy CDN link">copy</button>
       </div>
-      <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/fiko/index.css" /&gt;</code></pre>
+      <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" /&gt;</code></pre>
     </div>
 
     <div class="fiko_feature_grid" style="margin-top: calc(var(--spaceV) * 4);">
@@ -580,7 +580,7 @@
         <p class="typewriter" style="margin: 0;">Dear Claude, it all started with a CSS reset…</p>
 
         <p style="margin: 0;">.mono</p>
-        <p class="mono" style="margin: 0;">npm install fiko</p>
+        <p class="mono" style="margin: 0;">pnpm add @toybreaker/fiko</p>
 
         <p style="margin: 0;">.prose</p>
         <p class="prose" style="margin: 0;">Good design is as little design as possible. Comfortable reading wraps at 66 characters, for visual comfort on long paragraphs.</p>
