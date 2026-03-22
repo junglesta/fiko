@@ -1,8 +1,11 @@
-/*! 🐉 404.css | MIT License */
-/* branding/3client_theme.css — brand-specific overrides
+/*! fiko | MIT License */
+/* branding/overrides.css — brand-specific overrides
  *
- * .h1–.h6, .dim, .underline, .typewriter, .dots, .maximise,
- * .clipped-circle, .cat, .bento, [lang] switching are in fiko core.
+ * Injected into the `theme` layer:
+ *   @import url(./branding/overrides.css) layer(theme);
+ *
+ * .h1–.h6, .dim, .underline, .typewriter, .prose, .dots, .maximise,
+ * .cat, .bento, .accordion, [lang] switching are in fiko core (omg/).
  * Add brand/client-specific rules here only.
  */
 

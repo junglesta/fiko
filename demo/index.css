@@ -16,21 +16,21 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── NAV ──────────────────────────────────────────────── */
 
-.fiko-nav {
+.fiko_nav {
   background: color-mix(in oklch, var(--surface), transparent 8%);
   border-bottom: 1px solid var(--border_color);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
-.fiko-nav .container { padding-block: 0; }
+.fiko_nav .container { padding-block: 0; }
 
-.fiko-nav nav {
+.fiko_nav nav {
   padding-block: 0;
   height: var(--sticky_header_height);
 }
 
-.fiko-nav nav a {
+.fiko_nav nav a {
   min-height: unset;
   display: flex;
   align-items: center;
@@ -40,21 +40,21 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   transition: background-color var(--transition), color var(--transition);
 }
 
-.fiko-nav nav a:hover {
+.fiko_nav nav a:hover {
   background: var(--brandT25);
   color: var(--brand);
 }
 
-.fiko-nav-gh { padding: 0.4rem !important; }
-.fiko-nav-gh svg { display: block; }
+.fiko_nav_gh { padding: 0.4rem !important; }
+.fiko_nav_gh svg { display: block; }
 
 /* logo wordmark */
-.fiko-logo {
+.fiko_logo {
   padding: 0 !important;
   background: none !important;
 }
 
-.fiko-wordmark {
+.fiko_wordmark {
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -64,25 +64,25 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── HERO ─────────────────────────────────────────────── */
 
-.fiko-hero {
+.fiko_hero {
   position: relative;
   overflow: hidden;
   background: var(--surface);
   border-bottom: 1px solid var(--border_color);
 }
 
-.fiko-hero .container { position: relative; z-index: 1; }
+.fiko_hero .container { position: relative; z-index: 1; }
 
-.fiko-hero-inner { max-width: 680px; }
+.fiko_hero_inner { max-width: 680px; }
 
-.fiko-hero-badge {
+.fiko_hero_badge {
   font-size: 1rem;
   letter-spacing: 0.1em;
   margin-bottom: calc(var(--spaceV) * 2);
 }
 
-.fiko-hero-title {
-  animation: fiko-shake-vertical 1s both;
+.fiko_hero_title {
+  animation: fiko_shake_vertical 1s both;
   font-size: clamp(5rem, 22vw, 16rem);
   font-weight: 100;
   line-height: 1;
@@ -91,25 +91,25 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   user-select: none;
 }
 
-.fiko-hero-word {
+.fiko_hero_word {
   display: inline-block;
 }
 
-.fiko-hero-word.accent {
+.fiko_hero_word.accent {
   background: var(--gradient_warm);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: fiko-pulse 4s ease-in-out infinite;
+  animation: fiko_pulse 4s ease-in-out infinite;
 }
 
-@keyframes fiko-pulse {
+@keyframes fiko_pulse {
   0%, 100% { filter: brightness(1) saturate(1); }
   40%       { filter: brightness(1.15) saturate(1.3); }
   70%       { filter: brightness(0.92) saturate(0.9); }
 }
 
-.fiko-hero-tagline {
+.fiko_hero_tagline {
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.6;
   color: var(--text);
@@ -118,14 +118,14 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   margin: 0 0 calc(var(--spaceV) * 2);
 }
 
-.fiko-hero-pills {
+.fiko_hero_pills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: calc(var(--spaceV) * 2);
 }
 
-.fiko-pill {
+.fiko_pill {
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -139,7 +139,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 }
 
 /* animated orbs */
-.fiko-orb {
+.fiko_orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(60px);
@@ -148,39 +148,39 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   z-index: 0;
 }
 
-.fiko-orb-1 {
+.fiko_orb_1 {
   width: 500px;
   height: 500px;
   background: oklch(0.65 0.22 40);
   top: -120px;
   right: -100px;
-  animation: fiko-orb-drift 9s ease-in-out infinite;
+  animation: fiko_orb_drift 9s ease-in-out infinite;
 }
 
-.fiko-orb-2 {
+.fiko_orb_2 {
   width: 300px;
   height: 300px;
   background: oklch(0.72 0.20 65);
   bottom: -60px;
   right: 200px;
-  animation: fiko-orb-drift 13s ease-in-out infinite reverse;
+  animation: fiko_orb_drift 13s ease-in-out infinite reverse;
 }
 
-.fiko-orb-3 {
+.fiko_orb_3 {
   width: 200px;
   height: 200px;
   background: oklch(0.60 0.18 25);
   top: 50%;
   right: 40%;
-  animation: fiko-orb-drift 7s ease-in-out infinite 2s;
+  animation: fiko_orb_drift 7s ease-in-out infinite 2s;
 }
 
-@keyframes fiko-shake-vertical {
+@keyframes fiko_shake_vertical {
   0%, 20%, 40%, 60%, 80%, 100% { transform: translate3d(0,  7px, 0); }
   10%, 30%, 50%, 70%, 90%      { transform: translate3d(0, -7px, 0); }
 }
 
-@keyframes fiko-orb-drift {
+@keyframes fiko_orb_drift {
   0%   { transform: translate(0, 0) scale(1); }
   33%  { transform: translate(30px, -20px) scale(1.05); }
   66%  { transform: translate(-20px, 15px) scale(0.96); }
@@ -189,16 +189,16 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── SECTIONS ─────────────────────────────────────────── */
 
-.fiko-section {
+.fiko_section {
   padding-block: calc(var(--spaceV) * 8);
   border-bottom: 1px solid var(--border_color);
 }
 
-.fiko-section-alt {
+.fiko_section_alt {
   background: color-mix(in oklch, var(--surface), white 4%);
 }
 
-.fiko-section-label {
+.fiko_section_label {
   font-size: 1rem;
   letter-spacing: 0.12em;
   margin-bottom: calc(var(--spaceV) * 1.5);
@@ -206,25 +206,25 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── TOKEN GRID ───────────────────────────────────────── */
 
-.fiko-token-grid {
+.fiko_token_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: calc(var(--spaceV)) calc(var(--spaceH));
 }
 
-.fiko-swatch-card {
+.fiko_swatch_card {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-.fiko-swatch {
+.fiko_swatch {
   width: 100%;
   aspect-ratio: 1;
   border-radius: var(--radius);
 }
 
-.fiko-swatch-checkered {
+.fiko_swatch_checkered {
   background-image:
     linear-gradient(45deg, oklch(0.38 0 0) 25%, transparent 25%),
     linear-gradient(-45deg, oklch(0.38 0 0) 25%, transparent 25%),
@@ -234,14 +234,14 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   background-position: 0 0, 0 6px, 6px -6px, -6px 0;
 }
 
-.fiko-swatch-name {
+.fiko_swatch_name {
   font-size: 1rem;
   font-weight: 600;
   font-family: var(--font_serif);
   word-break: break-all;
 }
 
-.fiko-swatch-value {
+.fiko_swatch_value {
   font-size: 0.85rem;
   font-family: var(--font_serif);
   color: var(--text);
@@ -250,26 +250,26 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── TOKEN LIST (spacing / breakpoints) ───────────────── */
 
-.fiko-token-list {
+.fiko_token_list {
   display: flex;
   flex-direction: column;
   gap: calc(var(--spaceV) * 0.75);
 }
 
-.fiko-token-row {
+.fiko_token_row {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.fiko-token-name {
+.fiko_token_name {
   font-family: var(--font_serif);
   font-size: 1rem;
   min-width: 160px;
   flex-shrink: 0;
 }
 
-.fiko-token-bar {
+.fiko_token_bar {
   height: 12px;
   border-radius: 99px;
   flex-shrink: 0;
@@ -277,13 +277,13 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── TYPE SCALE ───────────────────────────────────────── */
 
-.fiko-type-scale {
+.fiko_type_scale {
   display: flex;
   flex-direction: column;
   gap: calc(var(--spaceV) * 1.5);
 }
 
-.fiko-type-row {
+.fiko_type_row {
   display: flex;
   align-items: baseline;
   gap: 1.5rem;
@@ -292,7 +292,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   padding-bottom: calc(var(--spaceV) * 0.75);
 }
 
-.fiko-type-row code {
+.fiko_type_row code {
   font-family: var(--font_serif);
   font-size: 1rem;
   opacity: 0.5;
@@ -301,7 +301,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── WEIGHT SCALE ─────────────────────────────────────── */
 
-.fiko-weight-scale {
+.fiko_weight_scale {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -310,14 +310,14 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── SHOWCASE BLOCKS ──────────────────────────────────── */
 
-.fiko-showcase {
+.fiko_showcase {
   margin-bottom: calc(var(--spaceV) * 5);
   border: 1px solid var(--border_color);
   border-radius: calc(var(--radius) * 2);
   overflow: hidden;
 }
 
-.fiko-showcase-header {
+.fiko_showcase_header {
   display: flex;
   align-items: baseline;
   gap: 1rem;
@@ -327,9 +327,9 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   background: color-mix(in oklch, var(--surface), white 4%);
 }
 
-.fiko-showcase-header h3 { margin: 0; }
+.fiko_showcase_header h3 { margin: 0; }
 
-.fiko-showcase-live {
+.fiko_showcase_live {
   padding: calc(var(--spaceV) * 2) calc(var(--spaceH) * 2);
   display: flex;
   flex-wrap: wrap;
@@ -337,12 +337,12 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   align-items: center;
 }
 
-.fiko-showcase-live-col {
+.fiko_showcase_live_col {
   flex-direction: column;
   align-items: stretch;
 }
 
-.fiko-showcase-live.resizable {
+.fiko_showcase_live.resizable {
   resize: horizontal;
   overflow: auto;
   min-width: 240px;
@@ -353,7 +353,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   container-name: main-container;
 }
 
-.fiko-showcase-live.resizable::after {
+.fiko_showcase_live.resizable::after {
   content: '↔ drag to resize';
   position: absolute;
   bottom: 0.5rem;
@@ -367,20 +367,20 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── CODE BLOCKS ──────────────────────────────────────── */
 
-.fiko-code-block {
+.fiko_code_block {
   border: 1px solid var(--border_color);
   border-radius: var(--radius);
   overflow: hidden;
   font-size: 1rem;
 }
 
-.fiko-showcase .fiko-code-block {
+.fiko_showcase .fiko_code_block {
   border: none;
   border-top: 1px solid var(--border_color);
   border-radius: 0;
 }
 
-.fiko-code-header {
+.fiko_code_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -389,7 +389,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   border-bottom: 1px solid var(--border_color);
 }
 
-.fiko-code-lang {
+.fiko_code_lang {
   font-family: var(--font_serif);
   font-size: 1rem;
   text-transform: uppercase;
@@ -397,7 +397,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   opacity: 0.45;
 }
 
-.fiko-code-block pre {
+.fiko_code_block pre {
   margin: 0;
   padding: 1rem 1.25rem;
   overflow-x: auto;
@@ -405,7 +405,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   line-height: 1.6;
 }
 
-.fiko-code-block code {
+.fiko_code_block code {
   font-family: var(--font_serif);
   font-size: 1rem;
   color: var(--text);
@@ -413,7 +413,7 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 }
 
 /* copy button */
-.fiko-copy-btn {
+.fiko_copy_btn {
   height: auto !important;
   padding: 0.2rem 0.6rem !important;
   font-size: 1rem !important;
@@ -429,14 +429,14 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   line-height: 1.6;
 }
 
-.fiko-copy-btn:hover {
+.fiko_copy_btn:hover {
   background: var(--brandT25) !important;
   border-color: var(--brand) !important;
   color: var(--brand) !important;
   transform: none !important; /* override fiko button hover lift */
 }
 
-.fiko-copy-btn--done {
+.fiko_copy_btn_done {
   background: var(--brandT25) !important;
   border-color: var(--brand) !important;
   color: var(--brand) !important;
@@ -444,35 +444,35 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── FEATURE GRID (install section) ──────────────────── */
 
-.fiko-feature-grid {
+.fiko_feature_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: calc(var(--spaceV)) calc(var(--spaceH));
 }
 
-.fiko-feature-card {
+.fiko_feature_card {
   padding: calc(var(--spaceV) * 2) calc(var(--spaceH) * 1.5);
   border: 1px solid var(--border_color);
   border-radius: calc(var(--radius) * 2);
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.fiko-feature-card:hover {
+.fiko_feature_card:hover {
   border-color: var(--brandT50);
   box-shadow: 0 0 0 3px var(--brandT25);
 }
 
-.fiko-feature-icon {
+.fiko_feature_icon {
   font-size: 1.5rem;
   margin-bottom: calc(var(--spaceV));
   color: var(--brand);
 }
 
-.fiko-feature-card h3 {
+.fiko_feature_card h3 {
   margin: 0 0 calc(var(--spaceV) * 0.5);
 }
 
-.fiko-feature-card p {
+.fiko_feature_card p {
   margin: 0;
   padding: 0;
   font-size: 1rem;
@@ -480,14 +480,14 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── GRID / BENTO demo cells ──────────────────────────── */
 
-.fiko-grid-cell {
+.fiko_grid_cell {
   background: var(--brandT25);
   padding: var(--spaceV) var(--spaceH);
   border-radius: var(--radius);
   font-size: 1rem;
 }
 
-.fiko-bento-hero {
+.fiko_bento_hero {
   background: var(--brandT50);
   font-weight: 700;
   min-height: 80px;
@@ -497,25 +497,25 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
 
 /* ── FOOTER ───────────────────────────────────────────── */
 
-.fiko-footer {
+.fiko_footer {
   background: oklch(0.10 0.01 265);
   color: var(--light);
   border-top: 1px solid var(--border_color);
 }
 
-.fiko-footer .dim {
+.fiko_footer .dim {
   color: color-mix(in oklch, var(--light), transparent 40%);
 }
 
-.fiko-footer a {
+.fiko_footer a {
   color: inherit;
 }
 
-.fiko-footer-logo.shake {
-  animation: fiko-shake-vertical 1s both;
+.fiko_footer_logo.shake {
+  animation: fiko_shake_vertical 1s both;
 }
 
-.fiko-footer-logo {
+.fiko_footer_logo {
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -524,53 +524,241 @@ a:hover { color: var(--cta_hover, var(--primary_hover)); }
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
-  animation: fiko-pulse 4s ease-in-out infinite;
+  animation: fiko_pulse 4s ease-in-out infinite;
 }
 
 /* ── HOVER SHAKE ──────────────────────────────────────── */
 
-.fiko-nav nav a:hover,
-.fiko-copy-btn:hover,
-.fiko-pill:hover,
-.fiko-feature-card:hover,
-.fiko-footer a:hover {
-  animation: fiko-shake-vertical 0.5s both;
+.fiko_nav nav a:hover,
+.fiko_copy_btn:hover,
+.fiko_pill:hover,
+.fiko_feature_card:hover,
+.fiko_footer a:hover {
+  animation: fiko_shake_vertical 0.5s both;
 }
 
 /* ── RESPONSIVE TWEAKS ────────────────────────────────── */
 
 @media (max-width: 640px) {
-  .fiko-token-grid {
+  .fiko_token_grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   }
 
-  .fiko-token-row {
+  .fiko_token_row {
     flex-wrap: wrap;
   }
 
-  .fiko-token-name {
+  .fiko_token_name {
     min-width: unset;
   }
 
-  .fiko-type-row {
+  .fiko_type_row {
     flex-direction: column;
     gap: 0.25rem;
   }
 
-  .fiko-weight-scale {
+  .fiko_weight_scale {
     gap: 1rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fiko-hero-title,
-  .fiko-hero-word.accent,
-  .fiko-footer-logo,
-  .fiko-footer-logo.shake,
-  .fiko-nav nav a:hover,
-  .fiko-copy-btn:hover,
-  .fiko-pill:hover,
-  .fiko-feature-card:hover,
-  .fiko-footer a:hover { animation: none; }
-  .fiko-orb { animation: none; }
+  .fiko_hero_title,
+  .fiko_hero_word.accent,
+  .fiko_footer_logo,
+  .fiko_footer_logo.shake,
+  .fiko_nav nav a:hover,
+  .fiko_copy_btn:hover,
+  .fiko_pill:hover,
+  .fiko_feature_card:hover,
+  .fiko_footer a:hover { animation: none; }
+  .fiko_orb { animation: none; }
+}
+
+/* ── NAV RIGHT CLUSTER ────────────────────────────────── */
+
+.fiko_nav_right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── HAMBURGER BUTTON ─────────────────────────────────── */
+
+/* hidden on desktop, shown on mobile inside the header */
+.fiko_nav_hamburger {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--dark), var(--brand) 12%);
+  border: 1.5px solid color-mix(in oklch, var(--light), transparent 72%);
+  color: var(--light);
+  cursor: pointer;
+  display: none; /* shown via media query below */
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background-color 180ms, border-color 180ms;
+}
+
+.fiko_nav_hamburger:hover {
+  background: color-mix(in oklch, var(--dark), var(--brand) 28%);
+  border-color: color-mix(in oklch, var(--brand), transparent 40%);
+}
+
+/* 3-bar icon → × animation */
+.fiko_nav_hamburger_icon {
+  position: relative;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: background-color 200ms 100ms;
+}
+
+.fiko_nav_hamburger_icon::before,
+.fiko_nav_hamburger_icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: top 200ms 200ms, transform 200ms 0ms;
+}
+
+.fiko_nav_hamburger_icon::before { top: -6px; }
+.fiko_nav_hamburger_icon::after  { top:  6px; }
+
+body.nav_open .fiko_nav_hamburger_icon {
+  background: transparent;
+  transition: background-color 200ms 0ms;
+}
+
+body.nav_open .fiko_nav_hamburger_icon::before,
+body.nav_open .fiko_nav_hamburger_icon::after {
+  top: 0;
+  transition: top 200ms 0ms, transform 200ms 200ms;
+}
+
+body.nav_open .fiko_nav_hamburger_icon::before { transform: rotate(45deg); }
+body.nav_open .fiko_nav_hamburger_icon::after  { transform: rotate(-45deg); }
+
+/* ── ASIDE NAV ────────────────────────────────────────── */
+
+/* mobile: panel slides in below the sticky header */
+.fiko_aside_nav {
+  position: fixed;
+  top: var(--sticky_header_height, 88px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  background: var(--dark);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.5rem 1.5rem 3rem;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms 300ms;
+}
+
+body.nav_open .fiko_aside_nav {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), visibility 0ms 0ms;
+}
+
+body.nav_open { overflow: hidden; }
+
+.fiko_aside_nav nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(var(--spaceV) * 0.5);
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.fiko_aside_nav .accordion {
+  width: 100%;
+}
+
+/* Install solo link */
+.fiko_aside_solo {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.75rem 0.5rem;
+  color: var(--brand);
+  text-decoration: none;
+  opacity: 0.9;
+  border-bottom: 1px solid var(--border_color);
+}
+
+.fiko_aside_solo:hover { opacity: 1; }
+
+/* links inside accordion panels */
+.fiko_aside_h3 {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.65;
+}
+
+.fiko_aside_h3:hover { opacity: 1; color: var(--brand); }
+
+/* ── mobile breakpoint: show hamburger, hide nav links ── */
+
+@media (max-width: 1023px) {
+  .fiko_nav_hamburger { display: flex; }
+  .fiko_nav_right > ul { display: none; }
+}
+
+/* ── desktop ≥1024px: fixed sidebar, hamburger hidden ─── */
+
+@media (min-width: 1024px) {
+  body.nav_open { overflow: auto; }
+
+  .fiko_aside_nav {
+    right: auto;
+    width: 220px;
+    padding: 1rem 0.75rem 2rem;
+    border-right: 1px solid var(--border_color);
+    scrollbar-width: thin;
+    transform: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .fiko_aside_nav nav {
+    max-width: none;
+    margin: 0;
+    align-items: stretch;
+  }
+
+  .fiko_aside_solo {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .fiko_aside_nav .accordion > summary { font-size: 0.8rem; }
+  .fiko_aside_nav .accordion > summary a { color: inherit; text-decoration: none; }
+
+  .fiko_aside_h3 {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  main { padding-left: 220px; }
 }

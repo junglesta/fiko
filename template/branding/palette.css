@@ -1,10 +1,13 @@
-/*! 🐉 404.css | MIT License */
-/* branding/1client_vars.css — brand palette tokens
+/*! fiko | MIT License */
+/* branding/palette.css — raw brand color tokens
  *
- * Neutrals (--dark, --light and alpha variants) are defined in
- * omg/1vars.css — override here only if your brand uses a tinted surface.
+ * Injected into the `tokens` layer:
+ *   @import url(./branding/palette.css) layer(tokens);
  *
- * Add brand-specific tokens: --brand, --nobori, --surface_*, gradients, etc.
+ * Neutrals (--dark, --light and alpha variants) are defined in omg/1vars.css.
+ * Override here only if your brand uses a tinted surface.
+ *
+ * Add brand-specific tokens: --brand, --surface_*, gradients, etc.
  */
 
 :root {

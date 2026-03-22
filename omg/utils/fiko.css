@@ -1,0 +1,66 @@
+/*! fiko | MIT License */
+/* utils/fiko.css — .fiko signature class
+ *
+ * Adds the warm animated orb glow to any element.
+ * Usage: <section class="fiko"> … </section>
+ *
+ * Requirements: the element needs dimensions (height/min-height).
+ * Pseudo-elements carry the orbs; direct children stay above via z-index.
+ * Override orb colors with --fiko_orb_a / --fiko_orb_b.
+ */
+
+.fiko {
+  --fiko_orb_a: oklch(0.65 0.22 40);   /* warm orange */
+  --fiko_orb_b: oklch(0.72 0.20 65);   /* amber */
+  position: relative;
+  overflow: hidden;
+  background: var(--dark, oklch(0.12 0.01 265));
+}
+
+.fiko::before,
+.fiko::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* primary orb — top-right */
+.fiko::before {
+  width: 60%;
+  aspect-ratio: 1;
+  background: var(--fiko_orb_a);
+  filter: blur(80px);
+  opacity: 0.22;
+  top: -20%;
+  right: -10%;
+  animation: fiko_orb_drift 9s ease-in-out infinite;
+}
+
+/* secondary orb — bottom-right */
+.fiko::after {
+  width: 40%;
+  aspect-ratio: 1;
+  background: var(--fiko_orb_b);
+  filter: blur(60px);
+  opacity: 0.15;
+  bottom: -10%;
+  right: 25%;
+  animation: fiko_orb_drift 13s ease-in-out infinite reverse;
+}
+
+/* keep children above orbs */
+.fiko > * { position: relative; z-index: 1; }
+
+@keyframes fiko_orb_drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.05); }
+  66%  { transform: translate(-20px, 15px) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fiko::before,
+  .fiko::after { animation: none; }
+}

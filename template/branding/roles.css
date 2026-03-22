@@ -1,8 +1,11 @@
-/*! 🐉 404.css | MIT License */
-/* 000/2client_datatheme.css — semantic theme aliases
+/*! fiko | MIT License */
+/* branding/roles.css — semantic theme aliases
  *
- * Maps raw palette tokens (from 1client_vars.css) to semantic roles.
- * This file loads in the `theme` layer.
+ * Maps raw palette tokens (from palette.css) to semantic roles.
+ *
+ * Injected into the `theme` layer:
+ *   @import url(./branding/roles.css) layer(theme);
+ *
  * Permanent light mode — dark mode intentionally excluded.
  */
 

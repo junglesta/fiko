@@ -50,3 +50,5 @@
 @import url(omg/utils/aspect.css) layer(utilities);
 @import url(omg/utils/gradients.css) layer(utilities);
 @import url(omg/utils/misc.css) layer(utilities);
+
+@import url(omg/utils/fiko.css) layer(utilities);

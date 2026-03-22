@@ -76,29 +76,51 @@ nav li {
 }
 
 /* ── BENTO BOX ──────────────────────────────────── */
-/* Mosaic product grid. Wrap cards in <div class="bento"> */
+/* Mosaic product grid. Wrap cards in <div class="bento">
+ *
+ * Token-driven: adjust --bento_cols / --bento_rows at any level.
+ * aspect-ratio keeps cells proportional automatically.
+ * grid-auto-flow: dense fills gaps — add items in any order.
+ *
+ * Quick override examples:
+ *   style="--bento_cols:4; --bento_rows:2"   → 4×2 landscape
+ *   style="--bento_cols:2; --bento_rows:4"   → 2×4 portrait
+ *
+ * Span modifiers on children:
+ *   .bento_col_2 / .bento_col_3   → span N columns
+ *   .bento_row_2 / .bento_row_3   → span N rows
+ *   .bento_full                    → full width
+ */
 
 .bento {
+  --bento_cols: 3;
+  --bento_rows: 3;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(var(--bento_cols), 1fr);
+  grid-template-rows: repeat(var(--bento_rows), 1fr);
+  grid-auto-flow: dense;
   gap: calc(var(--spaceV) * 0.5) calc(var(--spaceH) * 0.5);
   width: 100%;
+  aspect-ratio: var(--bento_cols) / var(--bento_rows);
 }
 
-.bento > :first-child { grid-column: 1 / -1; }
+/* Featured first child: 2×2 */
+.bento > :first-child { grid-column: span 2; grid-row: span 2; }
 
-.bento > :nth-child(7n + 1):not(:first-child) { grid-column: 1 / -1; }
+/* ── Span modifiers ─────────────────────────────── */
+.bento > .bento_col_2  { grid-column: span 2; }
+.bento > .bento_col_3  { grid-column: span 3; }
+.bento > .bento_full   { grid-column: 1 / -1; }
+.bento > .bento_row_2  { grid-row: span 2; }
+.bento > .bento_row_3  { grid-row: span 3; }
 
-@container main-container (min-width: 480px) {
-  .bento { grid-template-columns: 1fr 1fr; }
+/* ── Responsive defaults ────────────────────────── */
+@container main-container (max-width: 479px) {
+  .bento { --bento_cols: 1; --bento_rows: 6; }
+  .bento > :first-child { grid-column: span 1; grid-row: span 1; }
 }
 
-@container main-container (min-width: 640px) {
-  .bento { grid-template-columns: 1fr 1fr 1fr; }
-  .bento > :first-child { grid-column: 1 / 3; grid-row: 1 / 3; }
-}
-
-@container main-container (min-width: 960px) {
-  .bento { grid-template-columns: repeat(4, 1fr); }
-  .bento > :first-child { grid-column: 1 / 3; grid-row: 1 / 3; }
+@container main-container (min-width: 480px) and (max-width: 639px) {
+  .bento { --bento_cols: 2; --bento_rows: 4; }
+  .bento > :first-child { grid-column: span 2; grid-row: span 2; }
 }

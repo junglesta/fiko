@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.5.0 — 2026-03-22
+
+### Breaking
+- **All class names now snake_case** — any kebab-case class that was undocumented but used (e.g. `.bento-col-2`, `.clipped-circle`) must be updated to snake_case equivalents.
+
+### New
+- **`.accordion_chevron`** — modifier class for `details.accordion`: replaces `+`/`×` text icon with an animated SVG chevron via CSS `mask-image`. Rotates 90° on open. Pure CSS, no inline SVG needed.
+- **`.fiko` utility** — animated warm orb glow background. Add to any element with dimensions. Override orb colors with `--fiko_orb_a` / `--fiko_orb_b`.
+- **Hamburger nav** — `header` gets mobile hamburger button (top-right, animated 3-bar → ×). Full-screen overlay slides in on mobile; fixed 220px sidebar on desktop ≥1024px. Controlled by `body.nav_open`.
+- **`CLAUDE.md`** — CSS conventions documented for AI-assisted development in this repo.
+
+### Fixed
+- **snake_case audit** — all class names across `omg/` and `demo/` renamed from kebab-case to snake_case (`.bento_col_2`, `.bento_full`, `.bento_row_2`, `.bento_row_3`, `.clipped_circle`, etc.).
+- **`pnpm dev`** — now opens `http://localhost:3000/demo/` automatically via compound command + `serve.json` redirect.
+
+### Next
+- `apple-touch-icon.png` generation from `favicon.svg`
+
 ## 0.4.0 — 2026-03-22
 
 ### Breaking

@@ -18,20 +18,19 @@ await copyFile(path.join(root, 'index.css'), path.join(dist, 'fiko.css'))
 // demo assets
 await copyFile(path.join(root, 'demo', 'index.css'), path.join(dist, 'index.css'))
 
-for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) {
+for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'og-image.jpg']) {
   const src = path.join(root, 'demo', f)
   if (existsSync(src)) await copyFile(src, path.join(dist, f))
 }
 
-// fix CSS path in index.html: ../index.css → ./fiko.css
+// read version from package.json
+const { version } = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
+
+// fix CSS path in index.html: ../index.css → ./fiko.css, inject version
 let html = await readFile(path.join(root, 'demo', 'index.html'), 'utf8')
-html = html.replace(
-  '<link rel="stylesheet" href="../index.css" />',
-  '<link rel="stylesheet" href="./fiko.css" />'
-)
+html = html
+  .replace('<link rel="stylesheet" href="../index.css" />', '<link rel="stylesheet" href="./fiko.css" />')
+  .replaceAll('__FIKO_VERSION__', version)
 await writeFile(path.join(dist, 'index.html'), html)
 
-// CNAME for custom domain
-await writeFile(path.join(dist, 'CNAME'), 'fiko.junglestar.org\n')
-
-console.log('dist/ ready for fiko.junglestar.org')
+console.log('dist/ ready → run: npm run deploy')

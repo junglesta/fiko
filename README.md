@@ -21,8 +21,6 @@ fiko takes a third path: a minimal, layered foundation you override by design, n
 ## Install
 
 ```bash
-npm install @toybreaker/fiko
-# or
 pnpm add @toybreaker/fiko
 ```
 
@@ -37,7 +35,7 @@ pnpm add @toybreaker/fiko
 @import "@toybreaker/fiko";
 ```
 
-This imports `omg/` — the brand-agnostic framework. It declares six cascade layers and imports all `omg/` sheets in the correct order.
+This imports `omg/` — the brand-agnostic framework. It declares seven cascade layers and imports all `omg/` sheets in the correct order.
 
 ### 2. Add your brand (copy the template)
 
@@ -97,19 +95,22 @@ fiko/
 ## Cascade Layers
 
 ```css
-@layer reset, tokens, theme, layout, components, utilities;
+@layer reset, tokens, base, theme, layout, components, utilities;
 ```
 
-| Layer | Purpose |
-|---|---|
-| `reset` | Margin/padding zero, box-sizing, smooth scroll |
-| `tokens` | CSS custom properties: spacing, type, color |
-| `theme` | Semantic aliases + element defaults |
-| `layout` | Body, container, grid, nav |
-| `components` | Buttons, inputs, links |
-| `utilities` | Atomic helpers: `.hide`, `.flex`, `.center`, etc. |
+| Layer | Purpose | Your files |
+|---|---|---|
+| `reset` | Margin/padding zero, box-sizing, smooth scroll | — |
+| `tokens` | CSS custom properties: spacing, type, color | `branding/palette.css` |
+| `base` | Element defaults (h1–h6, p, blockquote) | — |
+| `theme` | Semantic aliases + brand overrides | `branding/roles.css`, `branding/overrides.css` |
+| `layout` | Body, container, grid, nav | — |
+| `components` | Buttons, inputs, links | — |
+| `utilities` | Atomic helpers: `.hide`, `.flex`, `.center`, etc. | — |
 
 `@layer` makes specificity predictable. A utility class in `utilities` always beats a component in `components` — no `!important` wars.
+
+**Why `theme` after `base`?** `base` sets sensible element defaults (e.g. `h1` size). Your `overrides.css` in `theme` always wins over them — no high-specificity selectors needed.
 
 ---
 
@@ -151,6 +152,23 @@ All color tokens use OKLCH:
 - **No JavaScript** — pure CSS
 - **No component library** — no `.card`, `.modal`, `.navbar` in `omg/`
 - **No magic class names** — every utility is obvious
+
+---
+
+## Local Development
+
+```bash
+# dev server — opens http://localhost:3000/demo/ automatically
+pnpm dev
+
+# build demo into dist/
+pnpm build
+
+# build + deploy to Netlify
+pnpm deploy
+```
+
+`pnpm dev` serves the repo root (so `demo/index.html` can load `../index.css`) and opens the browser automatically. Edit any file in `omg/` or `demo/` and reload — no build step needed during development.
 
 ---
 
