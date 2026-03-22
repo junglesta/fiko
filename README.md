@@ -4,6 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/@toybreaker/fiko)](https://www.npmjs.com/package/@toybreaker/fiko)
 [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![gzip size](https://img.shields.io/badge/gzip-12.1_kB-blue)](https://www.npmjs.com/package/@toybreaker/fiko)
 
 ---
 
