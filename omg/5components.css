@@ -165,9 +165,9 @@ details.accordion + details.accordion {
 }
 
 details.accordion > summary {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   padding: var(--spaceV) var(--spaceH);
   cursor: pointer;
@@ -180,9 +180,8 @@ details.accordion > summary {
 
 details.accordion > summary::-webkit-details-marker { display: none; }
 
-/* link inside summary — takes all space so chevron/icon stays right-aligned */
+/* link inside summary — inherits color, no underline, stays in col 1 */
 details.accordion > summary a {
-  flex: 1;
   color: inherit;
   text-decoration: none;
 }
