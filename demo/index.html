@@ -1286,6 +1286,69 @@
       heroTitle.style.animation = '';
     });
   }
+
+  // aside resize handle (desktop only)
+  const asideHandle = document.querySelector('.fiko_aside_handle');
+  const aside = document.getElementById('fiko_aside_nav');
+  const mainEl = document.querySelector('main');
+  const MIN_W = 140;
+  const MAX_W = 400;
+  const STORE_KEY = 'fiko_aside_w';
+
+  function applyWidth(w) {
+    aside.style.width = w + 'px';
+    mainEl.style.paddingLeft = w + 'px';
+  }
+
+  if (asideHandle && aside && mainEl) {
+    // restore saved width
+    const saved = parseInt(localStorage.getItem(STORE_KEY));
+    if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
+
+    let startX, startW;
+
+    function onMove(x) {
+      const w = Math.min(MAX_W, Math.max(MIN_W, startW + (x - startX)));
+      applyWidth(w);
+    }
+
+    function onUp(x) {
+      const w = Math.min(MAX_W, Math.max(MIN_W, startW + (x - startX)));
+      localStorage.setItem(STORE_KEY, w);
+      aside.classList.remove('resizing');
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+    }
+
+    function onMouseMove(e) { onMove(e.clientX); }
+    function onMouseUp(e)   { onUp(e.clientX); }
+    function onTouchMove(e) { onMove(e.touches[0].clientX); }
+    function onTouchEnd(e)  { onUp(e.changedTouches[0].clientX); }
+
+    asideHandle.addEventListener('mousedown', (e) => {
+      if (window.innerWidth < 1024) return;
+      startX = e.clientX;
+      startW = aside.offsetWidth;
+      aside.classList.add('resizing');
+      document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'col-resize';
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+
+    asideHandle.addEventListener('touchstart', (e) => {
+      if (window.innerWidth < 1024) return;
+      startX = e.touches[0].clientX;
+      startW = aside.offsetWidth;
+      aside.classList.add('resizing');
+      document.addEventListener('touchmove', onTouchMove, { passive: true });
+      document.addEventListener('touchend', onTouchEnd);
+    }, { passive: true });
+  }
 </script>
 
 </body>
