@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.2 — 2026-03-23
+
+### Fixed
+- **Accordion summary alignment** — switched from `display: grid` to `display: flex` on `<summary>` to fix Safari/WebKit rendering bug where text appeared top-left and chevron bottom-right. `<a>` inside summary now `flex: 1; display: flex; align-items: center` to reliably center content on both axes.
+- **README code blocks** — changed `layer(tokens)` and `@layer` examples from ` ```css ` to ` ```text ` to prevent npm's syntax highlighter from falsely highlighting `to` inside `tokens` as a CSS gradient keyword.
+
 ## 0.5.1 — 2026-03-23
 
 ### Fixed

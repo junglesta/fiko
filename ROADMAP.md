@@ -14,11 +14,14 @@
 - [x] CNAME in `demo/` — custom domain survives CI rebuilds
 - [x] Single CI workflow — duplicate `publish.yml` removed
 - [x] `@toybreaker/fiko@0.5.1` live on npm + deployed to `fiko.junglestar.org`
+- [x] Accordion summary alignment fixed (flexbox, Safari-safe) — `@toybreaker/fiko@0.5.2`
+- [x] README npm syntax highlight fix (`tokens` false `to` keyword)
+- [x] Deprecate unscoped `fiko` npm package → redirect to `@toybreaker/fiko` (pending `npm login`)
 
 ## NEXT
 - [ ] `apple-touch-icon.png` generated from `favicon.svg`
 - [ ] Update CA/DV/mom monorepo packages to use `.accordion_chevron` (replace inline Accordion component)
-- [ ] Update CA monorepo: `pnpm fiko:npm` to pull `@toybreaker/fiko@0.5.1`
+- [ ] Update CA monorepo: `pnpm fiko:npm` to pull `@toybreaker/fiko@0.5.2`
 
 ## LATER
 - [ ] Dark mode token layer (opt-in)

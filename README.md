@@ -47,7 +47,7 @@ cp node_modules/@toybreaker/fiko/template/branding/ src/assets/branding/ -r
 
 Then import your brand tokens **after** the framework, inside the same layers:
 
-```css
+```text
 @import "@toybreaker/fiko";
 
 /* brand palette — loads in the tokens layer */
@@ -95,7 +95,7 @@ fiko/
 
 ## Cascade Layers
 
-```css
+```text
 @layer reset, tokens, base, theme, layout, components, utilities;
 ```
 
