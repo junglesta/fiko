@@ -741,6 +741,7 @@ body.nav_open { overflow: hidden; }
     transform: none;
     visibility: visible;
     transition: none;
+    position: fixed;
   }
 
   .fiko_aside_nav nav {
@@ -766,4 +767,34 @@ body.nav_open { overflow: hidden; }
   }
 
   main { padding-left: 220px; }
+
+  .fiko_aside_handle {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -4px;
+    width: 8px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 10;
+  }
+
+  .fiko_aside_handle::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: var(--border_color);
+    opacity: 0;
+    transition: opacity 150ms;
+  }
+
+  .fiko_aside_handle:hover::after,
+  .fiko_aside_nav.resizing .fiko_aside_handle::after {
+    opacity: 1;
+  }
 }
