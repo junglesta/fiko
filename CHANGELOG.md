@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.3 — 2026-03-23
+
+### Changed
+- **Deploy target switched to Netlify** — removes GitHub Pages CDN cache problem (stale custom domain after deploy). `netlify.toml` added; `pages.yml` GitHub Actions workflow removed. npm publish workflow (`publish.yml`) unchanged.
+
 ## 0.5.2 — 2026-03-23
 
 ### Fixed

@@ -1,0 +1,3 @@
+[build]
+  command = "node scripts/build-demo.mjs"
+  publish = "dist"

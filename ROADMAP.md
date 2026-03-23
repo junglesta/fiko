@@ -16,7 +16,8 @@
 - [x] `@toybreaker/fiko@0.5.1` live on npm + deployed to `fiko.junglestar.org`
 - [x] Accordion summary alignment fixed (flexbox, Safari-safe) — `@toybreaker/fiko@0.5.2`
 - [x] README npm syntax highlight fix (`tokens` false `to` keyword)
-- [x] Deprecate unscoped `fiko` npm package → redirect to `@toybreaker/fiko` (pending `npm login`)
+- [x] Deprecate unscoped `fiko` npm package → redirect to `@toybreaker/fiko`
+- [x] Deploy switched to Netlify — no CDN stale cache; instant propagation on push — `@toybreaker/fiko@0.5.3`
 
 ## NEXT
 - [ ] `apple-touch-icon.png` generated from `favicon.svg`
