@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0 — 2026-03-23
+
+### Changed
+- **Version bump to 0.6.0** — clean minor bump; commit format + preflight rules added to CLAUDE.md
+
+---
+
 ## 0.5.3 — 2026-03-23
 
 ### Changed

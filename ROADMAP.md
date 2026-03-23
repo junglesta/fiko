@@ -18,13 +18,13 @@
 - [x] README npm syntax highlight fix (`tokens` false `to` keyword)
 - [x] Deprecate unscoped `fiko` npm package → redirect to `@toybreaker/fiko`
 - [x] Deploy switched to Netlify — no CDN stale cache; instant propagation on push — `@toybreaker/fiko@0.5.3`
+- [x] Commit format + preflight rules enforced in CLAUDE.md — `@toybreaker/fiko@0.6.0`
+- [x] CA/DV/MOM monorepo updated to `.accordion_chevron` + `@toybreaker/fiko@0.6.0`
 
 ## NEXT
 - [ ] `apple-touch-icon.png` generated from `favicon.svg`
-- [ ] Update CA/DV/mom monorepo packages to use `.accordion_chevron` (replace inline Accordion component)
-- [ ] Update CA monorepo: `pnpm fiko:npm` to pull `@toybreaker/fiko@0.5.2`
+- [ ] Dark mode token layer (opt-in)
 
 ## LATER
-- [ ] Dark mode token layer (opt-in)
 - [ ] `.fiko` orb: third orb variant token
 - [ ] Stagger animation utility

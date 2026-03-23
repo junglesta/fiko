@@ -71,8 +71,27 @@ pnpm build    # build demo → dist/
 pnpm deploy   # build + deploy to Netlify
 ```
 
+## Preflight — run before every commit
+
+Use the `/preflight` skill. Steps:
+
+1. `pnpm build` — must be clean
+2. Bump `version` in `package.json` (semver: patch/minor/major)
+3. Update `CHANGELOG.md`
+4. Update `ROADMAP.md` — tick done items, populate NEXT (never leave it empty)
+5. Propose commit message, stop. Do NOT commit until approved.
+
+## Commit message format
+
+```
+0.5.3 | fix accordion alignment, switch deploy to Netlify
+```
+
+One version number, one pipe, short description. No conventional-commit prefixes (`feat:`, `fix:`, etc.).
+
 ## Publishing
 
 1. Edit source in `omg/`
-2. Bump version in `package.json`
-3. Push a `vX.Y.Z` tag — GitHub Actions publishes to npm automatically
+2. Run preflight (`/preflight`) — bumps version, updates CHANGELOG + ROADMAP
+3. Commit with the format above
+4. Push a `vX.Y.Z` tag — GitHub Actions publishes to npm automatically
