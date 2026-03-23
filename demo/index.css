@@ -756,7 +756,28 @@ body.nav_open { overflow: hidden; }
     margin-bottom: 0.25rem;
   }
 
-  .fiko_aside_nav .accordion > summary { font-size: 0.8rem; }
+  .fiko_aside_nav .accordion > summary {
+    font-size: 0.8rem;
+    padding: 0;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .fiko_aside_nav .accordion > summary a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.6rem;
+    border-right: 1px solid var(--border_color);
+  }
+
+  .fiko_aside_nav .accordion > summary::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    align-self: stretch;
+  }
 
   .fiko_aside_h3 {
     font-size: 0.75rem;
