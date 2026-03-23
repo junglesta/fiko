@@ -760,11 +760,12 @@ body.nav_open { overflow: hidden; }
     font-size: 0.8rem;
     padding: 0;
     gap: 0;
-    align-items: stretch;
+    align-items: center;
   }
 
   .fiko_aside_nav .accordion > summary a {
     flex: 1;
+    align-self: stretch;
     display: flex;
     align-items: center;
     padding: 0.5rem 0.6rem;
@@ -772,11 +773,8 @@ body.nav_open { overflow: hidden; }
   }
 
   .fiko_aside_nav .accordion > summary::after {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 2.25rem;
-    align-self: stretch;
+    flex-shrink: 0;
   }
 
   .fiko_aside_h3 {
