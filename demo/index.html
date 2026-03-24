@@ -108,7 +108,7 @@
     <a class="fiko_aside_solo" href="#install">Install</a>
 
     <details class="accordion accordion_chevron" open>
-      <summary><a href="#tokens">Tokens</a></summary>
+      <summary>Tokens</summary>
       <div>
         <a class="fiko_aside_h3" href="#tokens-colors">Colors</a>
         <a class="fiko_aside_h3" href="#tokens-spacing">Spacing</a>
@@ -119,7 +119,7 @@
     </details>
 
     <details class="accordion accordion_chevron">
-      <summary><a href="#components">Components</a></summary>
+      <summary>Components</summary>
       <div>
         <a class="fiko_aside_h3" href="#comp-buttons">Buttons</a>
         <a class="fiko_aside_h3" href="#comp-headings">Heading classes</a>
@@ -130,12 +130,13 @@
         <a class="fiko_aside_h3" href="#comp-states">Data states</a>
         <a class="fiko_aside_h3" href="#comp-blockquote">Blockquote</a>
         <a class="fiko_aside_h3" href="#accordion">Accordion</a>
+        <a class="fiko_aside_h3" href="#accordion_dotted">Accordion dotted</a>
         <a class="fiko_aside_h3" href="#accordion_chevron">Accordion chevron</a>
       </div>
     </details>
 
     <details class="accordion accordion_chevron">
-      <summary><a href="#layout">Layout</a></summary>
+      <summary>Layout</summary>
       <div>
         <a class="fiko_aside_h3" href="#layout-container">Container</a>
         <a class="fiko_aside_h3" href="#layout-grid">Grid</a>
@@ -145,7 +146,7 @@
     </details>
 
     <details class="accordion accordion_chevron">
-      <summary><a href="#utilities">Utilities</a></summary>
+      <summary>Utilities</summary>
       <div>
         <a class="fiko_aside_h3" href="#util-padding">Padding</a>
         <a class="fiko_aside_h3" href="#util-spacers">Spacers</a>
@@ -732,67 +733,69 @@
         <h3 class="h4">Accordion</h3>
         <span class="dim">details, summary — zero JS, semantic HTML</span>
       </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
+      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
 
-        <!-- default: + / × icons -->
         <details class="accordion">
-          <summary>Default accordion — icon: + / ×</summary>
-          <div>Cascade layers are the single biggest shift in CSS architecture in a decade. Override in order, no specificity wars.</div>
+          <summary>Default accordion</summary>
+          <div>Down chevron rotates 180° on open. Row separator via <code>border-bottom</code>. No outer box. Zero JS.</div>
         </details>
         <details class="accordion" open>
           <summary>Open by default</summary>
-          <div>Add the <code>open</code> attribute to start expanded. The close icon is <code>×</code> by default.</div>
+          <div>Add the <code>open</code> attribute to start expanded.</div>
         </details>
-
-        <!-- custom icons via CSS token -->
-        <details class="accordion" style="--accordion_icon_closed: '↓'; --accordion_icon_open: '↑'; margin-top: calc(var(--spaceV) * 1.5);">
-          <summary>Custom icon — ↓ / ↑</summary>
-          <div>Override <code>--accordion_icon_closed</code> and <code>--accordion_icon_open</code> per element or globally in your brand layer.</div>
-        </details>
-        <details class="accordion" style="--accordion_icon_closed: '▶'; --accordion_icon_open: '▼';">
-          <summary>Custom icon — ▶ / ▼</summary>
-          <div>Any character works — emoji, arrows, symbols. Set the tokens once on a wrapper to apply to all children.</div>
+        <details class="accordion">
+          <summary>Another item</summary>
+          <div>Stack as many as you need.</div>
         </details>
 
       </div>
       <div class="fiko_code_block">
         <div class="fiko_code_header">
           <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<!-- default icons -->
-<details class="accordion">
+          <button class="fiko_copy_btn" data-copy='<details class="accordion">
   <summary>Title</summary>
   <div>Content goes here.</div>
-</details>
-
-<!-- custom icons via CSS token -->
-<details style="--accordion_icon_closed: &apos;↓&apos;; --accordion_icon_open: &apos;↑&apos;;">
-  <summary>Custom icon</summary>
-  <div>Content goes here.</div>
-</details>
-
-<!-- set icons for a whole group -->
-<div style="--accordion_icon_closed: &apos;▶&apos;; --accordion_icon_open: &apos;▼&apos;;">
-  <details class="accordion"><summary>Item 1</summary><div>…</div></details>
-  <details class="accordion"><summary>Item 2</summary><div>…</div></details>
-</div>' aria-label="Copy accordion code">copy</button>
+</details>' aria-label="Copy accordion code">copy</button>
         </div>
-        <pre><code>&lt;!-- default icons --&gt;
-&lt;details&gt;
+        <pre><code>&lt;details class="accordion"&gt;
   &lt;summary&gt;Title&lt;/summary&gt;
   &lt;div&gt;Content goes here.&lt;/div&gt;
-&lt;/details&gt;
+&lt;/details&gt;</code></pre>
+      </div>
+    </div>
 
-&lt;!-- custom icons via CSS token --&gt;
-&lt;details style="--accordion_icon_closed: '↓'; --accordion_icon_open: '↑';"&gt;
-  &lt;summary&gt;Custom icon&lt;/summary&gt;
+    <!-- Accordion dotted -->
+    <div id="accordion_dotted" class="fiko_showcase" style="margin-top: calc(var(--spaceV) * 3);">
+      <div class="fiko_showcase_header">
+        <h3 class="h4">Accordion dotted</h3>
+        <span class="dim">details.accordion.dotted — dot leader between label and chevron</span>
+      </div>
+      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
+        <details class="accordion dotted">
+          <summary>Dotted accordion</summary>
+          <div>Add <code>.dotted</code> to get the leader line between label and chevron.</div>
+        </details>
+        <details class="accordion dotted" open>
+          <summary>Open by default</summary>
+          <div>Composable with other modifiers — <code>accordion dotted accordion_chevron</code> works too.</div>
+        </details>
+        <details class="accordion dotted">
+          <summary>Another item</summary>
+          <div>Stack as many as you need.</div>
+        </details>
+      </div>
+      <div class="fiko_code_block">
+        <div class="fiko_code_header">
+          <span class="fiko_code_lang">html</span>
+          <button class="fiko_copy_btn" data-copy='<details class="accordion dotted">
+  <summary>Title</summary>
+  <div>Content goes here.</div>
+</details>' aria-label="Copy accordion dotted code">copy</button>
+        </div>
+        <pre><code>&lt;details class="accordion dotted"&gt;
+  &lt;summary&gt;Title&lt;/summary&gt;
   &lt;div&gt;Content goes here.&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;!-- set icons for a whole group --&gt;
-&lt;div style="--accordion_icon_closed: '▶'; --accordion_icon_open: '▼';"&gt;
-  &lt;details&gt;&lt;summary&gt;Item 1&lt;/summary&gt;&lt;div&gt;…&lt;/div&gt;&lt;/details&gt;
-  &lt;details&gt;&lt;summary&gt;Item 2&lt;/summary&gt;&lt;div&gt;…&lt;/div&gt;&lt;/details&gt;
-&lt;/div&gt;</code></pre>
+&lt;/details&gt;</code></pre>
       </div>
     </div>
 
@@ -802,14 +805,22 @@
         <h3 class="h4">Accordion chevron</h3>
         <span class="dim">details.accordion.accordion_chevron — SVG arrow via mask-image</span>
       </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
+      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
         <details class="accordion accordion_chevron">
-          <summary>Chevron accordion — closed</summary>
-          <div>The chevron rotates 90° on open. Pure CSS — no inline SVG, no JS. Color inherits <code>--cta</code>.</div>
+          <summary>Chevron — no dot</summary>
+          <div>Right-pointing SVG arrow, rotates 90° on open. Pure CSS — no inline SVG, no JS. Color inherits <code>currentColor</code>.</div>
         </details>
         <details class="accordion accordion_chevron" open>
-          <summary>Chevron accordion — open</summary>
-          <div>Stack with other modifiers freely. Override the color with <code>style="--cta: var(--brand)"</code>.</div>
+          <summary>Chevron — open</summary>
+          <div>Stack with other modifiers freely.</div>
+        </details>
+        <details class="accordion accordion_chevron dotted">
+          <summary>Chevron + dotted</summary>
+          <div>Combine <code>.accordion_chevron</code> and <code>.dotted</code> — dot leader fills the space, right-pointing chevron on the right.</div>
+        </details>
+        <details class="accordion accordion_chevron dotted" open>
+          <summary>Chevron + dotted — open</summary>
+          <div>All three modifiers compose freely.</div>
         </details>
       </div>
       <div class="fiko_code_block">
@@ -818,9 +829,21 @@
           <button class="fiko_copy_btn" data-copy='<details class="accordion accordion_chevron">
   <summary>Title</summary>
   <div>Content goes here.</div>
+</details>
+
+<!-- with dot leader -->
+<details class="accordion accordion_chevron dotted">
+  <summary>Title</summary>
+  <div>Content goes here.</div>
 </details>' aria-label="Copy accordion chevron code">copy</button>
         </div>
         <pre><code>&lt;details class="accordion accordion_chevron"&gt;
+  &lt;summary&gt;Title&lt;/summary&gt;
+  &lt;div&gt;Content goes here.&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;!-- with dot leader --&gt;
+&lt;details class="accordion accordion_chevron dotted"&gt;
   &lt;summary&gt;Title&lt;/summary&gt;
   &lt;div&gt;Content goes here.&lt;/div&gt;
 &lt;/details&gt;</code></pre>
@@ -1300,10 +1323,25 @@
     mainEl.style.paddingLeft = w + 'px';
   }
 
+  function clearWidth() {
+    aside.style.width = '';
+    mainEl.style.paddingLeft = '';
+  }
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 1024) clearWidth();
+    else {
+      const saved = parseInt(localStorage.getItem(STORE_KEY));
+      if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
+    }
+  });
+
   if (asideHandle && aside && mainEl) {
-    // restore saved width
-    const saved = parseInt(localStorage.getItem(STORE_KEY));
-    if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
+    // restore saved width — desktop only
+    if (window.innerWidth >= 1024) {
+      const saved = parseInt(localStorage.getItem(STORE_KEY));
+      if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
+    }
 
     let startX, startW;
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.1 — 2026-03-24
+
+### Changed
+- **Default `details.accordion` redesigned** — removes outer box (`border`, `border-radius`, `overflow: hidden`); each row separated by `border-bottom`; down-chevron SVG via `::after` in `currentColor`, rotates 180° on open; chevron aligned right via `margin-left: auto`; chevron size `1.25em` (matches `accordion_chevron`)
+- **`.dotted` modifier added** — opt-in dot leader between label and chevron (`details.accordion.dotted`); dots vertically centered; composable with `accordion_chevron`
+- **`accordion_chevron` fixed** — `background-color: currentColor` (was `var(--cta)`); no consumer `:global()` overrides needed
+- **Demo mobile overflow fixed** — `applyWidth()` guarded by `window.innerWidth >= 1024`; `resize` listener clears inline `padding-left` when dropping below 1024px
+- **Demo aside nav** — summary `<a>` links replaced with plain text (no red, not clickable); `gap: 0` on nav; `::before` suppressed in aside context
+- **Demo accordion section** — updated to show new row style; added `.dotted` and `accordion_chevron + dotted` examples; all three live blocks made resizable
+
+---
+
 ## 0.6.0 — 2026-03-23
 
 ### Changed
