@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.2 — 2026-03-29
+
+### Changed
+- **`fiko_shake_vertical_lg` keyframe** — new animation variant (doubled span, 0.6s); applied to demo hero title and footer logo `.shake`
+- **`cite` font-size** — adjusted from 66% to 77%
+- **`template/branding/palette.css`** — `--brandT25` renamed to `--brandT75` (was 75% transparent); new `--brandT25` added (25% transparent); indentation standardised to 4-space
+- **CSS formatting** — `omg/` source files reformatted to 4-space indentation; no functional changes
+- **CLAUDE.md** — brand name corrected to UPPERCASE `FIKO` throughout
+
+---
+
 ## 0.6.1 — 2026-03-24
 
 ### Changed

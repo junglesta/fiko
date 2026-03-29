@@ -1,560 +1,861 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fiko — modern CSS framework</title>
-  <meta name="description" content="fiko: cascade layers, OKLCH colors, design tokens. Zero specificity wars. Smiling DX." />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>fiko — modern CSS framework</title>
+        <meta
+            name="description"
+            content="fiko: cascade layers, OKLCH colors, design tokens. Zero specificity wars. Smiling DX."
+        />
 
-  <!-- favicons -->
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="icon" href="favicon.ico" sizes="any" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+        <!-- favicons -->
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
-  <!-- fiko CSS — relative path for local dev -->
-  <!-- CDN: <link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" /> -->
-  <link rel="stylesheet" href="../index.css" />
+        <!-- fiko CSS — relative path for local dev -->
+        <!-- CDN: <link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" /> -->
+        <link rel="stylesheet" href="../index.css" />
 
-  <!-- demo-specific styles -->
-  <link rel="stylesheet" href="index.css" />
+        <!-- demo-specific styles -->
+        <link rel="stylesheet" href="index.css" />
 
-  <!-- inline brand tokens (normally in your project's 000/ folder) -->
-  <style>
-    :root {
-      /* neutrals */
-      --dark:    oklch(0.18 0.01 265);
-      --darkT25: color-mix(in oklch, var(--dark), transparent 75%);
-      --darkT50: color-mix(in oklch, var(--dark), transparent 50%);
-      --light:    oklch(0.97 0.005 74);
-      --lightT25: color-mix(in oklch, var(--light), transparent 75%);
-      --lightT50: color-mix(in oklch, var(--light), transparent 50%);
+        <!-- inline brand tokens (normally in your project's 000/ folder) -->
+        <style>
+            :root {
+                /* neutrals */
+                --dark: oklch(0.18 0.01 265);
+                --darkT25: color-mix(in oklch, var(--dark), transparent 75%);
+                --darkT50: color-mix(in oklch, var(--dark), transparent 50%);
+                --light: oklch(0.97 0.005 74);
+                --lightT25: color-mix(in oklch, var(--light), transparent 75%);
+                --lightT50: color-mix(in oklch, var(--light), transparent 50%);
 
-      /* brand — punchy OKLCH orange */
-      --brand:         oklch(0.68 0.26 38);
-      --brand_lighter: oklch(from var(--brand) calc(l + 0.10) c h);
-      --brand_darker:  oklch(from var(--brand) calc(l - 0.20) c h);
-      --brand_invert:  oklch(from var(--brand) l c calc(h + 180));
-      --brandT25:      color-mix(in oklch, var(--brand), transparent 75%);
-      --brandT50:      color-mix(in oklch, var(--brand), transparent 50%);
+                /* brand — punchy OKLCH orange */
+                --brand: oklch(0.68 0.26 38);
+                --brand_lighter: oklch(from var(--brand) calc(l + 0.1) c h);
+                --brand_darker: oklch(from var(--brand) calc(l - 0.2) c h);
+                --brand_invert: oklch(from var(--brand) l c calc(h + 180));
+                --brandT25: color-mix(in oklch, var(--brand), transparent 75%);
+                --brandT50: color-mix(in oklch, var(--brand), transparent 50%);
 
-      /* semantic roles — dark palette */
-      --surface:         var(--dark);
-      --surface_inverse: var(--light);
-      --surfaceT25:      var(--darkT25);
-      --text:            var(--light);
-      --textT50:         var(--lightT50);
-      --logo:            var(--light);
-      --primary:         var(--brand);
-      --primary_hover:   var(--brand_lighter);
-      --contrast:        var(--brand_lighter);
-      --cta:             var(--brand);
-      --cta_text:        var(--light);
-      --cta_hover:       var(--brand_lighter);
-      --border_color:    var(--lightT25);
-      --focus_color:     var(--brand);
+                /* semantic roles — dark palette */
+                --surface: var(--dark);
+                --surface_inverse: var(--light);
+                --surfaceT25: var(--darkT25);
+                --text: var(--light);
+                --textT50: var(--lightT50);
+                --logo: var(--light);
+                --primary: var(--brand);
+                --primary_hover: var(--brand_lighter);
+                --contrast: var(--brand_lighter);
+                --cta: var(--brand);
+                --cta_text: var(--light);
+                --cta_hover: var(--brand_lighter);
+                --border_color: var(--lightT25);
+                --focus_color: var(--brand);
 
-      /* demo: larger base type for readability */
-      --font_size: clamp(1.15rem, 0.6vw + 1rem, 1.35rem);
+                /* demo: larger base type for readability */
+                --font_size: clamp(1.15rem, 0.6vw + 1rem, 1.35rem);
 
-      /* gradients */
-      --gradient_o: radial-gradient(circle at 35% 50% in oklch,
-        oklch(0.78 0.28 42) 0%,
-        oklch(0.58 0.24 28) 100%);
-      --gradient_h: linear-gradient(to right in oklch,
-        oklch(0.62 0.26 28) 0%,
-        oklch(0.76 0.28 46) 100%);
-      --gradient_v: linear-gradient(to bottom in oklch,
-        oklch(0.62 0.26 28) 0%,
-        oklch(0.76 0.28 46) 100%);
-      --gradient_warm: linear-gradient(105deg in oklch,
-        oklch(0.65 0.26 38) 0%,
-        oklch(0.90 0.16 88) 100%);
-    }
-  </style>
-</head>
-<body>
+                /* gradients */
+                --gradient_o: radial-gradient(
+                    circle at 35% 50% in oklch,
+                    oklch(0.78 0.28 42) 0%,
+                    oklch(0.58 0.24 28) 100%
+                );
+                --gradient_h: linear-gradient(
+                    to right in oklch,
+                    oklch(0.62 0.26 28) 0%,
+                    oklch(0.76 0.28 46) 100%
+                );
+                --gradient_v: linear-gradient(
+                    to bottom in oklch,
+                    oklch(0.62 0.26 28) 0%,
+                    oklch(0.76 0.28 46) 100%
+                );
+                --gradient_warm: linear-gradient(
+                    105deg in oklch,
+                    oklch(0.65 0.26 38) 0%,
+                    oklch(0.9 0.16 88) 100%
+                );
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ── NAV ────────────────────────────────────────────── -->
+        <header class="fiko_nav controls sticky">
+            <div class="container">
+                <nav>
+                    <a href="#hero" class="fiko_logo" aria-label="fiko home">
+                        <span class="fiko_wordmark">FIKO</span>
+                    </a>
+                    <div class="fiko_nav_right">
+                        <ul>
+                            <li><a href="#tokens">tokens</a></li>
+                            <li><a href="#components">components</a></li>
+                            <li><a href="#accordion">accordion</a></li>
+                            <li><a href="#layout">layout</a></li>
+                            <li><a href="#utilities">utilities</a></li>
+                            <li><a href="#install">install</a></li>
+                            <li>
+                                <a
+                                    href="https://github.com/junglesta/fiko"
+                                    target="_blank"
+                                    rel="noopener"
+                                    class="fiko_nav_gh"
+                                    aria-label="GitHub"
+                                >
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M12 2C6.477 2 2 6.477 2 12c0 4.419 2.865 8.166 6.839 9.489.5.091.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                                        />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                        <button
+                            class="fiko_nav_hamburger"
+                            aria-label="Open menu"
+                            aria-expanded="false"
+                            aria-controls="fiko_aside_nav"
+                        >
+                            <span
+                                class="fiko_nav_hamburger_icon"
+                                aria-hidden="true"
+                            ></span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </header>
 
-<!-- ── NAV ────────────────────────────────────────────── -->
-<header class="fiko_nav controls sticky">
-  <div class="container">
-    <nav>
-      <a href="#hero" class="fiko_logo" aria-label="fiko home">
-        <span class="fiko_wordmark">fiko</span>
-      </a>
-      <div class="fiko_nav_right">
-        <ul>
-          <li><a href="#tokens">tokens</a></li>
-          <li><a href="#components">components</a></li>
-          <li><a href="#accordion">accordion</a></li>
-          <li><a href="#layout">layout</a></li>
-          <li><a href="#utilities">utilities</a></li>
-          <li><a href="#install">install</a></li>
-          <li>
-            <a href="https://github.com/junglesta/fiko" target="_blank" rel="noopener" class="fiko_nav_gh" aria-label="GitHub">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.419 2.865 8.166 6.839 9.489.5.091.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-            </a>
-          </li>
-        </ul>
-        <button class="fiko_nav_hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="fiko_aside_nav">
-          <span class="fiko_nav_hamburger_icon" aria-hidden="true"></span>
-        </button>
-      </div>
-    </nav>
-  </div>
-</header>
+        <aside
+            class="fiko_aside_nav"
+            id="fiko_aside_nav"
+            aria-hidden="true"
+            aria-label="Page sections"
+        >
+            <nav>
+                <a class="fiko_aside_solo" href="#install">Install</a>
 
-<aside class="fiko_aside_nav" id="fiko_aside_nav" aria-hidden="true" aria-label="Page sections">
-  <nav>
-    <a class="fiko_aside_solo" href="#install">Install</a>
+                <details class="accordion accordion_chevron" open>
+                    <summary>Tokens</summary>
+                    <div>
+                        <a class="fiko_aside_h3" href="#tokens-colors"
+                            >Colors</a
+                        >
+                        <a class="fiko_aside_h3" href="#tokens-spacing"
+                            >Spacing</a
+                        >
+                        <a class="fiko_aside_h3" href="#tokens-typography"
+                            >Typography</a
+                        >
+                        <a class="fiko_aside_h3" href="#tokens-weights"
+                            >Font weights</a
+                        >
+                        <a class="fiko_aside_h3" href="#tokens-breakpoints"
+                            >Breakpoints</a
+                        >
+                    </div>
+                </details>
 
-    <details class="accordion accordion_chevron" open>
-      <summary>Tokens</summary>
-      <div>
-        <a class="fiko_aside_h3" href="#tokens-colors">Colors</a>
-        <a class="fiko_aside_h3" href="#tokens-spacing">Spacing</a>
-        <a class="fiko_aside_h3" href="#tokens-typography">Typography</a>
-        <a class="fiko_aside_h3" href="#tokens-weights">Font weights</a>
-        <a class="fiko_aside_h3" href="#tokens-breakpoints">Breakpoints</a>
-      </div>
-    </details>
+                <details class="accordion accordion_chevron">
+                    <summary>Components</summary>
+                    <div>
+                        <a class="fiko_aside_h3" href="#comp-buttons"
+                            >Buttons</a
+                        >
+                        <a class="fiko_aside_h3" href="#comp-headings"
+                            >Heading classes</a
+                        >
+                        <a class="fiko_aside_h3" href="#comp-decouple"
+                            >Decouple</a
+                        >
+                        <a class="fiko_aside_h3" href="#comp-text"
+                            >Text utilities</a
+                        >
+                        <a class="fiko_aside_h3" href="#comp-dot">Dot leader</a>
+                        <a class="fiko_aside_h3" href="#comp-sticky"
+                            >Sticky header</a
+                        >
+                        <a class="fiko_aside_h3" href="#comp-states"
+                            >Data states</a
+                        >
+                        <a class="fiko_aside_h3" href="#comp-blockquote"
+                            >Blockquote</a
+                        >
+                        <a class="fiko_aside_h3" href="#accordion">Accordion</a>
+                        <a class="fiko_aside_h3" href="#accordion_dotted"
+                            >Accordion dotted</a
+                        >
+                        <a class="fiko_aside_h3" href="#accordion_chevron"
+                            >Accordion chevron</a
+                        >
+                    </div>
+                </details>
 
-    <details class="accordion accordion_chevron">
-      <summary>Components</summary>
-      <div>
-        <a class="fiko_aside_h3" href="#comp-buttons">Buttons</a>
-        <a class="fiko_aside_h3" href="#comp-headings">Heading classes</a>
-        <a class="fiko_aside_h3" href="#comp-decouple">Decouple</a>
-        <a class="fiko_aside_h3" href="#comp-text">Text utilities</a>
-        <a class="fiko_aside_h3" href="#comp-dot">Dot leader</a>
-        <a class="fiko_aside_h3" href="#comp-sticky">Sticky header</a>
-        <a class="fiko_aside_h3" href="#comp-states">Data states</a>
-        <a class="fiko_aside_h3" href="#comp-blockquote">Blockquote</a>
-        <a class="fiko_aside_h3" href="#accordion">Accordion</a>
-        <a class="fiko_aside_h3" href="#accordion_dotted">Accordion dotted</a>
-        <a class="fiko_aside_h3" href="#accordion_chevron">Accordion chevron</a>
-      </div>
-    </details>
+                <details class="accordion accordion_chevron">
+                    <summary>Layout</summary>
+                    <div>
+                        <a class="fiko_aside_h3" href="#layout-container"
+                            >Container</a
+                        >
+                        <a class="fiko_aside_h3" href="#layout-grid">Grid</a>
+                        <a class="fiko_aside_h3" href="#layout-bento"
+                            >Bento box</a
+                        >
+                        <a class="fiko_aside_h3" href="#layout-nav"
+                            >Navigation</a
+                        >
+                    </div>
+                </details>
 
-    <details class="accordion accordion_chevron">
-      <summary>Layout</summary>
-      <div>
-        <a class="fiko_aside_h3" href="#layout-container">Container</a>
-        <a class="fiko_aside_h3" href="#layout-grid">Grid</a>
-        <a class="fiko_aside_h3" href="#layout-bento">Bento box</a>
-        <a class="fiko_aside_h3" href="#layout-nav">Navigation</a>
-      </div>
-    </details>
+                <details class="accordion accordion_chevron">
+                    <summary>Utilities</summary>
+                    <div>
+                        <a class="fiko_aside_h3" href="#util-padding"
+                            >Padding</a
+                        >
+                        <a class="fiko_aside_h3" href="#util-spacers"
+                            >Spacers</a
+                        >
+                        <a class="fiko_aside_h3" href="#util-gap">Gap scale</a>
+                        <a class="fiko_aside_h3" href="#util-text">Text</a>
+                        <a class="fiko_aside_h3" href="#util-visibility"
+                            >Visibility</a
+                        >
+                        <a class="fiko_aside_h3" href="#util-gradients"
+                            >Gradients</a
+                        >
+                        <a class="fiko_aside_h3" href="#util-maximise"
+                            >Maximise</a
+                        >
+                    </div>
+                </details>
+            </nav>
+            <div
+                class="fiko_aside_handle"
+                aria-hidden="true"
+                title="Drag to resize"
+            ></div>
+        </aside>
 
-    <details class="accordion accordion_chevron">
-      <summary>Utilities</summary>
-      <div>
-        <a class="fiko_aside_h3" href="#util-padding">Padding</a>
-        <a class="fiko_aside_h3" href="#util-spacers">Spacers</a>
-        <a class="fiko_aside_h3" href="#util-gap">Gap scale</a>
-        <a class="fiko_aside_h3" href="#util-text">Text</a>
-        <a class="fiko_aside_h3" href="#util-visibility">Visibility</a>
-        <a class="fiko_aside_h3" href="#util-gradients">Gradients</a>
-        <a class="fiko_aside_h3" href="#util-maximise">Maximise</a>
-      </div>
-    </details>
-  </nav>
-  <div class="fiko_aside_handle" aria-hidden="true" title="Drag to resize"></div>
-</aside>
+        <main>
+            <!-- ── HERO ───────────────────────────────────────────── -->
+            <section id="hero" class="fiko_hero">
+                <div class="container">
+                    <div class="fiko_hero_inner pad_block_xl">
+                        <div class="fiko_hero_badge uppercase dim">
+                            v__FIKO_VERSION__ · MIT · pnpm add @toybreaker/fiko
+                        </div>
 
-<main>
+                        <h1 class="fiko_hero_title">
+                            <span class="fiko_hero_word accent">FIKO</span>
+                        </h1>
 
-<!-- ── HERO ───────────────────────────────────────────── -->
-<section id="hero" class="fiko_hero">
-  <div class="container">
-    <div class="fiko_hero_inner pad_block_xl">
+                        <p class="fiko_hero_tagline typewriter">
+                            A modern CSS framework built on cascade layers,<br />
+                            OKLCH colors, and design tokens.<br />
+                            Zero specificity wars. Smiling DX.
+                        </p>
 
-      <div class="fiko_hero_badge uppercase dim">v__FIKO_VERSION__ · MIT · pnpm add @toybreaker/fiko</div>
+                        <div class="fiko_hero_pills">
+                            <span class="fiko_pill">cascade layers</span>
+                            <span class="fiko_pill">oklch colors</span>
+                            <span class="fiko_pill">design tokens</span>
+                            <span class="fiko_pill">container queries</span>
+                            <span class="fiko_pill">zero js</span>
+                        </div>
 
-      <h1 class="fiko_hero_title">
-        <span class="fiko_hero_word accent">FIKO</span>
-      </h1>
+                        <div class="flex gap_sm fiko_hero_cta">
+                            <a class="button button_cta" href="#install"
+                                ><button class="fiko_btn_gradient_warm">
+                                    Install
+                                </button></a
+                            >
+                            <a class="button" href="#tokens"
+                                ><button>Explore tokens</button></a
+                            >
+                        </div>
+                    </div>
 
-      <p class="fiko_hero_tagline typewriter">
-        A modern CSS framework built on cascade layers,<br>
-        OKLCH colors, and design tokens.<br>
-        Zero specificity wars. Smiling DX.
-      </p>
+                    <!-- pulsing orbs — pure CSS animation -->
+                    <div class="fiko_orb fiko_orb_1" aria-hidden="true"></div>
+                    <div class="fiko_orb fiko_orb_2" aria-hidden="true"></div>
+                    <div class="fiko_orb fiko_orb_3" aria-hidden="true"></div>
+                </div>
+            </section>
 
-      <div class="fiko_hero_pills">
-        <span class="fiko_pill">cascade layers</span>
-        <span class="fiko_pill">oklch colors</span>
-        <span class="fiko_pill">design tokens</span>
-        <span class="fiko_pill">container queries</span>
-        <span class="fiko_pill">zero js</span>
-      </div>
+            <!-- ── INSTALL ─────────────────────────────────────────── -->
+            <section id="install" class="fiko_section">
+                <div class="container">
+                    <div class="fiko_section_label uppercase dim">Install</div>
+                    <h2 class="h2 fiko_section_h2">Get started in seconds</h2>
 
-      <div class="flex gap_sm" style="margin-top: calc(var(--spaceV) * 3); flex-wrap: wrap;">
-        <a class="button button_cta" href="#install"><button style="background: var(--gradient_warm); border-color: var(--border_color);">Install</button></a>
-        <a class="button" href="#tokens"><button>Explore tokens</button></a>
-      </div>
+                    <div class="fiko_code_block">
+                        <div class="fiko_code_header">
+                            <span class="fiko_code_lang">shell</span>
+                            <button
+                                class="fiko_copy_btn"
+                                data-copy="pnpm add @toybreaker/fiko"
+                                aria-label="Copy install command"
+                            >
+                                copy
+                            </button>
+                        </div>
+                        <pre><code>pnpm add @toybreaker/fiko</code></pre>
+                    </div>
 
-    </div>
-
-    <!-- pulsing orbs — pure CSS animation -->
-    <div class="fiko_orb fiko_orb_1" aria-hidden="true"></div>
-    <div class="fiko_orb fiko_orb_2" aria-hidden="true"></div>
-    <div class="fiko_orb fiko_orb_3" aria-hidden="true"></div>
-  </div>
-</section>
-
-<!-- ── INSTALL ─────────────────────────────────────────── -->
-<section id="install" class="fiko_section">
-  <div class="container">
-    <div class="fiko_section_label uppercase dim">Install</div>
-    <h2 class="h2" style="margin-bottom: calc(var(--spaceV) * 2);">Get started in seconds</h2>
-
-    <div class="fiko_code_block">
-      <div class="fiko_code_header">
-        <span class="fiko_code_lang">shell</span>
-        <button class="fiko_copy_btn" data-copy="pnpm add @toybreaker/fiko" aria-label="Copy install command">copy</button>
-      </div>
-      <pre><code>pnpm add @toybreaker/fiko</code></pre>
-    </div>
-
-    <div class="fiko_code_block" style="margin-top: calc(var(--spaceV) * 2);">
-      <div class="fiko_code_header">
-        <span class="fiko_code_lang">css</span>
-        <button class="fiko_copy_btn" data-copy="@import &quot;@toybreaker/fiko&quot;;
+                    <div class="fiko_code_block fiko_mt_md">
+                        <div class="fiko_code_header">
+                            <span class="fiko_code_lang">css</span>
+                            <button
+                                class="fiko_copy_btn"
+                                data-copy='@import "@toybreaker/fiko";
 
 /* then layer your brand tokens on top */
-@import &quot;./branding/palette.css&quot;   layer(tokens);
-@import &quot;./branding/roles.css&quot;     layer(theme);
-@import &quot;./branding/overrides.css&quot; layer(theme);" aria-label="Copy CSS import">copy</button>
-      </div>
-      <pre><code>@import "@toybreaker/fiko";
+@import "./branding/palette.css"   layer(tokens);
+@import "./branding/roles.css"     layer(theme);
+@import "./branding/overrides.css" layer(theme);'
+                                aria-label="Copy CSS import"
+                            >
+                                copy
+                            </button>
+                        </div>
+                        <pre><code>@import "@toybreaker/fiko";
 
 /* then layer your brand tokens on top */
 @import "./branding/palette.css"   layer(tokens);
 @import "./branding/roles.css"     layer(theme);
 @import "./branding/overrides.css" layer(theme);</code></pre>
-    </div>
+                    </div>
 
-    <p class="dim" style="margin-top: calc(var(--spaceV) * 2);">
-      Or use directly from a CDN — no build step required:
-    </p>
+                    <p class="dim fiko_mt_md">
+                        Or use directly from a CDN — no build step required:
+                    </p>
 
-    <div class="fiko_code_block" style="margin-top: var(--spaceV);">
-      <div class="fiko_code_header">
-        <span class="fiko_code_lang">html</span>
-        <button class="fiko_copy_btn" data-copy='<link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" />' aria-label="Copy CDN link">copy</button>
-      </div>
-      <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" /&gt;</code></pre>
-    </div>
+                    <div class="fiko_code_block fiko_mt_sm">
+                        <div class="fiko_code_header">
+                            <span class="fiko_code_lang">html</span>
+                            <button
+                                class="fiko_copy_btn"
+                                data-copy='<link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" />'
+                                aria-label="Copy CDN link"
+                            >
+                                copy
+                            </button>
+                        </div>
+                        <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/@toybreaker/fiko/index.css" /&gt;</code></pre>
+                    </div>
 
-    <div class="fiko_feature_grid" style="margin-top: calc(var(--spaceV) * 4);">
-      <div class="fiko_feature_card">
-        <div class="fiko_feature_icon">&#9678;</div>
-        <h3 class="h5">6 cascade layers</h3>
-        <p class="dim">reset &rarr; tokens &rarr; theme &rarr; layout &rarr; components &rarr; utilities. Crystal-clear specificity order.</p>
-      </div>
-      <div class="fiko_feature_card">
-        <div class="fiko_feature_icon">&#9676;</div>
-        <h3 class="h5">OKLCH colors</h3>
-        <p class="dim">Perceptually uniform color space. Override one token, the whole palette adapts.</p>
-      </div>
-      <div class="fiko_feature_card">
-        <div class="fiko_feature_icon">&#9632;</div>
-        <h3 class="h5">Container queries</h3>
-        <p class="dim">Layout responds to its container, not the viewport. Truly composable components.</p>
-      </div>
-      <div class="fiko_feature_card">
-        <div class="fiko_feature_icon">&#9670;</div>
-        <h3 class="h5">Design tokens first</h3>
-        <p class="dim">Every visual decision lives in CSS custom properties. Override in your brand layer.</p>
-      </div>
-    </div>
-  </div>
-</section>
+                    <div class="fiko_feature_grid fiko_mt_lg">
+                        <div class="fiko_feature_card">
+                            <div class="fiko_feature_icon">&#9678;</div>
+                            <h3 class="h5">6 cascade layers</h3>
+                            <p class="dim">
+                                reset &rarr; tokens &rarr; theme &rarr; layout
+                                &rarr; components &rarr; utilities.
+                                Crystal-clear specificity order.
+                            </p>
+                        </div>
+                        <div class="fiko_feature_card">
+                            <div class="fiko_feature_icon">&#9676;</div>
+                            <h3 class="h5">OKLCH colors</h3>
+                            <p class="dim">
+                                Perceptually uniform color space. Override one
+                                token, the whole palette adapts.
+                            </p>
+                        </div>
+                        <div class="fiko_feature_card">
+                            <div class="fiko_feature_icon">&#9632;</div>
+                            <h3 class="h5">Container queries</h3>
+                            <p class="dim">
+                                Layout responds to its container, not the
+                                viewport. Truly composable components.
+                            </p>
+                        </div>
+                        <div class="fiko_feature_card">
+                            <div class="fiko_feature_icon">&#9670;</div>
+                            <h3 class="h5">Design tokens first</h3>
+                            <p class="dim">
+                                Every visual decision lives in CSS custom
+                                properties. Override in your brand layer.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-<!-- ── TOKENS ──────────────────────────────────────────── -->
-<section id="tokens" class="fiko_section fiko_section_alt">
-  <div class="container">
-    <div class="fiko_section_label uppercase dim">Design Tokens — omg/1vars.css</div>
-    <h2 class="h2" style="margin-bottom: calc(var(--spaceV) * 2);">CSS custom properties</h2>
+            <!-- ── TOKENS ──────────────────────────────────────────── -->
+            <section id="tokens" class="fiko_section fiko_section_alt">
+                <div class="container">
+                    <div class="fiko_section_label uppercase dim">
+                        Design Tokens — omg/1vars.css
+                    </div>
+                    <h2 class="h2 fiko_section_h2">CSS custom properties</h2>
 
-    <!-- Colors -->
-    <h3 class="h4" style="margin-bottom: var(--spaceV);">Colors</h3>
-    <div class="fiko_token_grid">
+                    <!-- Colors -->
+                    <h3 class="h4 fiko_mb_sm">Colors</h3>
+                    <div class="fiko_token_grid">
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch fiko_swatch_brand"></div>
+                            <div class="fiko_swatch_name">--brand</div>
+                            <div class="fiko_swatch_value">
+                                oklch(0.68 0.26 38)
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div
+                                class="fiko_swatch fiko_swatch_brand_lighter"
+                            ></div>
+                            <div class="fiko_swatch_name">--brand_lighter</div>
+                            <div class="fiko_swatch_value">
+                                oklch(l+0.10 c h)
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div
+                                class="fiko_swatch fiko_swatch_brand_darker"
+                            ></div>
+                            <div class="fiko_swatch_name">--brand_darker</div>
+                            <div class="fiko_swatch_value">
+                                oklch(l-0.20 c h)
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div
+                                class="fiko_swatch fiko_swatch_checkered fiko_swatch_brandT25"
+                            ></div>
+                            <div class="fiko_swatch_name">--brandT25</div>
+                            <div class="fiko_swatch_value">
+                                color-mix 75% transparent
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div
+                                class="fiko_swatch fiko_swatch_checkered fiko_swatch_brandT50"
+                            ></div>
+                            <div class="fiko_swatch_name">--brandT50</div>
+                            <div class="fiko_swatch_value">
+                                color-mix 50% transparent
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch fiko_swatch_cta"></div>
+                            <div class="fiko_swatch_name">--cta</div>
+                            <div class="fiko_swatch_value">= --brand</div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div
+                                class="fiko_swatch fiko_swatch_brand_invert"
+                            ></div>
+                            <div class="fiko_swatch_name">--brand_invert</div>
+                            <div class="fiko_swatch_value">
+                                oklch(l c h+180)
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch fiko_swatch_dark"></div>
+                            <div class="fiko_swatch_name">--dark</div>
+                            <div class="fiko_swatch_value">
+                                oklch(0.18 0.01 265)
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch fiko_swatch_light"></div>
+                            <div class="fiko_swatch_name">--light</div>
+                            <div class="fiko_swatch_value">
+                                oklch(0.97 0.005 74)
+                            </div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch fiko_swatch_surface"></div>
+                            <div class="fiko_swatch_name">--surface</div>
+                            <div class="fiko_swatch_value">= --light</div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch gradient_o"></div>
+                            <div class="fiko_swatch_name">--gradient_o</div>
+                            <div class="fiko_swatch_value">radial brand</div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch gradient_h"></div>
+                            <div class="fiko_swatch_name">--gradient_h</div>
+                            <div class="fiko_swatch_value">linear →</div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch gradient_v"></div>
+                            <div class="fiko_swatch_name">--gradient_v</div>
+                            <div class="fiko_swatch_value">linear ↓</div>
+                        </div>
+                        <div class="fiko_swatch_card">
+                            <div class="fiko_swatch gradient_warm"></div>
+                            <div class="fiko_swatch_name">--gradient_warm</div>
+                            <div class="fiko_swatch_value">linear warm</div>
+                        </div>
+                    </div>
 
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--brand);"></div>
-        <div class="fiko_swatch_name">--brand</div>
-        <div class="fiko_swatch_value">oklch(0.68 0.26 38)</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--brand_lighter);"></div>
-        <div class="fiko_swatch_name">--brand_lighter</div>
-        <div class="fiko_swatch_value">oklch(l+0.10 c h)</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--brand_darker);"></div>
-        <div class="fiko_swatch_name">--brand_darker</div>
-        <div class="fiko_swatch_value">oklch(l-0.20 c h)</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch fiko_swatch_checkered" style="background: var(--brandT25);"></div>
-        <div class="fiko_swatch_name">--brandT25</div>
-        <div class="fiko_swatch_value">color-mix 75% transparent</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch fiko_swatch_checkered" style="background: var(--brandT50);"></div>
-        <div class="fiko_swatch_name">--brandT50</div>
-        <div class="fiko_swatch_value">color-mix 50% transparent</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--cta);"></div>
-        <div class="fiko_swatch_name">--cta</div>
-        <div class="fiko_swatch_value">= --brand</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--brand_invert);"></div>
-        <div class="fiko_swatch_name">--brand_invert</div>
-        <div class="fiko_swatch_value">oklch(l c h+180)</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--dark);"></div>
-        <div class="fiko_swatch_name">--dark</div>
-        <div class="fiko_swatch_value">oklch(0.18 0.01 265)</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--light); outline: 1px solid var(--darkT25);"></div>
-        <div class="fiko_swatch_name">--light</div>
-        <div class="fiko_swatch_value">oklch(0.97 0.005 74)</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch" style="background: var(--surface); outline: 1px solid var(--darkT25);"></div>
-        <div class="fiko_swatch_name">--surface</div>
-        <div class="fiko_swatch_value">= --light</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch gradient_o" style="border-radius: var(--radius);"></div>
-        <div class="fiko_swatch_name">--gradient_o</div>
-        <div class="fiko_swatch_value">radial brand</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch gradient_h" style="border-radius: var(--radius);"></div>
-        <div class="fiko_swatch_name">--gradient_h</div>
-        <div class="fiko_swatch_value">linear →</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch gradient_v" style="border-radius: var(--radius);"></div>
-        <div class="fiko_swatch_name">--gradient_v</div>
-        <div class="fiko_swatch_value">linear ↓</div>
-      </div>
-      <div class="fiko_swatch_card">
-        <div class="fiko_swatch gradient_warm" style="border-radius: var(--radius);"></div>
-        <div class="fiko_swatch_name">--gradient_warm</div>
-        <div class="fiko_swatch_value">linear warm</div>
-      </div>
+                    <!-- Spacing -->
+                    <h3 class="h4 fiko_subsection_h3">Spacing</h3>
+                    <div class="fiko_token_list">
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--spaceH</code>
+                            <div class="fiko_token_bar fiko_bar_spaceH"></div>
+                            <span class="dim">1.75svw — horizontal rhythm</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--spaceV</code>
+                            <div class="fiko_token_bar fiko_bar_spaceV"></div>
+                            <span class="dim">1.5svh — vertical rhythm</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--space</code>
+                            <div class="fiko_token_bar fiko_bar_space"></div>
+                            <span class="dim">calc(spaceH + spaceV / 2)</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--breath</code>
+                            <div class="fiko_token_bar fiko_bar_breath"></div>
+                            <span class="dim">calc(space * 1.5) — gutters</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--radius</code>
+                            <div class="fiko_token_bar"></div>
+                            <span class="dim">6px</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--borderpx</code>
+                            <div class="fiko_token_bar"></div>
+                            <span class="dim">3px</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--tap_size</code>
+                            <div
+                                class="fiko_token_bar"
+                                style="
+                                    width: var(--tap_size);
+                                    height: var(--tap_size);
+                                    background: var(--brandT25);
+                                    border-radius: var(--radius);
+                                "
+                            ></div>
+                            <span class="dim">clamp(42px, 5vw, 52px)</span>
+                        </div>
+                    </div>
 
-    </div>
+                    <!-- Typography -->
+                    <h3
+                        class="h4"
+                        style="
+                            margin-top: calc(var(--spaceV) * 4);
+                            margin-bottom: var(--spaceV);
+                        "
+                    >
+                        Typography
+                    </h3>
+                    <div class="fiko_type_scale">
+                        <div class="fiko_type_row">
+                            <span class="h1" style="margin: 0">Display h1</span>
+                            <code class="dim"
+                                >.h1 — font-size * 2.5, weight 500</code
+                            >
+                        </div>
+                        <div class="fiko_type_row">
+                            <span class="h2" style="margin: 0">Heading h2</span>
+                            <code class="dim"
+                                >.h2 — font-size * 2.0, weight 500</code
+                            >
+                        </div>
+                        <div class="fiko_type_row">
+                            <span class="h3" style="margin: 0">Heading h3</span>
+                            <code class="dim"
+                                >.h3 — font-size * 1.75, weight 400</code
+                            >
+                        </div>
+                        <div class="fiko_type_row">
+                            <span class="h4" style="margin: 0"
+                                >Subheading h4</span
+                            >
+                            <code class="dim"
+                                >.h4 — font-size * 1.5, weight 400</code
+                            >
+                        </div>
+                        <div class="fiko_type_row">
+                            <span class="h5" style="margin: 0">Label h5</span>
+                            <code class="dim"
+                                >.h5 — font-size * 1.25, weight 400</code
+                            >
+                        </div>
+                        <div class="fiko_type_row">
+                            <span
+                                style="
+                                    font-size: var(--font_size);
+                                    font-weight: var(--weight_light);
+                                "
+                                >Body text — --font_size: clamp(1.1rem, 0.34vw +
+                                0.92rem, 1.21rem)</span
+                            >
+                            <code class="dim">base — weight 500</code>
+                        </div>
+                    </div>
 
-    <!-- Spacing -->
-    <h3 class="h4" style="margin-top: calc(var(--spaceV) * 4); margin-bottom: var(--spaceV);">Spacing</h3>
-    <div class="fiko_token_list">
-      <div class="fiko_token_row">
-        <code class="fiko_token_name">--spaceH</code>
-        <div class="fiko_token_bar" style="width: clamp(8px, 1.75svw, 40px); background: var(--brand);"></div>
-        <span class="dim">1.75svw — horizontal rhythm</span>
-      </div>
-      <div class="fiko_token_row">
-        <code class="fiko_token_name">--spaceV</code>
-        <div class="fiko_token_bar" style="width: clamp(8px, 1.5svh, 36px); background: var(--brand);"></div>
-        <span class="dim">1.5svh — vertical rhythm</span>
-      </div>
-      <div class="fiko_token_row">
-        <code class="fiko_token_name">--space</code>
-        <div class="fiko_token_bar" style="width: clamp(10px, 2.5svw, 48px); background: var(--brand_lighter);"></div>
-        <span class="dim">calc(spaceH + spaceV / 2)</span>
-      </div>
-      <div class="fiko_token_row">
-        <code class="fiko_token_name">--breath</code>
-        <div class="fiko_token_bar" style="width: clamp(14px, 3.75svw, 72px); background: var(--brand_lighter);"></div>
-        <span class="dim">calc(space * 1.5) — gutters</span>
-      </div>
-      <div class="fiko_token_row">
-        <code class="fiko_token_name">--radius</code>
-        <div class="fiko_token_bar" style="width: 6px; border-radius: 6px; background: var(--brand);"></div>
-        <span class="dim">6px</span>
-      </div>
-      <div class="fiko_token_row">
-        <code class="fiko_token_name">--borderpx</code>
-        <div class="fiko_token_bar" style="width: 3px; background: var(--brand);"></div>
-        <span class="dim">3px</span>
-      </div>
-      <div class="fiko_token_row">
-        <code class="fiko_token_name">--tap_size</code>
-        <div class="fiko_token_bar" style="width: var(--tap_size); height: var(--tap_size); background: var(--brandT25); border-radius: var(--radius);"></div>
-        <span class="dim">clamp(42px, 5vw, 52px)</span>
-      </div>
-    </div>
+                    <!-- Font weight scale -->
+                    <h3
+                        class="h4"
+                        style="
+                            margin-top: calc(var(--spaceV) * 4);
+                            margin-bottom: var(--spaceV);
+                        "
+                    >
+                        Font weight scale
+                    </h3>
+                    <div class="fiko_weight_scale">
+                        <span style="font-weight: 100">100 ultralight</span>
+                        <span style="font-weight: 200">200</span>
+                        <span style="font-weight: 300">300</span>
+                        <span style="font-weight: 400"
+                            >400 thin (default body)</span
+                        >
+                        <span style="font-weight: 500">500 light alias</span>
+                        <span style="font-weight: 600">600 regular alias</span>
+                        <span style="font-weight: 700">700 medium alias</span>
+                        <span style="font-weight: 800">800 bold alias</span>
+                    </div>
 
-    <!-- Typography -->
-    <h3 class="h4" style="margin-top: calc(var(--spaceV) * 4); margin-bottom: var(--spaceV);">Typography</h3>
-    <div class="fiko_type_scale">
-      <div class="fiko_type_row">
-        <span class="h1" style="margin: 0;">Display h1</span>
-        <code class="dim">.h1 — font-size * 2.5, weight 500</code>
-      </div>
-      <div class="fiko_type_row">
-        <span class="h2" style="margin: 0;">Heading h2</span>
-        <code class="dim">.h2 — font-size * 2.0, weight 500</code>
-      </div>
-      <div class="fiko_type_row">
-        <span class="h3" style="margin: 0;">Heading h3</span>
-        <code class="dim">.h3 — font-size * 1.75, weight 400</code>
-      </div>
-      <div class="fiko_type_row">
-        <span class="h4" style="margin: 0;">Subheading h4</span>
-        <code class="dim">.h4 — font-size * 1.5, weight 400</code>
-      </div>
-      <div class="fiko_type_row">
-        <span class="h5" style="margin: 0;">Label h5</span>
-        <code class="dim">.h5 — font-size * 1.25, weight 400</code>
-      </div>
-      <div class="fiko_type_row">
-        <span style="font-size: var(--font_size); font-weight: var(--weight_light);">Body text — --font_size: clamp(1.1rem, 0.34vw + 0.92rem, 1.21rem)</span>
-        <code class="dim">base — weight 500</code>
-      </div>
-    </div>
+                    <!-- Breakpoints -->
+                    <h3
+                        class="h4"
+                        style="
+                            margin-top: calc(var(--spaceV) * 4);
+                            margin-bottom: var(--spaceV);
+                        "
+                    >
+                        Breakpoints
+                    </h3>
+                    <div class="fiko_token_list">
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--bp_xs</code
+                            ><span class="dim">390px</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--bp_sm</code
+                            ><span class="dim">576px</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--bp_md</code
+                            ><span class="dim">768px</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--bp_lg</code
+                            ><span class="dim">992px</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name">--bp_xl</code
+                            ><span class="dim">1200px</span>
+                        </div>
+                        <div class="fiko_token_row">
+                            <code class="fiko_token_name"
+                                >--max_window_width</code
+                            ><span class="dim">1400px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- Font weight scale -->
-    <h3 class="h4" style="margin-top: calc(var(--spaceV) * 4); margin-bottom: var(--spaceV);">Font weight scale</h3>
-    <div class="fiko_weight_scale">
-      <span style="font-weight: 100;">100 ultralight</span>
-      <span style="font-weight: 200;">200</span>
-      <span style="font-weight: 300;">300</span>
-      <span style="font-weight: 400;">400 thin (default body)</span>
-      <span style="font-weight: 500;">500 light alias</span>
-      <span style="font-weight: 600;">600 regular alias</span>
-      <span style="font-weight: 700;">700 medium alias</span>
-      <span style="font-weight: 800;">800 bold alias</span>
-    </div>
+            <!-- ── COMPONENTS ──────────────────────────────────────── -->
+            <section id="components" class="fiko_section">
+                <div class="container">
+                    <div class="fiko_section_label uppercase dim">
+                        Components — omg/5components.css
+                    </div>
+                    <h2
+                        class="h2"
+                        style="margin-bottom: calc(var(--spaceV) * 3)"
+                    >
+                        Interactive elements
+                    </h2>
 
-    <!-- Breakpoints -->
-    <h3 class="h4" style="margin-top: calc(var(--spaceV) * 4); margin-bottom: var(--spaceV);">Breakpoints</h3>
-    <div class="fiko_token_list">
-      <div class="fiko_token_row"><code class="fiko_token_name">--bp_xs</code><span class="dim">390px</span></div>
-      <div class="fiko_token_row"><code class="fiko_token_name">--bp_sm</code><span class="dim">576px</span></div>
-      <div class="fiko_token_row"><code class="fiko_token_name">--bp_md</code><span class="dim">768px</span></div>
-      <div class="fiko_token_row"><code class="fiko_token_name">--bp_lg</code><span class="dim">992px</span></div>
-      <div class="fiko_token_row"><code class="fiko_token_name">--bp_xl</code><span class="dim">1200px</span></div>
-      <div class="fiko_token_row"><code class="fiko_token_name">--max_window_width</code><span class="dim">1400px</span></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── COMPONENTS ──────────────────────────────────────── -->
-<section id="components" class="fiko_section">
-  <div class="container">
-    <div class="fiko_section_label uppercase dim">Components — omg/5components.css</div>
-    <h2 class="h2" style="margin-bottom: calc(var(--spaceV) * 3);">Interactive elements</h2>
-
-    <!-- Buttons -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Buttons</h3>
-        <span class="dim">button, .button, .button_cta</span>
-      </div>
-      <div class="fiko_showcase_live">
-        <button>Default button</button>
-        <a class="button button_cta"><button>CTA button</button></a>
-        <a class="button"><button>Link button</button></a>
-        <button data-state="disabled">Disabled state</button>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<button>Default button</button>
+                    <!-- Buttons -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Buttons</h3>
+                            <span class="dim"
+                                >button, .button, .button_cta</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live">
+                            <button>Default button</button>
+                            <a class="button button_cta"
+                                ><button>CTA button</button></a
+                            >
+                            <a class="button"><button>Link button</button></a>
+                            <button data-state="disabled">
+                                Disabled state
+                            </button>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<button>Default button</button>
 <a class="button button_cta"><button>CTA button</button></a>
 <a class="button"><button>Link button</button></a>
-<button data-state="disabled">Disabled state</button>' aria-label="Copy button code">copy</button>
-        </div>
-        <pre><code>&lt;button&gt;Default button&lt;/button&gt;
+<button data-state="disabled">Disabled state</button>'
+                                    aria-label="Copy button code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;button&gt;Default button&lt;/button&gt;
 &lt;a class="button button_cta"&gt;&lt;button&gt;CTA button&lt;/button&gt;&lt;/a&gt;
 &lt;a class="button"&gt;&lt;button&gt;Link button&lt;/button&gt;&lt;/a&gt;
 &lt;button data-state="disabled"&gt;Disabled state&lt;/button&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Heading scale -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Heading size classes</h3>
-        <span class="dim">.h1–.h6 are size modifiers — apply to any element</span>
-      </div>
-      <div class="fiko_showcase_live" style="display: grid; grid-template-columns: max-content 1fr; gap: var(--spaceV) calc(var(--spaceH) * 2);">
-        <p style="margin: 0;">.h1</p>
-        <p class="h1" style="margin: 0;">FIKO Look good or die!</p>
+                    <!-- Heading scale -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Heading size classes</h3>
+                            <span class="dim"
+                                >.h1–.h6 are size modifiers — apply to any
+                                element</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live"
+                            style="
+                                display: grid;
+                                grid-template-columns: max-content 1fr;
+                                gap: var(--spaceV) calc(var(--spaceH) * 2);
+                            "
+                        >
+                            <p style="margin: 0">.h1</p>
+                            <p class="h1" style="margin: 0">
+                                FIKO Look good or die!
+                            </p>
 
-        <p style="margin: 0;">.h2</p>
-        <p class="h2" style="margin: 0;">FIKO Look good is easy now!</p>
+                            <p style="margin: 0">.h2</p>
+                            <p class="h2" style="margin: 0">
+                                FIKO Look good is easy now!
+                            </p>
 
-        <p style="margin: 0;">.h3</p>
-        <p class="h3" style="margin: 0;">FIKO Looking good is one install away</p>
+                            <p style="margin: 0">.h3</p>
+                            <p class="h3" style="margin: 0">
+                                FIKO Looking good is one install away
+                            </p>
 
-        <p style="margin: 0;">.h4</p>
-        <p class="h4" style="margin: 0;">FIKO Heading to looking good? Easy! Plug in FIKO dude!</p>
+                            <p style="margin: 0">.h4</p>
+                            <p class="h4" style="margin: 0">
+                                FIKO Heading to looking good? Easy! Plug in FIKO
+                                dude!
+                            </p>
 
-        <p style="margin: 0;">.h5</p>
-        <p class="h5" style="margin: 0;">FIKO Look good, but don't die trying, actually!</p>
+                            <p style="margin: 0">.h5</p>
+                            <p class="h5" style="margin: 0">
+                                FIKO Look good, but don't die trying, actually!
+                            </p>
 
-        <p style="margin: 0;">.h6</p>
-        <p class="h6" style="margin: 0;">HEY FLOWER, HERE, HAS SOME FIKO... LOOK GOOD, MANY BEES COMING!</p>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<p class="h1">Paragraph at .h1 size</p>
+                            <p style="margin: 0">.h6</p>
+                            <p class="h6" style="margin: 0">
+                                HEY FLOWER, HERE, HAS SOME FIKO... LOOK GOOD,
+                                MANY BEES COMING!
+                            </p>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<p class="h1">Paragraph at .h1 size</p>
 <p class="h2">Paragraph at .h2 size</p>
 <p class="h3">Paragraph at .h3 size</p>
 <div class="h4">A div at .h4 size</div>
 <p class="h5">Paragraph at .h5 size</p>
-<p class="h6">Paragraph at .h6 size</p>' aria-label="Copy heading size classes code">copy</button>
-        </div>
-        <pre><code>&lt;p class="h1"&gt;Paragraph at .h1 size&lt;/p&gt;
+<p class="h6">Paragraph at .h6 size</p>'
+                                    aria-label="Copy heading size classes code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;p class="h1"&gt;Paragraph at .h1 size&lt;/p&gt;
 &lt;p class="h2"&gt;Paragraph at .h2 size&lt;/p&gt;
 &lt;p class="h3"&gt;Paragraph at .h3 size&lt;/p&gt;
 &lt;div class="h4"&gt;A div at .h4 size&lt;/div&gt;
 &lt;p class="h5"&gt;Paragraph at .h5 size&lt;/p&gt;
 &lt;p class="h6"&gt;Paragraph at .h6 size&lt;/p&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Decouple semantics from appearance -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Decouple semantics from appearance</h3>
-        <span class="dim">the HTML heading hierarchy stays intact — only the visuals change</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <p class="dim" style="margin: 0 0 0.5rem; font-size: 1rem;">Promote a non-heading to h2 weight — the h1 in the DOM is untouched:</p>
-        <h1 style="margin: 0 0 0.25rem;">Page title (plain h1, no class)</h1>
-        <div class="h2" style="margin: 0 0 calc(var(--spaceV) * 3);">Promo callout — a div at h2 visual weight</div>
-        <p class="dim" style="margin: 0 0 0.5rem; font-size: 1rem;">Three consecutive headings, same visual weight — e.g. a hero with multiple big lines:</p>
-        <h2 class="h1" style="margin: 0;">First big line</h2>
-        <h3 class="h1 uppercase" style="margin: 0;">Second big line</h3>
-        <h4 class="h1" style="margin: 0;">Third big line</h4>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<!-- non-heading at h2 visual weight, h1 cascade untouched -->
+                    <!-- Decouple semantics from appearance -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">
+                                Decouple semantics from appearance
+                            </h3>
+                            <span class="dim"
+                                >the HTML heading hierarchy stays intact — only
+                                the visuals change</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <p
+                                class="dim"
+                                style="margin: 0 0 0.5rem; font-size: 1rem"
+                            >
+                                Promote a non-heading to h2 weight — the h1 in
+                                the DOM is untouched:
+                            </p>
+                            <h1 style="margin: 0 0 0.25rem">
+                                Page title (plain h1, no class)
+                            </h1>
+                            <div
+                                class="h2"
+                                style="margin: 0 0 calc(var(--spaceV) * 3)"
+                            >
+                                Promo callout — a div at h2 visual weight
+                            </div>
+                            <p
+                                class="dim"
+                                style="margin: 0 0 0.5rem; font-size: 1rem"
+                            >
+                                Three consecutive headings, same visual weight —
+                                e.g. a hero with multiple big lines:
+                            </p>
+                            <h2 class="h1" style="margin: 0">First big line</h2>
+                            <h3 class="h1 uppercase" style="margin: 0">
+                                Second big line
+                            </h3>
+                            <h4 class="h1" style="margin: 0">Third big line</h4>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<!-- non-heading at h2 visual weight, h1 cascade untouched -->
 <h1>Page title</h1>
 <div class="h2">Promo callout</div>
 
 <!-- three consecutive headings, same visual size -->
 <h2 class="h1">First big line</h2>
 <h3 class="h1 uppercase">Second big line</h3>
-<h4 class="h1">Third big line</h4>' aria-label="Copy decouple semantics code">copy</button>
-        </div>
-        <pre><code>&lt;!-- non-heading at h2 visual weight, h1 cascade untouched --&gt;
+<h4 class="h1">Third big line</h4>'
+                                    aria-label="Copy decouple semantics code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;!-- non-heading at h2 visual weight, h1 cascade untouched --&gt;
 &lt;h1&gt;Page title&lt;/h1&gt;
 &lt;div class="h2"&gt;Promo callout&lt;/div&gt;
 
@@ -562,271 +863,447 @@
 &lt;h2 class="h1"&gt;First big line&lt;/h2&gt;
 &lt;h3 class="h1 uppercase"&gt;Second big line&lt;/h3&gt;
 &lt;h4 class="h1"&gt;Third big line&lt;/h4&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Text utilities -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Text utilities</h3>
-        <span class="dim">.dim, .underline, .typewriter, .mono, .prose, .uppercase, .cat</span>
-      </div>
-      <div class="fiko_showcase_live" style="display: grid; grid-template-columns: max-content 1fr; gap: var(--spaceV) calc(var(--spaceH) * 2);">
-        <p style="margin: 0;">.dim</p>
-        <p class="dim" style="margin: 0;">Published 3 days ago · 4 min read</p>
+                    <!-- Text utilities -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Text utilities</h3>
+                            <span class="dim"
+                                >.dim, .underline, .typewriter, .mono, .prose,
+                                .uppercase, .cat</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live"
+                            style="
+                                display: grid;
+                                grid-template-columns: max-content 1fr;
+                                gap: var(--spaceV) calc(var(--spaceH) * 2);
+                            "
+                        >
+                            <p style="margin: 0">.dim</p>
+                            <p class="dim" style="margin: 0">
+                                Published 3 days ago · 4 min read
+                            </p>
 
-        <p style="margin: 0;">.underline</p>
-        <p style="margin: 0;"><a class="underline" href="#">Read the full documentation →</a></p>
+                            <p style="margin: 0">.underline</p>
+                            <p style="margin: 0">
+                                <a class="underline" href="#"
+                                    >Read the full documentation →</a
+                                >
+                            </p>
 
-        <p style="margin: 0;">.typewriter</p>
-        <p class="typewriter" style="margin: 0;">Dear Claude, it all started with a CSS reset…</p>
+                            <p style="margin: 0">.typewriter</p>
+                            <p class="typewriter" style="margin: 0">
+                                Dear Claude, it all started with a CSS reset…
+                            </p>
 
-        <p style="margin: 0;">.mono</p>
-        <p class="mono" style="margin: 0;">pnpm add @toybreaker/fiko</p>
+                            <p style="margin: 0">.mono</p>
+                            <p class="mono" style="margin: 0">
+                                pnpm add @toybreaker/fiko
+                            </p>
 
-        <p style="margin: 0;">.prose</p>
-        <p class="prose" style="margin: 0;">Good design is as little design as possible. Comfortable reading wraps at 66 characters, for visual comfort on long paragraphs.</p>
+                            <p style="margin: 0">.prose</p>
+                            <p class="prose" style="margin: 0">
+                                Good design is as little design as possible.
+                                Comfortable reading wraps at 66 characters, for
+                                visual comfort on long paragraphs.
+                            </p>
 
-        <p style="margin: 0;">.uppercase</p>
-        <p class="uppercase" style="margin: 0;">new release</p>
+                            <p style="margin: 0">.uppercase</p>
+                            <p class="uppercase" style="margin: 0">
+                                new release
+                            </p>
 
-        <p style="margin: 0;">.cat</p>
-        <p class="cat" style="margin: 0;">the quick brown fox jumps over the lazy cat</p>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<p class="dim">Dimmed text</p>
+                            <p style="margin: 0">.cat</p>
+                            <p class="cat" style="margin: 0">
+                                the quick brown fox jumps over the lazy cat
+                            </p>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<p class="dim">Dimmed text</p>
 <a class="underline" href="#">Underlined link</a>
 <p class="typewriter">Typewriter font</p>
 <p class="mono">Mono sans-serif system font</p>
 <p class="prose">Prose constrained to 66ch</p>
 <p class="uppercase">Uppercase text</p>
-<p class="cat">capitalize text</p>' aria-label="Copy text utility code">copy</button>
-        </div>
-        <pre><code>&lt;p class="dim"&gt;Dimmed text&lt;/p&gt;
+<p class="cat">capitalize text</p>'
+                                    aria-label="Copy text utility code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;p class="dim"&gt;Dimmed text&lt;/p&gt;
 &lt;a class="underline" href="#"&gt;Underlined link&lt;/a&gt;
 &lt;p class="typewriter"&gt;Typewriter font&lt;/p&gt;
 &lt;p class="mono"&gt;Mono sans-serif system font&lt;/p&gt;
 &lt;p class="prose"&gt;Prose constrained to 66ch&lt;/p&gt;
 &lt;p class="uppercase"&gt;Uppercase text&lt;/p&gt;
 &lt;p class="cat"&gt;capitalize text&lt;/p&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Dot leader -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Dot leader</h3>
-        <span class="dim">.dots</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <div style="display: flex; align-items: baseline; width: 100%; max-width: 400px;">
-          <span>Menu item</span>
-          <span class="dots"></span>
-          <span>42</span>
-        </div>
-        <div style="display: flex; align-items: baseline; width: 100%; max-width: 400px;">
-          <span>Table of contents</span>
-          <span class="dots"></span>
-          <span>7</span>
-        </div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div style="display: flex; align-items: baseline;">
+                    <!-- Dot leader -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Dot leader</h3>
+                            <span class="dim">.dots</span>
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <div
+                                style="
+                                    display: flex;
+                                    align-items: baseline;
+                                    width: 100%;
+                                    max-width: 400px;
+                                "
+                            >
+                                <span>Menu item</span>
+                                <span class="dots"></span>
+                                <span>42</span>
+                            </div>
+                            <div
+                                style="
+                                    display: flex;
+                                    align-items: baseline;
+                                    width: 100%;
+                                    max-width: 400px;
+                                "
+                            >
+                                <span>Table of contents</span>
+                                <span class="dots"></span>
+                                <span>7</span>
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div style="display: flex; align-items: baseline;">
   <span>Menu item</span>
   <span class="dots"></span>
   <span>42</span>
-</div>' aria-label="Copy dot leader code">copy</button>
-        </div>
-        <pre><code>&lt;div style="display: flex; align-items: baseline;"&gt;
+</div>'
+                                    aria-label="Copy dot leader code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div style="display: flex; align-items: baseline;"&gt;
   &lt;span&gt;Menu item&lt;/span&gt;
   &lt;span class="dots"&gt;&lt;/span&gt;
   &lt;span&gt;42&lt;/span&gt;
 &lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Sticky header -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Sticky header / controls</h3>
-        <span class="dim">.controls, .controls.sticky</span>
-      </div>
-      <div class="fiko_showcase_live">
-        <div class="controls" style="background: var(--dark); color: var(--light); display: flex; align-items: center; padding-inline: var(--spaceH); border-radius: var(--radius); width: 100%;">
-          <span>Nav bar — fixed height var(--sticky_header_height)</span>
-        </div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<header class="controls sticky">
+                    <!-- Sticky header -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Sticky header / controls</h3>
+                            <span class="dim">.controls, .controls.sticky</span>
+                        </div>
+                        <div class="fiko_showcase_live">
+                            <div
+                                class="controls"
+                                style="
+                                    background: var(--dark);
+                                    color: var(--light);
+                                    display: flex;
+                                    align-items: center;
+                                    padding-inline: var(--spaceH);
+                                    border-radius: var(--radius);
+                                    width: 100%;
+                                "
+                            >
+                                <span
+                                    >Nav bar — fixed height
+                                    var(--sticky_header_height)</span
+                                >
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<header class="controls sticky">
   <!-- nav content -->
-</header>' aria-label="Copy controls code">copy</button>
-        </div>
-        <pre><code>&lt;header class="controls sticky"&gt;
+</header>'
+                                    aria-label="Copy controls code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;header class="controls sticky"&gt;
   &lt;!-- nav content --&gt;
 &lt;/header&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Data states -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Data states</h3>
-        <span class="dim">data-state="loading | disabled | empty"</span>
-      </div>
-      <div class="fiko_showcase_live">
-        <div data-state="loading" style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">loading (cursor: progress, opacity 0.7)</div>
-        <div data-state="disabled" style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">disabled (opacity 0.5, no pointer)</div>
-        <div style="background: var(--brandT25); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
-          <span data-state="empty">this is hidden</span>
-          visible — sibling with data-state="empty" is hidden
-        </div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div data-state="loading">loading...</div>
+                    <!-- Data states -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Data states</h3>
+                            <span class="dim"
+                                >data-state="loading | disabled | empty"</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live">
+                            <div
+                                data-state="loading"
+                                style="
+                                    background: var(--brandT25);
+                                    padding: var(--spaceV) var(--spaceH);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                loading (cursor: progress, opacity 0.7)
+                            </div>
+                            <div
+                                data-state="disabled"
+                                style="
+                                    background: var(--brandT25);
+                                    padding: var(--spaceV) var(--spaceH);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                disabled (opacity 0.5, no pointer)
+                            </div>
+                            <div
+                                style="
+                                    background: var(--brandT25);
+                                    padding: var(--spaceV) var(--spaceH);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                <span data-state="empty">this is hidden</span>
+                                visible — sibling with data-state="empty" is
+                                hidden
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div data-state="loading">loading...</div>
 <div data-state="disabled">disabled</div>
-<span data-state="empty">hidden</span>' aria-label="Copy data-state code">copy</button>
-        </div>
-        <pre><code>&lt;div data-state="loading"&gt;loading...&lt;/div&gt;
+<span data-state="empty">hidden</span>'
+                                    aria-label="Copy data-state code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div data-state="loading"&gt;loading...&lt;/div&gt;
 &lt;div data-state="disabled"&gt;disabled&lt;/div&gt;
 &lt;span data-state="empty"&gt;hidden&lt;/span&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Blockquote -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Blockquote</h3>
-        <span class="dim">blockquote, cite</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <blockquote>
-          Cascade layers are the single biggest shift in CSS architecture in a decade.
-          <cite>A happy fiko user</cite>
-        </blockquote>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<blockquote>
+                    <!-- Blockquote -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Blockquote</h3>
+                            <span class="dim">blockquote, cite</span>
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <blockquote>
+                                Cascade layers are the single biggest shift in
+                                CSS architecture in a decade.
+                                <cite>A happy fiko user</cite>
+                            </blockquote>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy="<blockquote>
   Cascade layers are the biggest shift in CSS architecture in a decade.
   <cite>A happy fiko user</cite>
-</blockquote>' aria-label="Copy blockquote code">copy</button>
-        </div>
-        <pre><code>&lt;blockquote&gt;
+</blockquote>"
+                                    aria-label="Copy blockquote code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;blockquote&gt;
   Cascade layers are the biggest shift in CSS architecture in a decade.
   &lt;cite&gt;A happy fiko user&lt;/cite&gt;
 &lt;/blockquote&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Accordion -->
-    <div id="accordion" class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Accordion</h3>
-        <span class="dim">details, summary — zero JS, semantic HTML</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
-
-        <details class="accordion">
-          <summary>Default accordion</summary>
-          <div>Down chevron rotates 180° on open. Row separator via <code>border-bottom</code>. No outer box. Zero JS.</div>
-        </details>
-        <details class="accordion" open>
-          <summary>Open by default</summary>
-          <div>Add the <code>open</code> attribute to start expanded.</div>
-        </details>
-        <details class="accordion">
-          <summary>Another item</summary>
-          <div>Stack as many as you need.</div>
-        </details>
-
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<details class="accordion">
+                    <!-- Accordion -->
+                    <div id="accordion" class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Accordion</h3>
+                            <span class="dim"
+                                >details, summary — zero JS, semantic HTML</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live fiko_showcase_live_col resizable"
+                        >
+                            <details class="accordion">
+                                <summary>Default accordion</summary>
+                                <div>
+                                    Down chevron rotates 180° on open. Row
+                                    separator via <code>border-bottom</code>. No
+                                    outer box. Zero JS.
+                                </div>
+                            </details>
+                            <details class="accordion" open>
+                                <summary>Open by default</summary>
+                                <div>
+                                    Add the <code>open</code> attribute to start
+                                    expanded.
+                                </div>
+                            </details>
+                            <details class="accordion">
+                                <summary>Another item</summary>
+                                <div>Stack as many as you need.</div>
+                            </details>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<details class="accordion">
   <summary>Title</summary>
   <div>Content goes here.</div>
-</details>' aria-label="Copy accordion code">copy</button>
-        </div>
-        <pre><code>&lt;details class="accordion"&gt;
+</details>'
+                                    aria-label="Copy accordion code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;details class="accordion"&gt;
   &lt;summary&gt;Title&lt;/summary&gt;
   &lt;div&gt;Content goes here.&lt;/div&gt;
 &lt;/details&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Accordion dotted -->
-    <div id="accordion_dotted" class="fiko_showcase" style="margin-top: calc(var(--spaceV) * 3);">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Accordion dotted</h3>
-        <span class="dim">details.accordion.dotted — dot leader between label and chevron</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
-        <details class="accordion dotted">
-          <summary>Dotted accordion</summary>
-          <div>Add <code>.dotted</code> to get the leader line between label and chevron.</div>
-        </details>
-        <details class="accordion dotted" open>
-          <summary>Open by default</summary>
-          <div>Composable with other modifiers — <code>accordion dotted accordion_chevron</code> works too.</div>
-        </details>
-        <details class="accordion dotted">
-          <summary>Another item</summary>
-          <div>Stack as many as you need.</div>
-        </details>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<details class="accordion dotted">
+                    <!-- Accordion dotted -->
+                    <div
+                        id="accordion_dotted"
+                        class="fiko_showcase"
+                        style="margin-top: calc(var(--spaceV) * 3)"
+                    >
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Accordion dotted</h3>
+                            <span class="dim"
+                                >details.accordion.dotted — dot leader between
+                                label and chevron</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live fiko_showcase_live_col resizable"
+                        >
+                            <details class="accordion dotted">
+                                <summary>Dotted accordion</summary>
+                                <div>
+                                    Add <code>.dotted</code> to get the leader
+                                    line between label and chevron.
+                                </div>
+                            </details>
+                            <details class="accordion dotted" open>
+                                <summary>Open by default</summary>
+                                <div>
+                                    Composable with other modifiers —
+                                    <code
+                                        >accordion dotted
+                                        accordion_chevron</code
+                                    >
+                                    works too.
+                                </div>
+                            </details>
+                            <details class="accordion dotted">
+                                <summary>Another item</summary>
+                                <div>Stack as many as you need.</div>
+                            </details>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<details class="accordion dotted">
   <summary>Title</summary>
   <div>Content goes here.</div>
-</details>' aria-label="Copy accordion dotted code">copy</button>
-        </div>
-        <pre><code>&lt;details class="accordion dotted"&gt;
+</details>'
+                                    aria-label="Copy accordion dotted code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;details class="accordion dotted"&gt;
   &lt;summary&gt;Title&lt;/summary&gt;
   &lt;div&gt;Content goes here.&lt;/div&gt;
 &lt;/details&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Accordion chevron -->
-    <div id="accordion_chevron" class="fiko_showcase" style="margin-top: calc(var(--spaceV) * 3);">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Accordion chevron</h3>
-        <span class="dim">details.accordion.accordion_chevron — SVG arrow via mask-image</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
-        <details class="accordion accordion_chevron">
-          <summary>Chevron — no dot</summary>
-          <div>Right-pointing SVG arrow, rotates 90° on open. Pure CSS — no inline SVG, no JS. Color inherits <code>currentColor</code>.</div>
-        </details>
-        <details class="accordion accordion_chevron" open>
-          <summary>Chevron — open</summary>
-          <div>Stack with other modifiers freely.</div>
-        </details>
-        <details class="accordion accordion_chevron dotted">
-          <summary>Chevron + dotted</summary>
-          <div>Combine <code>.accordion_chevron</code> and <code>.dotted</code> — dot leader fills the space, right-pointing chevron on the right.</div>
-        </details>
-        <details class="accordion accordion_chevron dotted" open>
-          <summary>Chevron + dotted — open</summary>
-          <div>All three modifiers compose freely.</div>
-        </details>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<details class="accordion accordion_chevron">
+                    <!-- Accordion chevron -->
+                    <div
+                        id="accordion_chevron"
+                        class="fiko_showcase"
+                        style="margin-top: calc(var(--spaceV) * 3)"
+                    >
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Accordion chevron</h3>
+                            <span class="dim"
+                                >details.accordion.accordion_chevron — SVG arrow
+                                via mask-image</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live fiko_showcase_live_col resizable"
+                        >
+                            <details class="accordion accordion_chevron">
+                                <summary>Chevron — no dot</summary>
+                                <div>
+                                    Right-pointing SVG arrow, rotates 90° on
+                                    open. Pure CSS — no inline SVG, no JS. Color
+                                    inherits <code>currentColor</code>.
+                                </div>
+                            </details>
+                            <details class="accordion accordion_chevron" open>
+                                <summary>Chevron — open</summary>
+                                <div>Stack with other modifiers freely.</div>
+                            </details>
+                            <details class="accordion accordion_chevron dotted">
+                                <summary>Chevron + dotted</summary>
+                                <div>
+                                    Combine <code>.accordion_chevron</code> and
+                                    <code>.dotted</code> — dot leader fills the
+                                    space, right-pointing chevron on the right.
+                                </div>
+                            </details>
+                            <details
+                                class="accordion accordion_chevron dotted"
+                                open
+                            >
+                                <summary>Chevron + dotted — open</summary>
+                                <div>All three modifiers compose freely.</div>
+                            </details>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<details class="accordion accordion_chevron">
   <summary>Title</summary>
   <div>Content goes here.</div>
 </details>
@@ -835,9 +1312,13 @@
 <details class="accordion accordion_chevron dotted">
   <summary>Title</summary>
   <div>Content goes here.</div>
-</details>' aria-label="Copy accordion chevron code">copy</button>
-        </div>
-        <pre><code>&lt;details class="accordion accordion_chevron"&gt;
+</details>'
+                                    aria-label="Copy accordion chevron code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;details class="accordion accordion_chevron"&gt;
   &lt;summary&gt;Title&lt;/summary&gt;
   &lt;div&gt;Content goes here.&lt;/div&gt;
 &lt;/details&gt;
@@ -847,70 +1328,110 @@
   &lt;summary&gt;Title&lt;/summary&gt;
   &lt;div&gt;Content goes here.&lt;/div&gt;
 &lt;/details&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-  </div>
-</section>
+            <!-- ── LAYOUT ──────────────────────────────────────────── -->
+            <section id="layout" class="fiko_section fiko_section_alt">
+                <div class="container">
+                    <div class="fiko_section_label uppercase dim">
+                        Layout — omg/4layout.css
+                    </div>
+                    <h2
+                        class="h2"
+                        style="margin-bottom: calc(var(--spaceV) * 3)"
+                    >
+                        Layout primitives
+                    </h2>
 
-<!-- ── LAYOUT ──────────────────────────────────────────── -->
-<section id="layout" class="fiko_section fiko_section_alt">
-  <div class="container">
-    <div class="fiko_section_label uppercase dim">Layout — omg/4layout.css</div>
-    <h2 class="h2" style="margin-bottom: calc(var(--spaceV) * 3);">Layout primitives</h2>
-
-    <!-- Container -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Container</h3>
-        <span class="dim">.container — max-width + container query context</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
-        <div style="border: var(--borderpx) dashed var(--border_color); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
-          .container — <code>width: min(100% - breath*2, --container_xl)</code><br>
-          Sets up container query context for responsive children.
-        </div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div class="container">
+                    <!-- Container -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Container</h3>
+                            <span class="dim"
+                                >.container — max-width + container query
+                                context</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live fiko_showcase_live_col resizable"
+                        >
+                            <div
+                                style="
+                                    border: var(--borderpx) dashed
+                                        var(--border_color);
+                                    padding: var(--spaceV) var(--spaceH);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                .container —
+                                <code
+                                    >width: min(100% - breath*2,
+                                    --container_xl)</code
+                                ><br />
+                                Sets up container query context for responsive
+                                children.
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div class="container">
   <!-- max-width centered content, container query context -->
-</div>' aria-label="Copy container code">copy</button>
-        </div>
-        <pre><code>&lt;div class="container"&gt;
+</div>'
+                                    aria-label="Copy container code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div class="container"&gt;
   &lt;!-- max-width centered, container query context --&gt;
 &lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Responsive Grid -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Responsive grid</h3>
-        <span class="dim">.grid — 1 &rarr; 2 &rarr; 3 &rarr; 4 cols via container queries</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
-        <div class="grid">
-          <div class="fiko_grid_cell">Cell 1</div>
-          <div class="fiko_grid_cell">Cell 2</div>
-          <div class="fiko_grid_cell">Cell 3</div>
-          <div class="fiko_grid_cell">Cell 4</div>
-        </div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div class="container">
+                    <!-- Responsive Grid -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Responsive grid</h3>
+                            <span class="dim"
+                                >.grid — 1 &rarr; 2 &rarr; 3 &rarr; 4 cols via
+                                container queries</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live fiko_showcase_live_col resizable"
+                        >
+                            <div class="grid">
+                                <div class="fiko_grid_cell">Cell 1</div>
+                                <div class="fiko_grid_cell">Cell 2</div>
+                                <div class="fiko_grid_cell">Cell 3</div>
+                                <div class="fiko_grid_cell">Cell 4</div>
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div class="container">
   <div class="grid">
     <div>Cell 1</div>
     <div>Cell 2</div>
     <div>Cell 3</div>
     <div>Cell 4</div>
   </div>
-</div>' aria-label="Copy grid code">copy</button>
-        </div>
-        <pre><code>&lt;div class="container"&gt;
+</div>'
+                                    aria-label="Copy grid code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div class="container"&gt;
   &lt;div class="grid"&gt;
     &lt;div&gt;Cell 1&lt;/div&gt;
     &lt;div&gt;Cell 2&lt;/div&gt;
@@ -918,476 +1439,795 @@
     &lt;div&gt;Cell 4&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Bento -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Bento box</h3>
-        <span class="dim">.bento — mosaic product grid, first child spans</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
-        <div class="bento">
-          <div class="fiko_grid_cell fiko_bento_hero">Featured — first child spans 2 cols</div>
-          <div class="fiko_grid_cell">Card 2</div>
-          <div class="fiko_grid_cell">Card 3</div>
-          <div class="fiko_grid_cell">Card 4</div>
-          <div class="fiko_grid_cell">Card 5</div>
-        </div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div class="bento">
+                    <!-- Bento -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Bento box</h3>
+                            <span class="dim"
+                                >.bento — mosaic product grid, first child
+                                spans</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live fiko_showcase_live_col resizable"
+                        >
+                            <div class="bento">
+                                <div class="fiko_grid_cell fiko_bento_hero">
+                                    Featured — first child spans 2 cols
+                                </div>
+                                <div class="fiko_grid_cell">Card 2</div>
+                                <div class="fiko_grid_cell">Card 3</div>
+                                <div class="fiko_grid_cell">Card 4</div>
+                                <div class="fiko_grid_cell">Card 5</div>
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div class="bento">
   <div>Featured — spans 2 cols</div>
   <div>Card 2</div>
   <div>Card 3</div>
   <div>Card 4</div>
   <div>Card 5</div>
-</div>' aria-label="Copy bento code">copy</button>
-        </div>
-        <pre><code>&lt;div class="bento"&gt;
+</div>'
+                                    aria-label="Copy bento code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div class="bento"&gt;
   &lt;div&gt;Featured — spans 2 cols&lt;/div&gt;
   &lt;div&gt;Card 2&lt;/div&gt;
   &lt;div&gt;Card 3&lt;/div&gt;
   &lt;div&gt;Card 4&lt;/div&gt;
   &lt;div&gt;Card 5&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Nav -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Navigation</h3>
-        <span class="dim">nav — flex, space-between, wraps on mobile</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col resizable">
-        <nav style="background: var(--dark); color: var(--light); padding: var(--spaceV) var(--spaceH); border-radius: var(--radius);">
-          <span style="font-weight: 800;">brand</span>
-          <ul>
-            <li><a href="#" style="color: var(--light); padding: 0 var(--spaceH);">Home</a></li>
-            <li><a href="#" style="color: var(--light); padding: 0 var(--spaceH);">About</a></li>
-            <li><a href="#" style="color: var(--light); padding: 0 var(--spaceH);">Work</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<nav>
+                    <!-- Nav -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Navigation</h3>
+                            <span class="dim"
+                                >nav — flex, space-between, wraps on
+                                mobile</span
+                            >
+                        </div>
+                        <div
+                            class="fiko_showcase_live fiko_showcase_live_col resizable"
+                        >
+                            <nav
+                                style="
+                                    background: var(--dark);
+                                    color: var(--light);
+                                    padding: var(--spaceV) var(--spaceH);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                <span style="font-weight: 800">brand</span>
+                                <ul>
+                                    <li>
+                                        <a
+                                            href="#"
+                                            style="
+                                                color: var(--light);
+                                                padding: 0 var(--spaceH);
+                                            "
+                                            >Home</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#"
+                                            style="
+                                                color: var(--light);
+                                                padding: 0 var(--spaceH);
+                                            "
+                                            >About</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#"
+                                            style="
+                                                color: var(--light);
+                                                padding: 0 var(--spaceH);
+                                            "
+                                            >Work</a
+                                        >
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<nav>
   <span>brand</span>
   <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/about">About</a></li>
   </ul>
-</nav>' aria-label="Copy nav code">copy</button>
-        </div>
-        <pre><code>&lt;nav&gt;
+</nav>'
+                                    aria-label="Copy nav code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;nav&gt;
   &lt;span&gt;brand&lt;/span&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-  </div>
-</section>
+            <!-- ── UTILITIES ───────────────────────────────────────── -->
+            <section id="utilities" class="fiko_section">
+                <div class="container">
+                    <div class="fiko_section_label uppercase dim">
+                        Utilities — omg/utils/
+                    </div>
+                    <h2
+                        class="h2"
+                        style="margin-bottom: calc(var(--spaceV) * 3)"
+                    >
+                        Utility classes
+                    </h2>
 
-<!-- ── UTILITIES ───────────────────────────────────────── -->
-<section id="utilities" class="fiko_section">
-  <div class="container">
-    <div class="fiko_section_label uppercase dim">Utilities — omg/utils/</div>
-    <h2 class="h2" style="margin-bottom: calc(var(--spaceV) * 3);">Utility classes</h2>
-
-    <!-- Spacing utilities -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Padding blocks</h3>
-        <span class="dim">.pad_block_sm/md/lg/xl/xxl</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <div class="pad_block_sm" style="background: var(--brandT25); border-radius: var(--radius);">.pad_block_sm — spaceV * 1.5</div>
-        <div class="pad_block_md" style="background: var(--brandT25); border-radius: var(--radius);">.pad_block_md — spaceV * 3</div>
-        <div class="pad_block_lg" style="background: var(--brandT25); border-radius: var(--radius);">.pad_block_lg — spaceV * 6</div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<section class="pad_block_sm">...</section>
+                    <!-- Spacing utilities -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Padding blocks</h3>
+                            <span class="dim">.pad_block_sm/md/lg/xl/xxl</span>
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <div
+                                class="pad_block_sm"
+                                style="
+                                    background: var(--brandT25);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                .pad_block_sm — spaceV * 1.5
+                            </div>
+                            <div
+                                class="pad_block_md"
+                                style="
+                                    background: var(--brandT25);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                .pad_block_md — spaceV * 3
+                            </div>
+                            <div
+                                class="pad_block_lg"
+                                style="
+                                    background: var(--brandT25);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                .pad_block_lg — spaceV * 6
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<section class="pad_block_sm">...</section>
 <section class="pad_block_md">...</section>
 <section class="pad_block_lg">...</section>
 <section class="pad_block_xl">...</section>
-<section class="pad_block_xxl">...</section>' aria-label="Copy padding code">copy</button>
-        </div>
-        <pre><code>&lt;section class="pad_block_sm"&gt;...&lt;/section&gt;
+<section class="pad_block_xxl">...</section>'
+                                    aria-label="Copy padding code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;section class="pad_block_sm"&gt;...&lt;/section&gt;
 &lt;section class="pad_block_md"&gt;...&lt;/section&gt;
 &lt;section class="pad_block_lg"&gt;...&lt;/section&gt;
 &lt;section class="pad_block_xl"&gt;...&lt;/section&gt;
 &lt;section class="pad_block_xxl"&gt;...&lt;/section&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Spacer blocks -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Spacer blocks</h3>
-        <span class="dim">.spacer_block_xs/sm/md/lg/xl/xxl</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <div class="spacer_block_xs" style="background: var(--brandT25);"></div>
-        <code class="dim">.spacer_block_xs — 1svh max 88px</code>
-        <div class="spacer_block_sm" style="background: var(--brandT25);"></div>
-        <code class="dim">.spacer_block_sm — 2.5svh max 100px</code>
-        <div class="spacer_block_md" style="background: var(--brandT25);"></div>
-        <code class="dim">.spacer_block_md — 5svh max 133px</code>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div class="spacer_block_xs"></div>
+                    <!-- Spacer blocks -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Spacer blocks</h3>
+                            <span class="dim"
+                                >.spacer_block_xs/sm/md/lg/xl/xxl</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <div
+                                class="spacer_block_xs"
+                                style="background: var(--brandT25)"
+                            ></div>
+                            <code class="dim"
+                                >.spacer_block_xs — 1svh max 88px</code
+                            >
+                            <div
+                                class="spacer_block_sm"
+                                style="background: var(--brandT25)"
+                            ></div>
+                            <code class="dim"
+                                >.spacer_block_sm — 2.5svh max 100px</code
+                            >
+                            <div
+                                class="spacer_block_md"
+                                style="background: var(--brandT25)"
+                            ></div>
+                            <code class="dim"
+                                >.spacer_block_md — 5svh max 133px</code
+                            >
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div class="spacer_block_xs"></div>
 <div class="spacer_block_sm"></div>
 <div class="spacer_block_md"></div>
-<div class="spacer_block_lg"></div>' aria-label="Copy spacer code">copy</button>
-        </div>
-        <pre><code>&lt;div class="spacer_block_xs"&gt;&lt;/div&gt;
+<div class="spacer_block_lg"></div>'
+                                    aria-label="Copy spacer code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div class="spacer_block_xs"&gt;&lt;/div&gt;
 &lt;div class="spacer_block_sm"&gt;&lt;/div&gt;
 &lt;div class="spacer_block_md"&gt;&lt;/div&gt;
 &lt;div class="spacer_block_lg"&gt;&lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Gaps -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Gap scale</h3>
-        <span class="dim">.gap_sm/md/lg</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <div class="flex gap_sm" style="flex-wrap: wrap;">
-          <div class="fiko_grid_cell">item 1</div>
-          <div class="fiko_grid_cell">item 2</div>
-          <div class="fiko_grid_cell">.gap_sm</div>
-        </div>
-        <div class="flex gap_md" style="flex-wrap: wrap;">
-          <div class="fiko_grid_cell">item 1</div>
-          <div class="fiko_grid_cell">item 2</div>
-          <div class="fiko_grid_cell">.gap_md</div>
-        </div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div class="flex gap_sm">...</div>
+                    <!-- Gaps -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Gap scale</h3>
+                            <span class="dim">.gap_sm/md/lg</span>
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <div class="flex gap_sm" style="flex-wrap: wrap">
+                                <div class="fiko_grid_cell">item 1</div>
+                                <div class="fiko_grid_cell">item 2</div>
+                                <div class="fiko_grid_cell">.gap_sm</div>
+                            </div>
+                            <div class="flex gap_md" style="flex-wrap: wrap">
+                                <div class="fiko_grid_cell">item 1</div>
+                                <div class="fiko_grid_cell">item 2</div>
+                                <div class="fiko_grid_cell">.gap_md</div>
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div class="flex gap_sm">...</div>
 <div class="flex gap_md">...</div>
-<div class="flex gap_lg">...</div>' aria-label="Copy gap code">copy</button>
-        </div>
-        <pre><code>&lt;div class="flex gap_sm"&gt;...&lt;/div&gt;
+<div class="flex gap_lg">...</div>'
+                                    aria-label="Copy gap code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div class="flex gap_sm"&gt;...&lt;/div&gt;
 &lt;div class="flex gap_md"&gt;...&lt;/div&gt;
 &lt;div class="flex gap_lg"&gt;...&lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Text utilities -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Text utilities</h3>
-        <span class="dim">.center, .uppercase, .capitalize, .strikethrough, .pretty</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <p class="center" style="margin: 0; background: var(--brandT25); padding: var(--spaceV); border-radius: var(--radius);">.center — text-align: center</p>
-        <p class="uppercase" style="margin: 0;">.uppercase text</p>
-        <p class="capitalize" style="margin: 0;">.capitalize text</p>
-        <p class="strikethrough" style="margin: 0;">.strikethrough text</p>
-        <p class="pretty" style="margin: 0;">.pretty — text-wrap: pretty</p>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<p class="center">centered</p>
+                    <!-- Text utilities -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Text utilities</h3>
+                            <span class="dim"
+                                >.center, .uppercase, .capitalize,
+                                .strikethrough, .pretty</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <p
+                                class="center"
+                                style="
+                                    margin: 0;
+                                    background: var(--brandT25);
+                                    padding: var(--spaceV);
+                                    border-radius: var(--radius);
+                                "
+                            >
+                                .center — text-align: center
+                            </p>
+                            <p class="uppercase" style="margin: 0">
+                                .uppercase text
+                            </p>
+                            <p class="capitalize" style="margin: 0">
+                                .capitalize text
+                            </p>
+                            <p class="strikethrough" style="margin: 0">
+                                .strikethrough text
+                            </p>
+                            <p class="pretty" style="margin: 0">
+                                .pretty — text-wrap: pretty
+                            </p>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<p class="center">centered</p>
 <p class="uppercase">uppercase</p>
 <p class="capitalize">capitalize</p>
 <p class="strikethrough">strikethrough</p>
-<p class="pretty">text-wrap: pretty</p>' aria-label="Copy text utility code">copy</button>
-        </div>
-        <pre><code>&lt;p class="center"&gt;centered&lt;/p&gt;
+<p class="pretty">text-wrap: pretty</p>'
+                                    aria-label="Copy text utility code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;p class="center"&gt;centered&lt;/p&gt;
 &lt;p class="uppercase"&gt;uppercase&lt;/p&gt;
 &lt;p class="capitalize"&gt;capitalize&lt;/p&gt;
 &lt;p class="strikethrough"&gt;strikethrough&lt;/p&gt;
 &lt;p class="pretty"&gt;text-wrap: pretty&lt;/p&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Visibility -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Visibility</h3>
-        <span class="dim">.hide, .maybe_hide, .sr_only</span>
-      </div>
-      <div class="fiko_showcase_live">
-        <span style="background: var(--brandT25); padding: 0.25rem 0.75rem; border-radius: var(--radius);">.hide &rarr; <span class="hide">not visible</span>hidden</span>
-        <span style="background: var(--brandT25); padding: 0.25rem 0.75rem; border-radius: var(--radius);">.maybe_hide: <span class="maybe_hide">visible &ge;480px</span></span>
-        <span class="sr_only">Screen-reader only</span>
-        <span style="background: var(--brandT25); padding: 0.25rem 0.75rem; border-radius: var(--radius);">.sr_only in DOM, invisible</span>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<span class="hide">always hidden</span>
+                    <!-- Visibility -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Visibility</h3>
+                            <span class="dim"
+                                >.hide, .maybe_hide, .sr_only</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live">
+                            <span
+                                style="
+                                    background: var(--brandT25);
+                                    padding: 0.25rem 0.75rem;
+                                    border-radius: var(--radius);
+                                "
+                                >.hide &rarr;
+                                <span class="hide">not visible</span
+                                >hidden</span
+                            >
+                            <span
+                                style="
+                                    background: var(--brandT25);
+                                    padding: 0.25rem 0.75rem;
+                                    border-radius: var(--radius);
+                                "
+                                >.maybe_hide:
+                                <span class="maybe_hide"
+                                    >visible &ge;480px</span
+                                ></span
+                            >
+                            <span class="sr_only">Screen-reader only</span>
+                            <span
+                                style="
+                                    background: var(--brandT25);
+                                    padding: 0.25rem 0.75rem;
+                                    border-radius: var(--radius);
+                                "
+                                >.sr_only in DOM, invisible</span
+                            >
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<span class="hide">always hidden</span>
 <span class="maybe_hide">hidden below 480px</span>
-<span class="sr_only">screen-reader only</span>' aria-label="Copy visibility code">copy</button>
-        </div>
-        <pre><code>&lt;span class="hide"&gt;always hidden&lt;/span&gt;
+<span class="sr_only">screen-reader only</span>'
+                                    aria-label="Copy visibility code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;span class="hide"&gt;always hidden&lt;/span&gt;
 &lt;span class="maybe_hide"&gt;hidden below 480px&lt;/span&gt;
 &lt;span class="sr_only"&gt;screen-reader only&lt;/span&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- Gradients -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Gradient utilities</h3>
-        <span class="dim">.gradient_o, .gradient_h, .gradient_v, .gradient_warm</span>
-      </div>
-      <div class="fiko_showcase_live">
-        <div class="gradient_o" style="height: 80px; flex: 1; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">.gradient_o</div>
-        <div class="gradient_h" style="height: 80px; flex: 1; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">.gradient_h</div>
-        <div class="gradient_v" style="height: 80px; flex: 1; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">.gradient_v</div>
-        <div class="gradient_warm" style="height: 80px; flex: 1; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">.gradient_warm</div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div class="gradient_o">...</div>
+                    <!-- Gradients -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Gradient utilities</h3>
+                            <span class="dim"
+                                >.gradient_o, .gradient_h, .gradient_v,
+                                .gradient_warm</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live">
+                            <div
+                                class="gradient_o"
+                                style="
+                                    height: 80px;
+                                    flex: 1;
+                                    border-radius: var(--radius);
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: white;
+                                    font-weight: 700;
+                                "
+                            >
+                                .gradient_o
+                            </div>
+                            <div
+                                class="gradient_h"
+                                style="
+                                    height: 80px;
+                                    flex: 1;
+                                    border-radius: var(--radius);
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: white;
+                                    font-weight: 700;
+                                "
+                            >
+                                .gradient_h
+                            </div>
+                            <div
+                                class="gradient_v"
+                                style="
+                                    height: 80px;
+                                    flex: 1;
+                                    border-radius: var(--radius);
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: white;
+                                    font-weight: 700;
+                                "
+                            >
+                                .gradient_v
+                            </div>
+                            <div
+                                class="gradient_warm"
+                                style="
+                                    height: 80px;
+                                    flex: 1;
+                                    border-radius: var(--radius);
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: white;
+                                    font-weight: 700;
+                                "
+                            >
+                                .gradient_warm
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div class="gradient_o">...</div>
 <div class="gradient_h">...</div>
 <div class="gradient_v">...</div>
-<div class="gradient_warm">...</div>' aria-label="Copy gradient code">copy</button>
-        </div>
-        <pre><code>&lt;div class="gradient_o"&gt;...&lt;/div&gt;
+<div class="gradient_warm">...</div>'
+                                    aria-label="Copy gradient code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div class="gradient_o"&gt;...&lt;/div&gt;
 &lt;div class="gradient_h"&gt;...&lt;/div&gt;
 &lt;div class="gradient_v"&gt;...&lt;/div&gt;
 &lt;div class="gradient_warm"&gt;...&lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
 
-    <!-- maximise -->
-    <div class="fiko_showcase">
-      <div class="fiko_showcase_header">
-        <h3 class="h4">Maximise bleed</h3>
-        <span class="dim">.maximise — negative container margin bleed</span>
-      </div>
-      <div class="fiko_showcase_live fiko_showcase_live_col">
-        <div class="maximise gradient_warm" style="height: 60px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">.maximise — bleeds past container padding</div>
-      </div>
-      <div class="fiko_code_block">
-        <div class="fiko_code_header">
-          <span class="fiko_code_lang">html</span>
-          <button class="fiko_copy_btn" data-copy='<div class="maximise gradient_o">
+                    <!-- maximise -->
+                    <div class="fiko_showcase">
+                        <div class="fiko_showcase_header">
+                            <h3 class="h4">Maximise bleed</h3>
+                            <span class="dim"
+                                >.maximise — negative container margin
+                                bleed</span
+                            >
+                        </div>
+                        <div class="fiko_showcase_live fiko_showcase_live_col">
+                            <div
+                                class="maximise gradient_warm"
+                                style="
+                                    height: 60px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: white;
+                                    font-weight: 700;
+                                "
+                            >
+                                .maximise — bleeds past container padding
+                            </div>
+                        </div>
+                        <div class="fiko_code_block">
+                            <div class="fiko_code_header">
+                                <span class="fiko_code_lang">html</span>
+                                <button
+                                    class="fiko_copy_btn"
+                                    data-copy='<div class="maximise gradient_o">
   full-bleed content inside a .container
-</div>' aria-label="Copy maximise code">copy</button>
-        </div>
-        <pre><code>&lt;div class="maximise gradient_o"&gt;
+</div>'
+                                    aria-label="Copy maximise code"
+                                >
+                                    copy
+                                </button>
+                            </div>
+                            <pre><code>&lt;div class="maximise gradient_o"&gt;
   full-bleed content inside a .container
 &lt;/div&gt;</code></pre>
-      </div>
-    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-  </div>
-</section>
+            <!-- ── FOOTER ──────────────────────────────────────────── -->
+            <footer class="fiko_footer">
+                <div class="container">
+                    <div class="grid pad_block_lg center">
+                        <div class="fiko_footer_logo">fiko</div>
 
-<!-- ── FOOTER ──────────────────────────────────────────── -->
-<footer class="fiko_footer">
-  <div class="container">
-    <div class="fiko_footer_inner pad_block_lg center">
-      <div class="fiko_footer_logo">fiko</div>
-      <p style="margin-top: var(--spaceV);">LOOK GOOD OR DIE!</p>
-      <p class="dim" style="margin-top: calc(var(--spaceV) * 0.5);">
-        An unknown modern CSS framework.<br>
-        Cascade layers. OKLCH colors. Design tokens.
-      </p>
-      <p class="dim" style="margin-top: calc(var(--spaceV) * 2); font-size: 0.8rem;">
-        MIT License &copy; 2024&ndash;2026
-        <a href="https://junglestar.org" target="_blank" rel="noopener" class="underline">junglestar.org</a>
-        &middot;
-        <a href="https://github.com/junglesta/fiko" target="_blank" rel="noopener" class="underline">github.com/junglesta/fiko</a>
-      </p>
-    </div>
-  </div>
-</footer>
+                        <div class="fiko_footer_tagline h1">
+                            LOOK GOOD OR DIE!
+                        </div>
 
-</main>
+                        <p class="dim">
+                            An unknown modern CSS framework.<br />
+                            Cascade layers. OKLCH colors. Design tokens.
+                        </p>
+                        <p class="dim">
+                            MIT License &copy; 2024&ndash;2026
+                            <a
+                                href="https://junglestar.org"
+                                target="_blank"
+                                rel="noopener"
+                                class="underline"
+                                >junglestar.org</a
+                            >
+                            &middot;
+                            <a
+                                href="https://github.com/junglesta/fiko"
+                                target="_blank"
+                                rel="noopener"
+                                class="underline"
+                                >github.com/junglesta/fiko</a
+                            >
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </main>
 
-<script>
-  /* copy-to-clipboard for all .fiko_copy_btn buttons */
-  document.querySelectorAll('.fiko_copy_btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const text = btn.dataset.copy;
-      try {
-        await navigator.clipboard.writeText(text);
-        const original = btn.textContent;
-        btn.textContent = 'copied!';
-        btn.classList.add('fiko_copy_btn_done');
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.classList.remove('fiko_copy_btn_done');
-        }, 1800);
-      } catch {
-        /* fallback: select a hidden textarea */
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        btn.textContent = 'copied!';
-        setTimeout(() => { btn.textContent = 'copy'; }, 1800);
-      }
-    });
-  });
+        <script>
+            /* copy-to-clipboard for all .fiko_copy_btn buttons */
+            document.querySelectorAll(".fiko_copy_btn").forEach((btn) => {
+                btn.addEventListener("click", async () => {
+                    const text = btn.dataset.copy;
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        const original = btn.textContent;
+                        btn.textContent = "copied!";
+                        btn.classList.add("fiko_copy_btn_done");
+                        setTimeout(() => {
+                            btn.textContent = original;
+                            btn.classList.remove("fiko_copy_btn_done");
+                        }, 1800);
+                    } catch {
+                        /* fallback: select a hidden textarea */
+                        const ta = document.createElement("textarea");
+                        ta.value = text;
+                        ta.style.position = "fixed";
+                        ta.style.opacity = "0";
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(ta);
+                        btn.textContent = "copied!";
+                        setTimeout(() => {
+                            btn.textContent = "copy";
+                        }, 1800);
+                    }
+                });
+            });
 
-  // Aside nav: one section open at a time
-  document.querySelectorAll('.fiko_aside_nav .accordion').forEach(det => {
-    det.addEventListener('toggle', () => {
-      if (det.open) {
-        document.querySelectorAll('.fiko_aside_nav .accordion').forEach(other => {
-          if (other !== det) other.removeAttribute('open');
-        });
-      }
-    });
-  });
+            // Aside nav: one section open at a time
+            document
+                .querySelectorAll(".fiko_aside_nav .accordion")
+                .forEach((det) => {
+                    det.addEventListener("toggle", () => {
+                        if (det.open) {
+                            document
+                                .querySelectorAll(".fiko_aside_nav .accordion")
+                                .forEach((other) => {
+                                    if (other !== det)
+                                        other.removeAttribute("open");
+                                });
+                        }
+                    });
+                });
 
-  // Hamburger nav toggle
-  const hamburger = document.querySelector('.fiko_nav_hamburger');
-  const asideNav  = document.getElementById('fiko_aside_nav');
-  if (hamburger && asideNav) {
-    function openNav() {
-      document.body.classList.add('nav_open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      hamburger.setAttribute('aria-label', 'Close menu');
-      asideNav.removeAttribute('aria-hidden');
-    }
-    function closeNav() {
-      document.body.classList.remove('nav_open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      asideNav.setAttribute('aria-hidden', 'true');
-    }
-    hamburger.addEventListener('click', () => {
-      document.body.classList.contains('nav_open') ? closeNav() : openNav();
-    });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
-    asideNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => { if (window.innerWidth < 1024) closeNav(); });
-    });
-  }
-</script>
+            // Hamburger nav toggle
+            const hamburger = document.querySelector(".fiko_nav_hamburger");
+            const asideNav = document.getElementById("fiko_aside_nav");
+            if (hamburger && asideNav) {
+                function openNav() {
+                    document.body.classList.add("nav_open");
+                    hamburger.setAttribute("aria-expanded", "true");
+                    hamburger.setAttribute("aria-label", "Close menu");
+                    asideNav.removeAttribute("aria-hidden");
+                }
+                function closeNav() {
+                    document.body.classList.remove("nav_open");
+                    hamburger.setAttribute("aria-expanded", "false");
+                    hamburger.setAttribute("aria-label", "Open menu");
+                    asideNav.setAttribute("aria-hidden", "true");
+                }
+                hamburger.addEventListener("click", () => {
+                    document.body.classList.contains("nav_open")
+                        ? closeNav()
+                        : openNav();
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") closeNav();
+                });
+                asideNav.querySelectorAll("a").forEach((link) => {
+                    link.addEventListener("click", () => {
+                        if (window.innerWidth < 1024) closeNav();
+                    });
+                });
+            }
+        </script>
 
-<script>
-  // footer logo: shake 1s after scrolling into view
-  const footerLogo = document.querySelector('.fiko_footer_logo');
-  if (footerLogo) {
-    new IntersectionObserver((entries, obs) => {
-      if (entries[0].isIntersecting) {
-        setTimeout(() => footerLogo.classList.add('shake'), 1000);
-        obs.disconnect();
-      }
-    }).observe(footerLogo);
-  }
+        <script>
+            // footer logo: shake 1s after scrolling into view
+            const footerLogo = document.querySelector(".fiko_footer_logo");
+            if (footerLogo) {
+                new IntersectionObserver((entries, obs) => {
+                    if (entries[0].isIntersecting) {
+                        setTimeout(
+                            () => footerLogo.classList.add("shake"),
+                            1000,
+                        );
+                        obs.disconnect();
+                    }
+                }).observe(footerLogo);
+            }
 
-  // hero title: replay shake on click
-  const heroTitle = document.querySelector('.fiko_hero_title');
-  if (heroTitle) {
-    heroTitle.style.cursor = 'pointer';
-    heroTitle.addEventListener('click', () => {
-      heroTitle.style.animation = 'none';
-      heroTitle.offsetWidth; // reflow to restart
-      heroTitle.style.animation = '';
-    });
-  }
+            // hero title: replay shake on click
+            const heroTitle = document.querySelector(".fiko_hero_title");
+            if (heroTitle) {
+                heroTitle.style.cursor = "pointer";
+                heroTitle.addEventListener("click", () => {
+                    heroTitle.style.animation = "none";
+                    heroTitle.offsetWidth; // reflow to restart
+                    heroTitle.style.animation = "";
+                });
+            }
 
-  // aside resize handle (desktop only)
-  const asideHandle = document.querySelector('.fiko_aside_handle');
-  const aside = document.getElementById('fiko_aside_nav');
-  const mainEl = document.querySelector('main');
-  const MIN_W = 140;
-  const MAX_W = 400;
-  const STORE_KEY = 'fiko_aside_w';
+            // aside resize handle (desktop only)
+            const asideHandle = document.querySelector(".fiko_aside_handle");
+            const aside = document.getElementById("fiko_aside_nav");
+            const mainEl = document.querySelector("main");
+            const MIN_W = 140;
+            const MAX_W = 400;
+            const STORE_KEY = "fiko_aside_w";
 
-  function applyWidth(w) {
-    aside.style.width = w + 'px';
-    mainEl.style.paddingLeft = w + 'px';
-  }
+            function applyWidth(w) {
+                aside.style.width = w + "px";
+                mainEl.style.paddingLeft = w + "px";
+            }
 
-  function clearWidth() {
-    aside.style.width = '';
-    mainEl.style.paddingLeft = '';
-  }
+            function clearWidth() {
+                aside.style.width = "";
+                mainEl.style.paddingLeft = "";
+            }
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth < 1024) clearWidth();
-    else {
-      const saved = parseInt(localStorage.getItem(STORE_KEY));
-      if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
-    }
-  });
+            window.addEventListener("resize", () => {
+                if (window.innerWidth < 1024) clearWidth();
+                else {
+                    const saved = parseInt(localStorage.getItem(STORE_KEY));
+                    if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
+                }
+            });
 
-  if (asideHandle && aside && mainEl) {
-    // restore saved width — desktop only
-    if (window.innerWidth >= 1024) {
-      const saved = parseInt(localStorage.getItem(STORE_KEY));
-      if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
-    }
+            if (asideHandle && aside && mainEl) {
+                // restore saved width — desktop only
+                if (window.innerWidth >= 1024) {
+                    const saved = parseInt(localStorage.getItem(STORE_KEY));
+                    if (saved >= MIN_W && saved <= MAX_W) applyWidth(saved);
+                }
 
-    let startX, startW;
+                let startX, startW;
 
-    function onMove(x) {
-      const w = Math.min(MAX_W, Math.max(MIN_W, startW + (x - startX)));
-      applyWidth(w);
-    }
+                function onMove(x) {
+                    const w = Math.min(
+                        MAX_W,
+                        Math.max(MIN_W, startW + (x - startX)),
+                    );
+                    applyWidth(w);
+                }
 
-    function onUp(x) {
-      const w = Math.min(MAX_W, Math.max(MIN_W, startW + (x - startX)));
-      localStorage.setItem(STORE_KEY, w);
-      aside.classList.remove('resizing');
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-      document.removeEventListener('touchmove', onTouchMove);
-      document.removeEventListener('touchend', onTouchEnd);
-      document.body.style.userSelect = '';
-      document.body.style.cursor = '';
-    }
+                function onUp(x) {
+                    const w = Math.min(
+                        MAX_W,
+                        Math.max(MIN_W, startW + (x - startX)),
+                    );
+                    localStorage.setItem(STORE_KEY, w);
+                    aside.classList.remove("resizing");
+                    document.removeEventListener("mousemove", onMouseMove);
+                    document.removeEventListener("mouseup", onMouseUp);
+                    document.removeEventListener("touchmove", onTouchMove);
+                    document.removeEventListener("touchend", onTouchEnd);
+                    document.body.style.userSelect = "";
+                    document.body.style.cursor = "";
+                }
 
-    function onMouseMove(e) { onMove(e.clientX); }
-    function onMouseUp(e)   { onUp(e.clientX); }
-    function onTouchMove(e) { onMove(e.touches[0].clientX); }
-    function onTouchEnd(e)  { onUp(e.changedTouches[0].clientX); }
+                function onMouseMove(e) {
+                    onMove(e.clientX);
+                }
+                function onMouseUp(e) {
+                    onUp(e.clientX);
+                }
+                function onTouchMove(e) {
+                    onMove(e.touches[0].clientX);
+                }
+                function onTouchEnd(e) {
+                    onUp(e.changedTouches[0].clientX);
+                }
 
-    asideHandle.addEventListener('mousedown', (e) => {
-      if (window.innerWidth < 1024) return;
-      startX = e.clientX;
-      startW = aside.offsetWidth;
-      aside.classList.add('resizing');
-      document.body.style.userSelect = 'none';
-      document.body.style.cursor = 'col-resize';
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-    });
+                asideHandle.addEventListener("mousedown", (e) => {
+                    if (window.innerWidth < 1024) return;
+                    startX = e.clientX;
+                    startW = aside.offsetWidth;
+                    aside.classList.add("resizing");
+                    document.body.style.userSelect = "none";
+                    document.body.style.cursor = "col-resize";
+                    document.addEventListener("mousemove", onMouseMove);
+                    document.addEventListener("mouseup", onMouseUp);
+                });
 
-    asideHandle.addEventListener('touchstart', (e) => {
-      if (window.innerWidth < 1024) return;
-      startX = e.touches[0].clientX;
-      startW = aside.offsetWidth;
-      aside.classList.add('resizing');
-      document.addEventListener('touchmove', onTouchMove, { passive: true });
-      document.addEventListener('touchend', onTouchEnd);
-    }, { passive: true });
-  }
-</script>
-
-</body>
+                asideHandle.addEventListener(
+                    "touchstart",
+                    (e) => {
+                        if (window.innerWidth < 1024) return;
+                        startX = e.touches[0].clientX;
+                        startW = aside.offsetWidth;
+                        aside.classList.add("resizing");
+                        document.addEventListener("touchmove", onTouchMove, {
+                            passive: true,
+                        });
+                        document.addEventListener("touchend", onTouchEnd);
+                    },
+                    { passive: true },
+                );
+            }
+        </script>
+    </body>
 </html>

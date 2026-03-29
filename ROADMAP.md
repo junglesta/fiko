@@ -5,7 +5,6 @@
 ---
 
 ## NEXT
-
 - [ ] **Aside nav** — soften borders; align visual style with ca/dv footer accordion
 - [ ] **`currentColor` audit** — sweep remaining components for `var(--cta)` on decorative elements (markers, borders, icons); default to `currentColor`; expose `var(--cta)` as opt-in override
 - [ ] `apple-touch-icon.png` auto-generated from `favicon.svg`
@@ -37,3 +36,4 @@
 - [x] `@toybreaker/fiko@0.5.3` — deploy switched to Netlify (instant propagation)
 - [x] `@toybreaker/fiko@0.6.0` — commit format + preflight rules in CLAUDE.md; CA/DV/MOM upgraded
 - [x] `@toybreaker/fiko@0.6.1` — accordion redesign: row-separator style, `currentColor` down-chevron, `margin-left: auto` right-align; `.dotted` opt-in modifier for dot leader (vertically centered); `accordion_chevron` switched to `currentColor`; demo mobile overflow fixed; aside nav plain-text summaries
+- [x] `@toybreaker/fiko@0.6.2` — FIKO brand uppercase in CLAUDE.md; `fiko_shake_vertical_lg` keyframe; `cite` font-size 77%; palette `--brandT75`/`--brandT25` tokens; 4-space CSS formatting

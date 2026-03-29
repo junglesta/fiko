@@ -11,25 +11,28 @@
  */
 
 :root {
-  /* ── LIGHT OVERRIDE (optional) ──────────────────── */
-  /* Uncomment and set if your brand uses a tinted surface instead of neutral white:
+    /* ── LIGHT OVERRIDE (optional) ──────────────────── */
+    /* Uncomment and set if your brand uses a tinted surface instead of neutral white:
    * --light: oklch(0.84 0.028 74);  ← warm sand example
    */
 
-  /* ── BRAND COLOR ────────────────────────────────── */
-  /* Change the hue (0–360) to match your brand.
+    /* ── BRAND COLOR ────────────────────────────────── */
+    /* Change the hue (0–360) to match your brand.
    * red oklch(0.55 0.22 20) · orange oklch(0.55 0.19 40)
    * green oklch(0.45 0.18 145) · blue oklch(0.50 0.20 250)
    */
-  --brand:         oklch(0.55 0.19 28);   /* ← change me */
-  --brand_lighter: oklch(from var(--brand) calc(l + 0.08) c h);
-  --brand_darker:  oklch(from var(--brand) calc(l - 0.18) c h);
-  --brand_invert:  oklch(from var(--brand) l c calc(h + 180)); /* complementary — auto-updates with --brand */
-  --brandT25:      color-mix(in oklch, var(--brand), transparent 75%);
-  --brandT50:      color-mix(in oklch, var(--brand), transparent 50%);
+    --brand: oklch(0.55 0.19 28); /* ← change me */
+    --brand_lighter: oklch(from var(--brand) calc(l + 0.08) c h);
+    --brand_darker: oklch(from var(--brand) calc(l - 0.18) c h);
+    --brand_invert: oklch(
+        from var(--brand) l c calc(h + 180)
+    ); /* complementary — auto-updates with --brand */
+    --brandT75: color-mix(in oklch, var(--brand), transparent 75%);
+    --brandT50: color-mix(in oklch, var(--brand), transparent 50%);
+    --brandT25: color-mix(in oklch, var(--brand), transparent 25%);
 
-  /* ── PAGE SURFACES ──────────────────────────────── */
-  /* Add named surfaces for sections, e.g.:
+    /* ── PAGE SURFACES ──────────────────────────────── */
+    /* Add named surfaces for sections, e.g.:
    * --surface_hero: oklch(0.92 0.02 28);
    */
 }

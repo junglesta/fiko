@@ -2,102 +2,125 @@
 /* 3base.css — element defaults */
 
 body {
-  font-family: var(--font_family);
-  font-size: var(--font_size);
-  line-height: var(--line_height);
-  background: var(--surface);
-  color: var(--text);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+    font-family: var(--font_family);
+    font-size: var(--font_size);
+    line-height: var(--line_height);
+    background: var(--surface);
+    color: var(--text);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 :focus-visible {
-  outline: 2px solid var(--focus_color, var(--primary));
-  outline-offset: 2px;
+    outline: 2px solid var(--focus_color, var(--primary));
+    outline-offset: 2px;
 }
 
 /* minimum tap target for accessibility */
 a {
-  min-height: var(--tap_size);
+    min-height: var(--tap_size);
 }
 
 img,
 video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* ── BODY STRUCTURE ─────────────────────────────── */
 
 body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-weight: var(--weight_light);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-weight: var(--weight_light);
 }
 
 body > header,
 body > main,
 body > footer {
-  width: 100%;
-  margin-inline: auto;
-  line-height: var(--line_height);
+    width: 100%;
+    margin-inline: auto;
+    line-height: var(--line_height);
 }
 
 /* ── TYPOGRAPHY ELEMENTS ────────────────────────── */
 
-strong { font-weight: var(--weight_bold); }
-
-p {
-  padding-block: var(--spaceV);
-  line-height: 1.5;
+strong {
+    font-weight: var(--weight_bold);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  user-select: none;
-  line-height: 1.5;
-  font-family: var(--font_family);
-  font-weight: var(--weight_light);
+p {
+    padding-block: var(--spaceV);
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    user-select: none;
+    line-height: 1.5;
+    font-family: var(--font_family);
+    font-weight: var(--weight_light);
 }
 
 /* ── HR ─────────────────────────────────────────── */
 
 hr {
-  border: 0 none;
-  border-top: 0.5px solid currentColor;
-  opacity: 0.5;
+    border: 0 none;
+    border-top: 0.5px solid currentColor;
+    opacity: 0.5;
 }
 
 /* ── BLOCKQUOTE ─────────────────────────────────── */
 
 blockquote {
-  display: block;
-  margin: calc(var(--spaceV) * 8) calc(var(--spaceH) * 4);
-  padding: var(--spaceV) calc(var(--spaceH) * 4);
-  border-left: 4px solid currentColor;
-  line-height: 1.2;
-  font-size: 120%;
-  font-style: italic;
+    display: block;
+    margin: calc(var(--spaceV) * 8) calc(var(--spaceH) * 4);
+    padding: var(--spaceV) calc(var(--spaceH) * 4);
+    border-left: 4px solid currentColor;
+    line-height: 1.2;
+    font-size: 120%;
+    font-style: italic;
 }
 
 cite {
-  display: block;
-  padding-top: var(--spaceV);
-  font-size: 66%;
-  text-transform: capitalize;
+    display: block;
+    padding-top: var(--spaceV);
+    font-size: 77%;
+    text-transform: capitalize;
 }
 
 /* ── LISTS ──────────────────────────────────────── */
 
-ol, ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+ol,
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* ── LANGUAGE SWITCHING ─────────────────────────── */
 
-[lang="en"] { .lang_it, .lang_id { display: none; } }
-[lang="it"] { .lang_en, .lang_id { display: none; } }
-[lang="id"] { .lang_it, .lang_en { display: none; } }
+[lang="en"] {
+    .lang_it,
+    .lang_id {
+        display: none;
+    }
+}
+[lang="it"] {
+    .lang_en,
+    .lang_id {
+        display: none;
+    }
+}
+[lang="id"] {
+    .lang_it,
+    .lang_en {
+        display: none;
+    }
+}

@@ -1,8 +1,8 @@
-# fiko — Claude Code Instructions
+# FIKO — Claude Code Instructions
 
 ## CSS Naming Convention: snake_case only
 
-**CRITICAL**: Always use snake_case (underscores) for ALL CSS class names and custom properties. Never kebab-case.
+**CRITICAL**: Always use snake_case (underscores) for ALL CSS class names and custom properties. Never kebab-case. 'FIKO' brand name is always UPPERCASE.
 
 ```css
 /* correct */
@@ -24,7 +24,7 @@
 
 ## Architecture
 
-fiko is a pure CSS framework — no JS, no preprocessor. Two parts:
+FIKO is a pure CSS framework — no JS, no preprocessor. Two parts:
 
 - `omg/` — the published framework (snake_case classes, OKLCH tokens, cascade layers)
 - `demo/` — the demo page (not published to npm, served via `pnpm dev`)
