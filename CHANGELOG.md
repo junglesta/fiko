@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.3 — 2026-04-02
+
+### Changed
+- **`kitchen/index.html`** — new component testbed page; every framework class demonstrated in isolation, zero inline styles, resizable layout demos, source snippets open by default
+- **Demo banner** — full-width top banner on `demo/index.html` linking to `/kitchen/`
+
+---
+
 ## 0.6.2 — 2026-03-29
 
 ### Changed

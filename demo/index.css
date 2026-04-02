@@ -3,6 +3,45 @@
  * No !important abuse; these live outside fiko's cascade layers.
  */
 
+/* ── KITCHEN BANNER ───────────────────────────────────── */
+
+.fiko_kitchen_banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.55rem 1.5rem;
+    background: color-mix(in oklch, var(--brand), transparent 88%);
+    border-bottom: 1px solid var(--brandT25);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color var(--transition);
+    min-height: unset;
+}
+
+.fiko_kitchen_banner:hover {
+    background: color-mix(in oklch, var(--brand), transparent 80%);
+}
+
+.fiko_kitchen_label {
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--brand_lighter, var(--brand));
+}
+
+.fiko_kitchen_desc {
+    opacity: 0.6;
+    font-size: 0.85rem;
+}
+
+.fiko_kitchen_cta {
+    font-weight: 700;
+    color: var(--brand_lighter, var(--brand));
+    margin-left: auto;
+}
+
 /* ── RESET / BASELINE ─────────────────────────────────── */
 
 *,
