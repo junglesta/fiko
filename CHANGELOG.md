@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.4 — 2026-04-02
+
+### Changed
+- **`.fiko` shake utility** — new in `omg/utils/fiko.css`; token-driven vertical shake (`--shake_distance: 18px`, `--shake_duration: 0.6s`, ease-out); three variants: `.fiko` (one-shot on load, no JS), `.fiko_hover` (re-triggers on `:hover`), `.fiko_loop` (infinite); full `prefers-reduced-motion` support
+- **`.fiko_orbital`** — renamed from `.fiko` (orb glow utility; was `.fiko` before this release)
+- **Kitchen testbed** — `.fiko` shake section added with all three variants and token-override demos; nav updated
+
+---
+
 ## 0.6.3 — 2026-04-02
 
 ### Changed

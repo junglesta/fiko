@@ -1,15 +1,14 @@
 /*! fiko | MIT License */
-/* utils/fiko.css — .fiko signature class
+/* utils/fiko.css — FIKO signature utilities
  *
- * Adds the warm animated orb glow to any element.
- * Usage: <section class="fiko"> … </section>
- *
- * Requirements: the element needs dimensions (height/min-height).
- * Pseudo-elements carry the orbs; direct children stay above via z-index.
- * Override orb colors with --fiko_orb_a / --fiko_orb_b.
+ * .fiko_orbital  — warm animated orb glow (needs dimensions; override --fiko_orb_a / --fiko_orb_b)
+ * .fiko          — one-shot vertical shake on page load (no JS)
+ * .fiko_hover    — vertical shake on :hover
+ * .fiko_loop     — continuous vertical shake
+ *                  Override: style="--shake_distance: 12px; --shake_duration: 0.4s"
  */
 
-.fiko {
+.fiko_orbital {
   --fiko_orb_a: oklch(0.65 0.22 40);   /* warm orange */
   --fiko_orb_b: oklch(0.72 0.20 65);   /* amber */
   position: relative;
@@ -17,8 +16,8 @@
   background: var(--dark, oklch(0.12 0.01 265));
 }
 
-.fiko::before,
-.fiko::after {
+.fiko_orbital::before,
+.fiko_orbital::after {
   content: '';
   position: absolute;
   border-radius: 50%;
@@ -27,7 +26,7 @@
 }
 
 /* primary orb — top-right */
-.fiko::before {
+.fiko_orbital::before {
   width: 60%;
   aspect-ratio: 1;
   background: var(--fiko_orb_a);
@@ -39,7 +38,7 @@
 }
 
 /* secondary orb — bottom-right */
-.fiko::after {
+.fiko_orbital::after {
   width: 40%;
   aspect-ratio: 1;
   background: var(--fiko_orb_b);
@@ -51,7 +50,7 @@
 }
 
 /* keep children above orbs */
-.fiko > * { position: relative; z-index: 1; }
+.fiko_orbital > * { position: relative; z-index: 1; }
 
 @keyframes fiko_orb_drift {
   0%   { transform: translate(0, 0) scale(1); }
@@ -61,6 +60,56 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fiko::before,
-  .fiko::after { animation: none; }
+  .fiko_orbital::before,
+  .fiko_orbital::after { animation: none; }
+}
+
+/* ─── .fiko shake utility ───────────────────────────────────────────────────
+ *
+ * Token-driven vertical shake. Override via custom properties:
+ *   style="--shake_distance: 12px; --shake_duration: 0.4s"
+ *
+ * Variants:
+ *   .fiko          — one-shot on page load (no JS required)
+ *   .fiko_hover    — shakes on :hover
+ *   .fiko_loop     — shakes on repeat forever
+ */
+
+.fiko,
+.fiko_hover,
+.fiko_loop {
+  --shake_distance: 18px;
+  --shake_duration: 0.6s;
+}
+
+/* default: one-shot on load */
+.fiko {
+  animation: fiko_shake var(--shake_duration) ease-out both;
+}
+
+/* hover: re-triggers each time cursor enters */
+.fiko_hover:hover {
+  animation: fiko_shake var(--shake_duration) ease-out both;
+}
+
+/* loop: runs continuously */
+.fiko_loop {
+  animation: fiko_shake var(--shake_duration) ease-out infinite;
+}
+
+@keyframes fiko_shake {
+  0%   { transform: translateY(0); }
+  10%  { transform: translateY(calc(var(--shake_distance) * -1)); }
+  22%  { transform: translateY(calc(var(--shake_distance) * 0.78)); }
+  36%  { transform: translateY(calc(var(--shake_distance) * -0.56)); }
+  50%  { transform: translateY(calc(var(--shake_distance) * 0.44)); }
+  64%  { transform: translateY(calc(var(--shake_distance) * -0.22)); }
+  78%  { transform: translateY(calc(var(--shake_distance) * 0.11)); }
+  100% { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fiko,
+  .fiko_hover:hover,
+  .fiko_loop { animation: none; }
 }

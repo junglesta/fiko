@@ -13,8 +13,9 @@
 
 ## LATER
 
-- [ ] `.fiko` orb: third variant token
+- [ ] `.fiko_orbital` orb: third variant token
 - [ ] Stagger animation utility
+- [ ] `.fiko` shake: horizontal variant (`.fiko_x`, `.fiko_x_hover`)
 
 ## DONE
 
@@ -39,3 +40,4 @@
 - [x] `@toybreaker/fiko@0.6.1` — accordion redesign: row-separator style, `currentColor` down-chevron, `margin-left: auto` right-align; `.dotted` opt-in modifier for dot leader (vertically centered); `accordion_chevron` switched to `currentColor`; demo mobile overflow fixed; aside nav plain-text summaries
 - [x] `@toybreaker/fiko@0.6.2` — FIKO brand uppercase in CLAUDE.md; `fiko_shake_vertical_lg` keyframe; `cite` font-size 77%; palette `--brandT75`/`--brandT25` tokens; 4-space CSS formatting
 - [x] `@toybreaker/fiko@0.6.3` — `kitchen/` testbed page; demo banner linking to kitchen
+- [x] `@toybreaker/fiko@0.6.4` — `.fiko` shake utility (on-load / hover / loop); `.fiko_orbital` rename; kitchen shake demos

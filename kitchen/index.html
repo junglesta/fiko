@@ -460,7 +460,8 @@
             <a href="#util_gradients">gradients</a>
             <a href="#util_aspect">aspect</a>
             <a href="#util_layout">layout utils</a>
-            <a href="#util_fiko">fiko</a>
+            <a href="#util_fiko">fiko orb</a>
+            <a href="#util_fiko_shake">fiko shake</a>
         </nav>
 
         <div class="container">
@@ -1346,14 +1347,14 @@
                  ════════════════════════════════════════════════════ -->
 
             <div class="k_group_head" id="util_fiko">
-                <h2 class="h2 k_group_title">.fiko orb</h2>
+                <h2 class="h2 k_group_title">.fiko_orbital orb</h2>
                 <div class="k_file">omg/utils/fiko.css</div>
             </div>
 
             <div class="k_section" id="util_fiko_orb">
-                <h3 class="h6 k_label"><code class="k_tag">.fiko</code> — animated orb glow</h3>
+                <h3 class="h6 k_label"><code class="k_tag">.fiko_orbital</code> — animated orb glow</h3>
                 <div class="k_demo k_demo_flush">
-                    <div class="fiko k_orb_demo">
+                    <div class="fiko_orbital k_orb_demo">
                         <div class="center">
                             <p class="h3">FIKO orb</p>
                             <p class="dim">Warm animated radial orbs via ::before / ::after</p>
@@ -1364,17 +1365,61 @@
                 <div class="spacer_block_xs"></div>
                 <!-- token override is the intended pattern — only --fiko_orb_* kept inline -->
                 <div class="k_demo k_demo_flush">
-                    <div class="fiko k_orb_demo_sm" style="--fiko_orb_a: oklch(0.72 0.22 145); --fiko_orb_b: oklch(0.58 0.18 165);">
+                    <div class="fiko_orbital k_orb_demo_sm" style="--fiko_orb_a: oklch(0.72 0.22 145); --fiko_orb_b: oklch(0.58 0.18 165);">
                         <p class="center dim mono">custom orb colors: fresh green</p>
                     </div>
                 </div>
-                <details class="k_source" open><summary>▸ source</summary><pre>&lt;section class="fiko" style="min-height: 20rem;"&gt;
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;section class="fiko_orbital" style="min-height: 20rem;"&gt;
     &lt;!-- children are z-index: 1 above orbs --&gt;
     &lt;div&gt;Content&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;!-- Custom orb colors --&gt;
-&lt;section class="fiko" style="--fiko_orb_a: oklch(0.65 0.2 280);"&gt;…&lt;/section&gt;</pre></details>
+&lt;section class="fiko_orbital" style="--fiko_orb_a: oklch(0.65 0.2 280);"&gt;…&lt;/section&gt;</pre></details>
+            </div>
+
+            <!-- ════════════════════════════════════════════════════
+                 .fiko shake
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_fiko_shake">
+                <h2 class="h2 k_group_title">.fiko shake</h2>
+                <div class="k_file">omg/utils/fiko.css</div>
+            </div>
+
+            <div class="k_section" id="util_fiko_shake_load">
+                <h3 class="h6 k_label"><code class="k_tag">.fiko</code> — one-shot on load (no JS)</h3>
+                <div class="k_demo">
+                    <p class="h3 fiko">SHAKE ME</p>
+                    <p class="dim">Plays once on page load. Reload to replay.</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="fiko"&gt;SHAKE ME&lt;/p&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="util_fiko_shake_hover">
+                <h3 class="h6 k_label"><code class="k_tag">.fiko_hover</code> — shake on :hover</h3>
+                <div class="k_demo">
+                    <p class="h3 fiko_hover">Hover me</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="fiko_hover"&gt;Hover me&lt;/p&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="util_fiko_shake_loop">
+                <h3 class="h6 k_label"><code class="k_tag">.fiko_loop</code> — continuous shake</h3>
+                <div class="k_demo">
+                    <p class="h3 fiko_loop">LOOPING</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="fiko_loop"&gt;LOOPING&lt;/p&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="util_fiko_shake_tokens">
+                <h3 class="h6 k_label">token overrides — <code class="k_tag">--shake_distance</code> <code class="k_tag">--shake_duration</code></h3>
+                <div class="k_demo">
+                    <p class="h3 fiko_hover" style="--shake_distance: 8px; --shake_duration: 0.35s">Subtle hover</p>
+                    <p class="h3 fiko_hover" style="--shake_distance: 30px; --shake_duration: 0.9s">Dramatic hover</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="fiko_hover" style="--shake_distance: 8px; --shake_duration: 0.35s"&gt;Subtle&lt;/p&gt;
+&lt;p class="fiko_hover" style="--shake_distance: 30px; --shake_duration: 0.9s"&gt;Dramatic&lt;/p&gt;</pre></details>
             </div>
 
             <!-- bottom spacer -->
