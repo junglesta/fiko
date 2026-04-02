@@ -33,4 +33,10 @@ html = html
   .replaceAll('__FIKO_VERSION__', version)
 await writeFile(path.join(dist, 'index.html'), html)
 
+// kitchen testbed — fix CSS path and copy to dist/kitchen/
+await mkdir(path.join(dist, 'kitchen'), { recursive: true })
+let kitchen = await readFile(path.join(root, 'kitchen', 'index.html'), 'utf8')
+kitchen = kitchen.replace('<link rel="stylesheet" href="../index.css" />', '<link rel="stylesheet" href="../fiko.css" />')
+await writeFile(path.join(dist, 'kitchen', 'index.html'), kitchen)
+
 console.log('dist/ ready → run: npm run deploy')
