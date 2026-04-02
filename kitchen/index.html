@@ -1,0 +1,1386 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FIKO — kitchen</title>
+
+        <!-- framework under test — zero other CSS -->
+        <link rel="stylesheet" href="../index.css" />
+
+        <style>
+            /* ── brand tokens ──────────────────────────────────────
+             * Consumers supply these in their 000/ branding files.
+             * The kitchen provides a minimal dark set so the framework
+             * renders correctly without any external brand layer.
+             * ─────────────────────────────────────────────────────── */
+            :root {
+                --brand:           oklch(0.68 0.26 38);
+                --brand_lighter:   oklch(from var(--brand) calc(l + 0.1) c h);
+                --brand_darker:    oklch(from var(--brand) calc(l - 0.2) c h);
+                --brandT25:        color-mix(in oklch, var(--brand), transparent 75%);
+                --brandT50:        color-mix(in oklch, var(--brand), transparent 50%);
+
+                --surface:         oklch(0.12 0.01 265);
+                --surface_inverse: oklch(0.97 0 0);
+                --text:            oklch(0.97 0 0);
+                --textT50:         color-mix(in oklch, var(--text), transparent 50%);
+                --border_color:    color-mix(in oklch, var(--text), transparent 80%);
+
+                --primary:         var(--brand);
+                --primary_hover:   var(--brand_lighter);
+                --cta:             var(--brand);
+                --cta_text:        oklch(0.97 0 0);
+                --cta_hover:       var(--brand_lighter);
+                --focus_color:     var(--brand);
+
+                --gradient_o:    radial-gradient(circle at 35% 50% in oklch, oklch(0.78 0.28 42) 0%, oklch(0.58 0.24 28) 100%);
+                --gradient_h:    linear-gradient(to right in oklch, oklch(0.62 0.26 28) 0%, oklch(0.76 0.28 46) 100%);
+                --gradient_v:    linear-gradient(to bottom in oklch, oklch(0.62 0.26 28) 0%, oklch(0.76 0.28 46) 100%);
+                --gradient_warm: linear-gradient(105deg in oklch, oklch(0.65 0.26 38) 0%, oklch(0.9 0.16 88) 100%);
+            }
+
+            /* ── kitchen chrome ────────────────────────────────────
+             * Structural styles for the testbed UI itself.
+             * These are NOT framework exports.
+             * ─────────────────────────────────────────────────────── */
+
+            /* nav */
+            .k_nav {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                background: color-mix(in oklch, var(--surface), transparent 8%);
+                border-bottom: 1px solid var(--border_color);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                padding: 0.5rem 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+                font-size: 0.78rem;
+            }
+
+            .k_nav_brand {
+                color: var(--brand);
+                letter-spacing: 0.05em;
+                margin: 0;
+                user-select: none;
+            }
+
+            .k_nav_brand a {
+                color: inherit;
+                text-decoration: none;
+                min-height: unset;
+            }
+
+            .k_nav_sep {
+                opacity: 0.2;
+                font-size: 0.6rem;
+            }
+
+            .k_nav a:not(.k_nav_brand a) {
+                min-height: unset;
+                opacity: 0.55;
+                color: var(--text);
+                text-decoration: none;
+                transition: opacity 150ms, color 150ms;
+                padding: 0.15em 0.4em;
+                border-radius: 4px;
+            }
+
+            .k_nav a:not(.k_nav_brand a):hover {
+                opacity: 1;
+                color: var(--brand);
+            }
+
+            /* section chrome */
+            .k_section {
+                padding: 3rem 0 2rem;
+                border-top: 1px solid var(--border_color);
+            }
+
+            .k_group_head {
+                padding: 3rem 0 0.5rem;
+            }
+
+            .k_group_title {
+                color: var(--brand);
+                letter-spacing: -0.01em;
+                margin: 0;
+            }
+
+            .k_file {
+                font-family: ui-monospace, monospace;
+                font-size: 0.72rem;
+                opacity: 0.4;
+                margin-top: 0.15rem;
+                user-select: all;
+            }
+
+            .k_label {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                opacity: 0.5;
+                flex-wrap: wrap;
+            }
+
+            .k_tag {
+                font-family: ui-monospace, monospace;
+                font-size: 1rem;
+                font-weight: normal;
+                text-transform: none;
+                letter-spacing: 0;
+                background: color-mix(in oklch, var(--brand), transparent 92%);
+                color: var(--brand_lighter);
+                padding: 0.15em 0.5em;
+                border-radius: 4px;
+                border: 1px solid color-mix(in oklch, var(--brand), transparent 60%);
+                user-select: all;
+                opacity: 1;
+            }
+
+            .k_demo {
+                background: color-mix(in oklch, var(--text), transparent 96%);
+                border: 1px solid var(--border_color);
+                border-radius: 6px;
+                padding: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .k_demo_flush {
+                padding: 0;
+                overflow: hidden;
+            }
+
+            /* source block */
+            .k_source > summary {
+                font-family: ui-monospace, monospace;
+                font-size: 0.72rem;
+                opacity: 0.45;
+                cursor: pointer;
+                list-style: none;
+                padding: 0.3rem 0;
+                user-select: none;
+            }
+
+            .k_source > summary:hover { opacity: 0.8; }
+            .k_source > summary::-webkit-details-marker { display: none; }
+
+            .k_source pre {
+                margin: 0.25rem 0 0;
+                padding: 1rem 1.25rem;
+                background: oklch(0.08 0.01 265);
+                border: 1px solid var(--border_color);
+                border-radius: 6px;
+                font-family: ui-monospace, monospace;
+                font-size: 0.78rem;
+                line-height: 1.6;
+                overflow-x: auto;
+                white-space: pre;
+                color: oklch(0.78 0.06 200);
+                tab-size: 4;
+            }
+
+            /* resizable container for responsive demos */
+            .k_resizable {
+                resize: horizontal;
+                overflow: auto;
+                min-width: 240px;
+                max-width: 100%;
+                position: relative;
+                padding-bottom: 2rem !important;
+                container-type: inline-size;
+                container-name: main-container;
+            }
+
+            .k_resizable::after {
+                content: "↔ drag to resize";
+                position: absolute;
+                bottom: 0.5rem;
+                right: 0.75rem;
+                font-size: 0.7rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                opacity: 0.3;
+                pointer-events: none;
+            }
+
+            /* placeholder block for layout demos */
+            .k_block {
+                background: color-mix(in oklch, var(--brand), transparent 80%);
+                border: 1px solid var(--brandT25);
+                border-radius: 4px;
+                padding: 0.75rem;
+                text-align: center;
+                font-size: 0.75rem;
+                font-family: ui-monospace, monospace;
+                min-height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* image placeholder for aspect demos */
+            .k_img {
+                background: oklch(0.25 0.02 265);
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.7rem;
+                font-family: ui-monospace, monospace;
+                opacity: 0.6;
+                color: var(--text);
+            }
+
+            /* visibility demo row */
+            .k_vis_row {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+                padding: 0.5rem 0;
+            }
+
+            /* ── token visualization ─────────────────────────────── */
+
+            .k_swatches {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            .k_swatch {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.35rem;
+            }
+
+            .k_swatch_dot {
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                border: 1px solid var(--border_color);
+            }
+
+            .k_swatch_name {
+                font-family: ui-monospace, monospace;
+                font-size: 0.62rem;
+                opacity: 0.6;
+                text-align: center;
+            }
+
+            /* one class per token — the only legitimate use of token values outside the framework */
+            .k_swatch_brand         { background: var(--brand); }
+            .k_swatch_brand_lighter { background: var(--brand_lighter); }
+            .k_swatch_brand_darker  { background: var(--brand_darker); }
+            .k_swatch_brandT25      { background: var(--brandT25); }
+            .k_swatch_brandT50      { background: var(--brandT50); }
+            .k_swatch_surface       { background: var(--surface); }
+            .k_swatch_text          { background: var(--text); }
+            .k_swatch_border        { background: var(--border_color); }
+            .k_swatch_cta           { background: var(--cta); }
+            .k_swatch_dark          { background: var(--dark); }
+            .k_swatch_darkT25       { background: var(--darkT25); }
+            .k_swatch_light         { background: var(--light); }
+            .k_swatch_lightT25      { background: var(--lightT25); }
+
+            /* spacing scale bars */
+            .k_scale {
+                display: flex;
+                align-items: flex-end;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
+
+            .k_scale_item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+            }
+
+            .k_scale_bar {
+                width: 2rem;
+                background: var(--brandT25);
+                border: 1px solid var(--brand);
+                border-radius: 2px;
+            }
+
+            .k_scale_name {
+                font-family: ui-monospace, monospace;
+                font-size: 0.6rem;
+                opacity: 0.5;
+            }
+
+            .k_bar_spaceV  { height: var(--spaceV); }
+            .k_bar_spaceH  { height: var(--spaceH); }
+            .k_bar_space   { height: var(--space); }
+            .k_bar_breath  { height: var(--breath); }
+            .k_bar_tap     { height: var(--tap_size); }
+
+            /* spacer_block visualization */
+            .k_bar_vis {
+                width: 2rem;
+                background: var(--brandT25);
+                border: 1px solid var(--brand);
+            }
+
+            /* pad_block visualization wrapper */
+            .k_pad_vis {
+                background: var(--brandT25);
+                border: 1px solid var(--brand);
+                width: 3rem;
+            }
+
+            /* font-weight scale
+             * NOTE: framework is missing .weight_* utility classes */
+            .k_w100 { font-weight: var(--weight_100); }
+            .k_w200 { font-weight: var(--weight_200); }
+            .k_w300 { font-weight: var(--weight_300); }
+            .k_w400 { font-weight: var(--weight_400); }
+            .k_w500 { font-weight: var(--weight_500); }
+            .k_w600 { font-weight: var(--weight_600); }
+            .k_w700 { font-weight: var(--weight_700); }
+            .k_w800 { font-weight: var(--weight_800); }
+
+            /* ── layout helpers missing from framework ───────────────
+             * These expose gaps in the utility layer.
+             * NOTE: framework is missing .flex_wrap, .align_*, .fill, .full utilities */
+            .k_wrap           { flex-wrap: wrap; }
+            .k_align_center   { align-items: center; }
+            .k_align_baseline { align-items: baseline; }
+            .k_fill           { flex: 1; }
+            .k_full           { width: 100%; }
+
+            /* ── demo-specific helpers ───────────────────────────── */
+
+            /* container demo band */
+            .k_band {
+                padding: 0.75rem;
+                text-align: center;
+                font-family: ui-monospace, monospace;
+                font-size: 0.75rem;
+                background: color-mix(in oklch, var(--brand), transparent 90%);
+            }
+
+            .k_band_inner {
+                background: color-mix(in oklch, var(--brand), transparent 80%);
+            }
+
+            /* controls demo */
+            .k_controls_demo {
+                background: color-mix(in oklch, var(--brand), transparent 88%);
+                border: 1px solid var(--brandT25);
+                display: flex;
+                align-items: center;
+                padding-inline: 1rem;
+            }
+
+            /* maximise demo inner padding */
+            .k_maximise_inner {
+                padding: 1.5rem;
+            }
+
+            /* gradient swatches */
+            .k_gradient_tile {
+                height: 6rem;
+                border-radius: var(--radius);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: ui-monospace, monospace;
+                font-size: 0.75rem;
+            }
+
+            /* aspect ratio size wrappers */
+            .k_ratio_xs { width: 120px; }
+            .k_ratio_sm { width: 160px; }
+            .k_ratio_md { width: 200px; }
+            .k_ratio_lg { width: 240px; }
+            .k_ratio_xl { width: 280px; }
+
+            /* clipped circle demo needs dimensions */
+            .k_circle_demo {
+                width: 100px;
+                height: 100px;
+            }
+
+            /* flex column demo needs a constrained width */
+            .k_flex_col_demo { width: 6rem; }
+
+            /* vertical text demo */
+            .k_vertical_demo {
+                height: 8rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .k_vertical_note {
+                padding-left: 2rem;
+            }
+
+            /* fiko orb demo */
+            .k_orb_demo {
+                min-height: 14rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .k_orb_demo_sm {
+                min-height: 8rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- ── STICKY NAV ────────────────────────────────────────── -->
+        <nav class="k_nav">
+            <h1 class="h1 k_nav_brand"><a href="#">FIKO kitchen</a></h1>
+            <span class="k_nav_sep">|</span>
+            <a href="#tokens">tokens</a>
+            <a href="#base">base</a>
+            <a href="#layout">layout</a>
+            <a href="#components">components</a>
+            <a href="#states">states</a>
+            <a href="#util_spacing">spacing</a>
+            <a href="#util_text">text</a>
+            <a href="#util_visibility">visibility</a>
+            <a href="#util_gradients">gradients</a>
+            <a href="#util_aspect">aspect</a>
+            <a href="#util_layout">layout utils</a>
+            <a href="#util_fiko">fiko</a>
+        </nav>
+
+        <div class="container">
+
+            <!-- ════════════════════════════════════════════════════
+                 TOKENS — 1vars.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="tokens">
+                <h2 class="h2 k_group_title">Tokens</h2>
+                <div class="k_file">omg/1vars.css</div>
+            </div>
+
+            <!-- Colors -->
+            <div class="k_section" id="tokens_colors">
+                <h3 class="h6 k_label">color tokens</h3>
+                <div class="k_demo">
+                    <div class="k_swatches">
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_brand"></div>
+                            <span class="k_swatch_name">--brand</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_brand_lighter"></div>
+                            <span class="k_swatch_name">--brand_lighter</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_brand_darker"></div>
+                            <span class="k_swatch_name">--brand_darker</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_brandT25"></div>
+                            <span class="k_swatch_name">--brandT25</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_brandT50"></div>
+                            <span class="k_swatch_name">--brandT50</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_surface"></div>
+                            <span class="k_swatch_name">--surface</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_text"></div>
+                            <span class="k_swatch_name">--text</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_border"></div>
+                            <span class="k_swatch_name">--border_color</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_cta"></div>
+                            <span class="k_swatch_name">--cta</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_dark"></div>
+                            <span class="k_swatch_name">--dark</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_darkT25"></div>
+                            <span class="k_swatch_name">--darkT25</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_light"></div>
+                            <span class="k_swatch_name">--light</span>
+                        </div>
+                        <div class="k_swatch">
+                            <div class="k_swatch_dot k_swatch_lightT25"></div>
+                            <span class="k_swatch_name">--lightT25</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacing tokens -->
+            <div class="k_section" id="tokens_spacing">
+                <h3 class="h6 k_label">spacing tokens</h3>
+                <div class="k_demo">
+                    <div class="k_scale">
+                        <div class="k_scale_item">
+                            <div class="k_scale_bar k_bar_spaceV"></div>
+                            <span class="k_scale_name">--spaceV</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="k_scale_bar k_bar_spaceH"></div>
+                            <span class="k_scale_name">--spaceH</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="k_scale_bar k_bar_space"></div>
+                            <span class="k_scale_name">--space</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="k_scale_bar k_bar_breath"></div>
+                            <span class="k_scale_name">--breath</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="k_scale_bar k_bar_tap"></div>
+                            <span class="k_scale_name">--tap_size</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography tokens -->
+            <div class="k_section" id="tokens_type">
+                <h3 class="h6 k_label">typography tokens</h3>
+                <div class="k_demo">
+                    <p>--font_size · The quick brown fox</p>
+                    <p class="typewriter">--font_serif · The quick brown fox</p>
+                    <div class="flex gap_sm k_wrap">
+                        <span class="k_w100">100</span>
+                        <span class="k_w200">200</span>
+                        <span class="k_w300">300</span>
+                        <span class="k_w400">400 / thin*</span>
+                        <span class="k_w500">500 / light*</span>
+                        <span class="k_w600">600 / regular*</span>
+                        <span class="k_w700">700 / medium*</span>
+                        <span class="k_w800">800 / bold*</span>
+                    </div>
+                    <p class="dim">* semantic alias — NOTE: framework is missing .weight_* utility classes</p>
+                </div>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 BASE — 3base.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="base">
+                <h2 class="h2 k_group_title">Base</h2>
+                <div class="k_file">omg/3base.css</div>
+            </div>
+
+            <div class="k_section" id="base_headings">
+                <h3 class="h6 k_label">h1 – h6 element defaults</h3>
+                <div class="k_demo">
+                    <h1>h1 — The quick brown fox</h1>
+                    <h2>h2 — The quick brown fox</h2>
+                    <h3>h3 — The quick brown fox</h3>
+                    <h4>h4 — The quick brown fox</h4>
+                    <h5>h5 — The quick brown fox</h5>
+                    <h6>h6 — The quick brown fox</h6>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;h1&gt;Heading one&lt;/h1&gt;
+&lt;h2&gt;Heading two&lt;/h2&gt;
+&lt;h3&gt;Heading three&lt;/h3&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="base_paragraph">
+                <h3 class="h6 k_label"><code class="k_tag">p</code> · <code class="k_tag">strong</code></h3>
+                <div class="k_demo">
+                    <p>A paragraph with <strong>strong text</strong> inside. Line height is set by <code>--line_height</code>. Padding-block comes from <code>--spaceV</code>.</p>
+                    <p>Second paragraph. The base layer resets lists and sets body font from <code>--font_family</code>.</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p&gt;A paragraph with &lt;strong&gt;strong text&lt;/strong&gt; inside.&lt;/p&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="base_blockquote">
+                <h3 class="h6 k_label"><code class="k_tag">blockquote</code> · <code class="k_tag">cite</code></h3>
+                <div class="k_demo">
+                    <blockquote>
+                        Design is not just what it looks like and feels like. Design is how it works.
+                        <cite>— Steve Jobs</cite>
+                    </blockquote>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;blockquote&gt;
+    Quote text here.
+    &lt;cite&gt;— Author Name&lt;/cite&gt;
+&lt;/blockquote&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="base_hr">
+                <h3 class="h6 k_label"><code class="k_tag">hr</code></h3>
+                <div class="k_demo">
+                    <p>Above the rule</p>
+                    <hr />
+                    <p>Below the rule</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;hr /&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="base_link">
+                <h3 class="h6 k_label"><code class="k_tag">a</code> link</h3>
+                <div class="k_demo">
+                    <a href="#">A plain anchor link — min-height: var(--tap_size)</a>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;a href="#"&gt;Link text&lt;/a&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="base_button">
+                <h3 class="h6 k_label"><code class="k_tag">button</code> naked element</h3>
+                <div class="k_demo">
+                    <button>Default button</button>
+                    <button disabled>Disabled button</button>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;button&gt;Default button&lt;/button&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="base_focus">
+                <h3 class="h6 k_label">:focus-visible</h3>
+                <div class="k_demo">
+                    <p class="dim">Tab to the button below to see focus ring (2px solid --focus_color, offset 2px)</p>
+                    <button>Tab to me</button>
+                </div>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 LAYOUT — 4layout.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="layout">
+                <h2 class="h2 k_group_title">Layout</h2>
+                <div class="k_file">omg/4layout.css</div>
+            </div>
+
+            <div class="k_section" id="layout_container">
+                <h3 class="h6 k_label"><code class="k_tag">.container</code></h3>
+                <div class="k_demo k_demo_flush">
+                    <div class="k_band">full width</div>
+                    <div class="container k_band k_band_inner">.container — centered, max var(--container_xl)</div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="container"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="layout_grid">
+                <h3 class="h6 k_label"><code class="k_tag">.grid</code> — responsive 1 → 4 cols via container query</h3>
+                <div class="k_demo k_resizable">
+                    <div class="grid">
+                        <div class="k_block">1</div>
+                        <div class="k_block">2</div>
+                        <div class="k_block">3</div>
+                        <div class="k_block">4</div>
+                        <div class="k_block">5</div>
+                        <div class="k_block">6</div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="grid"&gt;
+    &lt;div&gt;…&lt;/div&gt;
+    &lt;div&gt;…&lt;/div&gt;
+    &lt;div&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="layout_bento">
+                <h3 class="h6 k_label"><code class="k_tag">.bento</code> — default 3×3, first child 2×2</h3>
+                <div class="k_demo k_resizable">
+                    <div class="bento">
+                        <div class="k_block">1 (2×2)</div>
+                        <div class="k_block">2</div>
+                        <div class="k_block">3</div>
+                        <div class="k_block">4</div>
+                        <div class="k_block">5</div>
+                        <div class="k_block">6</div>
+                        <div class="k_block">7</div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="bento"&gt;
+    &lt;div&gt;featured (auto 2×2)&lt;/div&gt;
+    &lt;div&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="layout_bento_mods">
+                <h3 class="h6 k_label">
+                    <code class="k_tag">.bento_col_2</code>
+                    <code class="k_tag">.bento_col_3</code>
+                    <code class="k_tag">.bento_full</code>
+                    <code class="k_tag">.bento_row_2</code>
+                    <code class="k_tag">.bento_row_3</code>
+                </h3>
+                <!-- token override via custom property is the intended pattern for bento -->
+                <div class="k_demo k_resizable">
+                    <div class="bento" style="--bento_cols: 4; --bento_rows: 3;">
+                        <div class="k_block">1 (2×2)</div>
+                        <div class="k_block bento_col_2">.bento_col_2</div>
+                        <div class="k_block bento_row_2">.bento_row_2</div>
+                        <div class="k_block">4</div>
+                        <div class="k_block">5</div>
+                        <div class="k_block bento_full">.bento_full</div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="bento" style="--bento_cols: 4; --bento_rows: 3;"&gt;
+    &lt;div class="bento_col_2"&gt;…&lt;/div&gt;
+    &lt;div class="bento_row_2"&gt;…&lt;/div&gt;
+    &lt;div class="bento_full"&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="layout_nav">
+                <h3 class="h6 k_label"><code class="k_tag">nav</code> element default</h3>
+                <div class="k_demo k_resizable">
+                    <nav>
+                        <a href="#">Logo</a>
+                        <ul>
+                            <li><a href="#">Link one</a></li>
+                            <li><a href="#">Link two</a></li>
+                            <li><a href="#">Link three</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;nav&gt;
+    &lt;a href="#"&gt;Logo&lt;/a&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 COMPONENTS — 5components.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="components">
+                <h2 class="h2 k_group_title">Components</h2>
+                <div class="k_file">omg/5components.css</div>
+            </div>
+
+            <div class="k_section" id="comp_headings">
+                <h3 class="h6 k_label"><code class="k_tag">.h1</code> – <code class="k_tag">.h6</code> heading classes (decoupled from element)</h3>
+                <div class="k_demo">
+                    <p class="h1">h1 class on a p</p>
+                    <p class="h2">h2 class on a p</p>
+                    <p class="h3">h3 class on a p</p>
+                    <p class="h4">h4 class on a p</p>
+                    <p class="h5">h5 class on a p</p>
+                    <p class="h6">h6 class on a p</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="h1"&gt;Display heading&lt;/p&gt;
+&lt;p class="h2"&gt;Section heading&lt;/p&gt;
+&lt;span class="h3"&gt;Any element&lt;/span&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_button_cta">
+                <h3 class="h6 k_label"><code class="k_tag">.button</code> · <code class="k_tag">.button_cta</code></h3>
+                <div class="k_demo flex gap_sm k_wrap k_align_center">
+                    <a class="button" href="#"><button>Default</button></a>
+                    <a class="button button_cta" href="#"><button>CTA button</button></a>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;a class="button" href="#"&gt;
+    &lt;button&gt;Default&lt;/button&gt;
+&lt;/a&gt;
+
+&lt;a class="button button_cta" href="#"&gt;
+    &lt;button&gt;CTA button&lt;/button&gt;
+&lt;/a&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_prose">
+                <h3 class="h6 k_label"><code class="k_tag">.prose</code></h3>
+                <div class="k_demo">
+                    <div class="prose">
+                        <p>This paragraph is constrained to 66ch and centered. Good for long-form reading. The <code>.prose</code> class sets <code>max-width: 66ch</code> and <code>margin-inline: auto</code>.</p>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="prose"&gt;
+    &lt;p&gt;Long-form content…&lt;/p&gt;
+&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_dim">
+                <h3 class="h6 k_label"><code class="k_tag">.dim</code></h3>
+                <div class="k_demo">
+                    <p>Normal text for reference</p>
+                    <p class="dim">Dim text — slightly smaller, inherits color</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="dim"&gt;Secondary text&lt;/p&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_underline">
+                <h3 class="h6 k_label"><code class="k_tag">.underline</code></h3>
+                <div class="k_demo">
+                    <a href="#" class="underline">A link with .underline class (3px offset)</a>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;a href="#" class="underline"&gt;Underlined link&lt;/a&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_typewriter">
+                <h3 class="h6 k_label"><code class="k_tag">.typewriter</code></h3>
+                <div class="k_demo">
+                    <p class="typewriter">Typewriter font — uses --font_serif (monospace stack)</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="typewriter"&gt;Monospace text&lt;/p&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_cat">
+                <h3 class="h6 k_label"><code class="k_tag">.cat</code> capitalize</h3>
+                <div class="k_demo">
+                    <p class="cat">category label — text-transform: capitalize</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;span class="cat"&gt;category&lt;/span&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_dots">
+                <h3 class="h6 k_label"><code class="k_tag">.dots</code> dot leader</h3>
+                <div class="k_demo">
+                    <!-- NOTE: framework is missing .align_baseline utility -->
+                    <div class="flex k_full k_align_baseline">
+                        <span>Chapter One</span>
+                        <span class="dots"></span>
+                        <span>12</span>
+                    </div>
+                    <div class="flex k_full k_align_baseline">
+                        <span>The Long Chapter Title</span>
+                        <span class="dots"></span>
+                        <span>47</span>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="flex"&gt;
+    &lt;span&gt;Label&lt;/span&gt;
+    &lt;span class="dots"&gt;&lt;/span&gt;
+    &lt;span&gt;Value&lt;/span&gt;
+&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_clipped_circle">
+                <h3 class="h6 k_label"><code class="k_tag">.clipped_circle</code></h3>
+                <div class="k_demo">
+                    <div class="clipped_circle k_block k_circle_demo">circle</div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="clipped_circle"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_maximise">
+                <h3 class="h6 k_label"><code class="k_tag">.maximise</code> — negative margin bleed</h3>
+                <div class="k_demo k_demo_flush">
+                    <div class="k_maximise_inner">
+                        <p class="dim">inside container padding</p>
+                        <div class="maximise k_block">.maximise — bleeds past parent padding</div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="maximise"&gt;Full-bleed element&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_controls">
+                <h3 class="h6 k_label"><code class="k_tag">.controls</code> · <code class="k_tag">.controls.sticky</code></h3>
+                <div class="k_demo">
+                    <div class="controls k_controls_demo">
+                        <span class="dim mono">.controls — height: var(--sticky_header_height) = 88px</span>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;header class="controls sticky"&gt;
+    &lt;div class="container"&gt;…&lt;/div&gt;
+&lt;/header&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_accordion">
+                <h3 class="h6 k_label"><code class="k_tag">details.accordion</code></h3>
+                <div class="k_demo">
+                    <details class="accordion" open>
+                        <summary>Open accordion item</summary>
+                        <div>Content inside the accordion. Padding comes from <code>--spaceV</code> and <code>--spaceH</code>.</div>
+                    </details>
+                    <details class="accordion" open>
+                        <summary>Second accordion item</summary>
+                        <div>This content is visible because open is set.</div>
+                    </details>
+                    <details class="accordion" open>
+                        <summary>Third accordion item</summary>
+                        <div>Another piece of content.</div>
+                    </details>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;details class="accordion" open&gt;
+    &lt;summary&gt;Title&lt;/summary&gt;
+    &lt;div&gt;Content&lt;/div&gt;
+&lt;/details&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_accordion_dotted">
+                <h3 class="h6 k_label"><code class="k_tag">details.accordion.dotted</code></h3>
+                <div class="k_demo">
+                    <details class="accordion dotted" open>
+                        <summary>Dotted leader item</summary>
+                        <div>Dot leader fills the gap between label and chevron.</div>
+                    </details>
+                    <details class="accordion dotted" open>
+                        <summary>Another dotted item</summary>
+                        <div>Content here.</div>
+                    </details>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;details class="accordion dotted"&gt;
+    &lt;summary&gt;Title&lt;/summary&gt;
+    &lt;div&gt;Content&lt;/div&gt;
+&lt;/details&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_accordion_chevron">
+                <h3 class="h6 k_label"><code class="k_tag">details.accordion.accordion_chevron</code></h3>
+                <div class="k_demo">
+                    <details class="accordion accordion_chevron" open>
+                        <summary>Right-arrow chevron (open → rotates 90°)</summary>
+                        <div>The chevron points right when closed, rotates down when open.</div>
+                    </details>
+                    <details class="accordion accordion_chevron" open>
+                        <summary>Second chevron item</summary>
+                        <div>Content here.</div>
+                    </details>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;details class="accordion accordion_chevron"&gt;
+    &lt;summary&gt;Title&lt;/summary&gt;
+    &lt;div&gt;Content&lt;/div&gt;
+&lt;/details&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="comp_accordion_link">
+                <h3 class="h6 k_label"><code class="k_tag">details.accordion</code> with nav link + chevron toggle</h3>
+                <div class="k_demo">
+                    <details class="accordion accordion_chevron" open>
+                        <summary><a href="#">Nav link fills the row</a></summary>
+                        <div>
+                            <a href="#">Sub-link one</a>
+                            <a href="#">Sub-link two</a>
+                        </div>
+                    </details>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;details class="accordion accordion_chevron"&gt;
+    &lt;summary&gt;
+        &lt;a href="#"&gt;Nav link fills the row&lt;/a&gt;
+    &lt;/summary&gt;
+    &lt;div&gt;
+        &lt;a href="#"&gt;Sub-link&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/details&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 STATES — 6states.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="states">
+                <h2 class="h2 k_group_title">States</h2>
+                <div class="k_file">omg/6states.css</div>
+            </div>
+
+            <div class="k_section" id="state_loading">
+                <h3 class="h6 k_label"><code class="k_tag">data-state="loading"</code></h3>
+                <div class="k_demo">
+                    <div data-state="loading">
+                        <button>Loading state — cursor: progress, opacity: 0.7</button>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div data-state="loading"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="state_disabled">
+                <h3 class="h6 k_label"><code class="k_tag">data-state="disabled"</code></h3>
+                <div class="k_demo">
+                    <div data-state="disabled">
+                        <button>Disabled state — opacity: 0.5, pointer-events: none</button>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div data-state="disabled"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="state_empty">
+                <h3 class="h6 k_label"><code class="k_tag">data-state="empty"</code> — display: none</h3>
+                <div class="k_demo">
+                    <p>Element below has <code>data-state="empty"</code> → hidden:</p>
+                    <div data-state="empty">You should not see this</div>
+                    <p class="dim">(hidden as expected)</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div data-state="empty"&gt;Hidden&lt;/div&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 UTILS: SPACING — utils/spacing.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_spacing">
+                <h2 class="h2 k_group_title">Spacing utilities</h2>
+                <div class="k_file">omg/utils/spacing.css</div>
+            </div>
+
+            <div class="k_section" id="util_gap">
+                <h3 class="h6 k_label"><code class="k_tag">.gap_sm</code> · <code class="k_tag">.gap_md</code> · <code class="k_tag">.gap_lg</code></h3>
+                <div class="k_demo">
+                    <p class="dim mono">.gap_sm</p>
+                    <div class="flex gap_sm pad_bottom_sm">
+                        <div class="k_block k_fill">A</div>
+                        <div class="k_block k_fill">B</div>
+                        <div class="k_block k_fill">C</div>
+                    </div>
+                    <p class="dim mono">.gap_md</p>
+                    <div class="flex gap_md pad_bottom_sm">
+                        <div class="k_block k_fill">A</div>
+                        <div class="k_block k_fill">B</div>
+                        <div class="k_block k_fill">C</div>
+                    </div>
+                    <p class="dim mono">.gap_lg</p>
+                    <div class="flex gap_lg">
+                        <div class="k_block k_fill">A</div>
+                        <div class="k_block k_fill">B</div>
+                        <div class="k_block k_fill">C</div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="flex gap_sm"&gt;…&lt;/div&gt;
+&lt;div class="flex gap_md"&gt;…&lt;/div&gt;
+&lt;div class="flex gap_lg"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="util_pad_block">
+                <h3 class="h6 k_label">
+                    <code class="k_tag">.pad_block_sm</code>
+                    <code class="k_tag">.pad_block_md</code>
+                    <code class="k_tag">.pad_block_lg</code>
+                    <code class="k_tag">.pad_block_xl</code>
+                    <code class="k_tag">.pad_block_xxl</code>
+                </h3>
+                <div class="k_demo">
+                    <div class="k_scale">
+                        <div class="k_scale_item">
+                            <div class="k_pad_vis">
+                                <div class="pad_block_sm k_block k_full">sm</div>
+                            </div>
+                            <span class="k_scale_name">pad_block_sm</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="k_pad_vis">
+                                <div class="pad_block_md k_block k_full">md</div>
+                            </div>
+                            <span class="k_scale_name">pad_block_md</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="k_pad_vis">
+                                <div class="pad_block_lg k_block k_full">lg</div>
+                            </div>
+                            <span class="k_scale_name">pad_block_lg</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="k_pad_vis">
+                                <div class="pad_block_xl k_block k_full">xl</div>
+                            </div>
+                            <span class="k_scale_name">pad_block_xl</span>
+                        </div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;section class="pad_block_xl"&gt;…&lt;/section&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="util_spacer">
+                <h3 class="h6 k_label">
+                    <code class="k_tag">.spacer_block_xs</code> →
+                    <code class="k_tag">.spacer_block_xxl</code>
+                </h3>
+                <div class="k_demo">
+                    <div class="k_scale">
+                        <div class="k_scale_item">
+                            <div class="spacer_block_xs k_bar_vis"></div>
+                            <span class="k_scale_name">xs</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="spacer_block_sm k_bar_vis"></div>
+                            <span class="k_scale_name">sm</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="spacer_block_md k_bar_vis"></div>
+                            <span class="k_scale_name">md</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="spacer_block_lg k_bar_vis"></div>
+                            <span class="k_scale_name">lg</span>
+                        </div>
+                        <div class="k_scale_item">
+                            <div class="spacer_block_xl k_bar_vis"></div>
+                            <span class="k_scale_name">xl</span>
+                        </div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="spacer_block_md"&gt;&lt;/div&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 UTILS: TEXT — utils/text.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_text">
+                <h2 class="h2 k_group_title">Text utilities</h2>
+                <div class="k_file">omg/utils/text.css</div>
+            </div>
+
+            <div class="k_section" id="util_text_align">
+                <h3 class="h6 k_label">
+                    <code class="k_tag">.center</code>
+                    <code class="k_tag">.uppercase</code>
+                    <code class="k_tag">.capitalize</code>
+                    <code class="k_tag">.strikethrough</code>
+                    <code class="k_tag">.pretty</code>
+                    <code class="k_tag">.mono</code>
+                </h3>
+                <div class="k_demo">
+                    <p class="center">center — text-align: center</p>
+                    <p class="uppercase">uppercase — text-transform: uppercase</p>
+                    <p class="capitalize">capitalize text — text-transform: capitalize</p>
+                    <p class="strikethrough">strikethrough text — text-decoration: line-through</p>
+                    <p class="pretty">pretty — text-wrap: pretty (better line breaks for long text)</p>
+                    <p class="mono">mono — ui-monospace, Cascadia Code, SF Mono, Menlo…</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;p class="center"&gt;Centered&lt;/p&gt;
+&lt;p class="uppercase"&gt;Uppercase&lt;/p&gt;
+&lt;p class="capitalize"&gt;capitalized&lt;/p&gt;
+&lt;p class="strikethrough"&gt;Struck through&lt;/p&gt;
+&lt;p class="mono"&gt;Monospace&lt;/p&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 UTILS: VISIBILITY — utils/visibility.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_visibility">
+                <h2 class="h2 k_group_title">Visibility utilities</h2>
+                <div class="k_file">omg/utils/visibility.css</div>
+            </div>
+
+            <div class="k_section" id="util_vis">
+                <h3 class="h6 k_label">
+                    <code class="k_tag">.hide</code>
+                    <code class="k_tag">.hidden</code>
+                    <code class="k_tag">.maybe_hide</code>
+                    <code class="k_tag">.visually_hidden</code>
+                    <code class="k_tag">.sr_only</code>
+                </h3>
+                <div class="k_demo">
+                    <div class="k_vis_row">
+                        <span>Visible text</span>
+                        <span class="hide">hidden (display: none)</span>
+                        <span class="dim mono">← .hide removes it</span>
+                    </div>
+                    <div class="k_vis_row">
+                        <span>Visible text</span>
+                        <span class="maybe_hide">maybe_hide (hidden below 480px)</span>
+                    </div>
+                    <div class="k_vis_row">
+                        <span>The next element is <code>.visually_hidden</code> — accessible to screen readers but invisible:</span>
+                        <span class="visually_hidden">Screen reader only content</span>
+                        <span class="dim mono">← (not in flow)</span>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;span class="hide"&gt;Hidden&lt;/span&gt;
+&lt;span class="maybe_hide"&gt;Hidden below 480px&lt;/span&gt;
+&lt;span class="visually_hidden"&gt;SR only&lt;/span&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 UTILS: GRADIENTS — utils/gradients.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_gradients">
+                <h2 class="h2 k_group_title">Gradient utilities</h2>
+                <div class="k_file">omg/utils/gradients.css</div>
+            </div>
+
+            <div class="k_section" id="util_grad">
+                <h3 class="h6 k_label">
+                    <code class="k_tag">.gradient_o</code>
+                    <code class="k_tag">.gradient_h</code>
+                    <code class="k_tag">.gradient_v</code>
+                    <code class="k_tag">.gradient_warm</code>
+                </h3>
+                <div class="k_demo">
+                    <div class="grid">
+                        <div class="gradient_o k_gradient_tile">.gradient_o</div>
+                        <div class="gradient_h k_gradient_tile">.gradient_h</div>
+                        <div class="gradient_v k_gradient_tile">.gradient_v</div>
+                        <div class="gradient_warm k_gradient_tile">.gradient_warm</div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="gradient_o"&gt;…&lt;/div&gt;
+&lt;div class="gradient_h"&gt;…&lt;/div&gt;
+&lt;div class="gradient_v"&gt;…&lt;/div&gt;
+&lt;div class="gradient_warm"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 UTILS: ASPECT — utils/aspect.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_aspect">
+                <h2 class="h2 k_group_title">Aspect utilities</h2>
+                <div class="k_file">omg/utils/aspect.css</div>
+            </div>
+
+            <div class="k_section" id="util_ratios">
+                <h3 class="h6 k_label">ratio classes</h3>
+                <div class="k_demo k_resizable">
+                    <!-- NOTE: framework is missing .flex_wrap utility -->
+                    <div class="flex gap_sm k_wrap k_align_center">
+                        <div class="k_ratio_sm">
+                            <div class="ratio_1x1 k_block">1:1</div>
+                        </div>
+                        <div class="k_ratio_md">
+                            <div class="ratio_4x3 k_block">4:3</div>
+                        </div>
+                        <div class="k_ratio_lg">
+                            <div class="ratio_16x9 k_block">16:9</div>
+                        </div>
+                        <div class="k_ratio_xl">
+                            <div class="ratio_21x9 k_block">21:9</div>
+                        </div>
+                        <div class="k_ratio_xs">
+                            <div class="ratio_9x16 k_block">9:16</div>
+                        </div>
+                        <div class="k_ratio_xs">
+                            <div class="ratio_1x2 k_block">1:2</div>
+                        </div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="ratio_16x9"&gt;…&lt;/div&gt;
+&lt;div class="ratio_1x1"&gt;…&lt;/div&gt;
+&lt;div class="ratio_4x3"&gt;…&lt;/div&gt;
+&lt;div class="ratio_21x9"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="util_aspect_container">
+                <h3 class="h6 k_label"><code class="k_tag">.aspect_container</code> · <code class="k_tag">.focus_*</code> · <code class="k_tag">.clip_*</code></h3>
+                <div class="k_demo">
+                    <div class="flex gap_sm k_wrap">
+                        <div class="k_ratio_lg">
+                            <div class="aspect_container ratio_4x3 focus_center k_img">.focus_center</div>
+                        </div>
+                        <div class="k_ratio_lg">
+                            <div class="aspect_container ratio_4x3 clip_letterbox k_img">.clip_letterbox</div>
+                        </div>
+                        <div class="k_ratio_lg">
+                            <div class="aspect_container ratio_4x3 clip_pillarbox k_img">.clip_pillarbox</div>
+                        </div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="aspect_container ratio_16x9 focus_center"&gt;
+    &lt;img src="…" alt="…" /&gt;
+    &lt;div class="caption"&gt;Caption&lt;/div&gt;
+&lt;/div&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 UTILS: LAYOUT — utils/layout.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_layout">
+                <h2 class="h2 k_group_title">Layout utilities</h2>
+                <div class="k_file">omg/utils/layout.css</div>
+            </div>
+
+            <div class="k_section" id="util_flex">
+                <h3 class="h6 k_label"><code class="k_tag">.flex</code> · <code class="k_tag">.flex_col</code></h3>
+                <div class="k_demo">
+                    <p class="dim mono">.flex (row)</p>
+                    <div class="flex gap_sm pad_bottom_sm">
+                        <div class="k_block">A</div>
+                        <div class="k_block">B</div>
+                        <div class="k_block">C</div>
+                    </div>
+                    <p class="dim mono">.flex.flex_col (column)</p>
+                    <div class="flex flex_col gap_sm k_flex_col_demo">
+                        <div class="k_block">A</div>
+                        <div class="k_block">B</div>
+                        <div class="k_block">C</div>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;div class="flex gap_sm"&gt;…&lt;/div&gt;
+&lt;div class="flex flex_col gap_sm"&gt;…&lt;/div&gt;</pre></details>
+            </div>
+
+            <div class="k_section" id="util_vertical">
+                <h3 class="h6 k_label"><code class="k_tag">.vertical</code></h3>
+                <div class="k_demo k_vertical_demo">
+                    <span class="vertical">Vertical text</span>
+                    <p class="dim k_vertical_note">writing-mode: vertical-rl, rotate(180deg), uppercase</p>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;span class="vertical"&gt;Label&lt;/span&gt;</pre></details>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 UTILS: FIKO — utils/fiko.css
+                 ════════════════════════════════════════════════════ -->
+
+            <div class="k_group_head" id="util_fiko">
+                <h2 class="h2 k_group_title">.fiko orb</h2>
+                <div class="k_file">omg/utils/fiko.css</div>
+            </div>
+
+            <div class="k_section" id="util_fiko_orb">
+                <h3 class="h6 k_label"><code class="k_tag">.fiko</code> — animated orb glow</h3>
+                <div class="k_demo k_demo_flush">
+                    <div class="fiko k_orb_demo">
+                        <div class="center">
+                            <p class="h3">FIKO orb</p>
+                            <p class="dim">Warm animated radial orbs via ::before / ::after</p>
+                            <p class="dim mono">Override: --fiko_orb_a / --fiko_orb_b</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="spacer_block_xs"></div>
+                <!-- token override is the intended pattern — only --fiko_orb_* kept inline -->
+                <div class="k_demo k_demo_flush">
+                    <div class="fiko k_orb_demo_sm" style="--fiko_orb_a: oklch(0.72 0.22 145); --fiko_orb_b: oklch(0.58 0.18 165);">
+                        <p class="center dim mono">custom orb colors: fresh green</p>
+                    </div>
+                </div>
+                <details class="k_source" open><summary>▸ source</summary><pre>&lt;section class="fiko" style="min-height: 20rem;"&gt;
+    &lt;!-- children are z-index: 1 above orbs --&gt;
+    &lt;div&gt;Content&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Custom orb colors --&gt;
+&lt;section class="fiko" style="--fiko_orb_a: oklch(0.65 0.2 280);"&gt;…&lt;/section&gt;</pre></details>
+            </div>
+
+            <!-- bottom spacer -->
+            <div class="spacer_block_xxl"></div>
+
+        </div><!-- /.container -->
+
+    </body>
+</html>
