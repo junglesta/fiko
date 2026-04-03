@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // scripts/build-demo.mjs — builds a self-contained dist/ for fiko.junglestar.org
+// Kitchen is the site root. Demo page is retired (KISS).
 
 import { mkdir, copyFile, readFile, writeFile, cp } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
@@ -15,28 +16,15 @@ await mkdir(dist, { recursive: true })
 await cp(path.join(root, 'omg'), path.join(dist, 'omg'), { recursive: true })
 await copyFile(path.join(root, 'index.css'), path.join(dist, 'fiko.css'))
 
-// demo assets
-await copyFile(path.join(root, 'demo', 'index.css'), path.join(dist, 'index.css'))
-
+// static assets — live at project root
 for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'og-image.jpg', 'CNAME']) {
-  const src = path.join(root, 'demo', f)
+  const src = path.join(root, f)
   if (existsSync(src)) await copyFile(src, path.join(dist, f))
 }
 
-// read version from package.json
-const { version } = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
-
-// fix CSS path in index.html: ../index.css → ./fiko.css, inject version
-let html = await readFile(path.join(root, 'demo', 'index.html'), 'utf8')
-html = html
-  .replace('<link rel="stylesheet" href="../index.css" />', '<link rel="stylesheet" href="./fiko.css" />')
-  .replaceAll('__FIKO_VERSION__', version)
+// index.html — fix CSS path: ./index.css → ./fiko.css
+let html = await readFile(path.join(root, 'index.html'), 'utf8')
+html = html.replace('<link rel="stylesheet" href="./index.css" />', '<link rel="stylesheet" href="./fiko.css" />')
 await writeFile(path.join(dist, 'index.html'), html)
-
-// kitchen testbed — fix CSS path and copy to dist/kitchen/
-await mkdir(path.join(dist, 'kitchen'), { recursive: true })
-let kitchen = await readFile(path.join(root, 'kitchen', 'index.html'), 'utf8')
-kitchen = kitchen.replace('<link rel="stylesheet" href="../index.css" />', '<link rel="stylesheet" href="../fiko.css" />')
-await writeFile(path.join(dist, 'kitchen', 'index.html'), kitchen)
 
 console.log('dist/ ready → run: npm run deploy')

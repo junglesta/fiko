@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.7.0 — 2026-04-03
+
+> See [UPGRADE.md](./UPGRADE.md) for migration steps.
+
+### Breaking
+- **`.accordion_chevron` → `.accordion_pm`** — plus/minus symbol swap (`+`/`−`), brand color, no rotation; old chevron variant removed
+
+### New
+- **`omg/utils/animation.css`** — `.fade_in`, `.slide_up`, `.slide_down`, `.scale_in` via `@starting-style`
+- **`omg/utils/transitions.css`** — `.vt_hero`, `.vt_header`, `.vt_image`, `.vt_title`, `.vt_card`, `.vt_custom`, `.vt_page` view transition helpers
+- **`omg/utils/visibility.css`** — `.skip_to_content`
+- **Form elements** — inputs, textarea, select focus/disabled/invalid states; `.field` wrapper; `.select_wrap` with `currentColor` chevron mask
+- **Layout utilities** — `.flex_wrap`, `.flex_1`, `.fill`, `.w_full`, `.align_*` (5), `.justify_*` (5) in `utils/layout.css`
+- **Text utilities** — `.weight_thin/light/regular/medium/bold` + `.weight_100`–`.weight_800` in `utils/text.css`
+- **Tokens** — `--mono`, `--radius_sm`, `--sticky_z` added to `omg/1vars.css`
+- **`template/branding/theme-toggle.js`** — light/dark/system cycle; `.theme_toggle_labeled` pill variant; word labels show click intention
+
+### Changed
+- **CSS architecture** — semantic element rules stay in numbered layer files; all utility classes moved to `omg/utils/`; `4layout.css` is now semantic-only
+- **CSS logical properties** — `padding-top/bottom` → `padding-block-start/end`; `margin-left/right` → `margin-inline` throughout `omg/`
+- **`nav`** — `overflow-y: hidden` added; vertical scroll clipped
+- **Kitchen** promoted to root `index.html` (sole dev + demo page); `demo/` removed
+- **`/breaking-changes` skill** — standardises the breaking-changes cheat-sheet process; added as step 3 in `/preflight`
+- **`UPGRADE.md`** — new file; cumulative upgrade guide for consumers
+
+---
+
 ## 0.6.4 — 2026-04-02
 
 ### Changed

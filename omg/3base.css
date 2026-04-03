@@ -90,7 +90,7 @@ blockquote {
 
 cite {
     display: block;
-    padding-top: var(--spaceV);
+    padding-block-start: var(--spaceV);
     font-size: 77%;
     text-transform: capitalize;
 }

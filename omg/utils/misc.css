@@ -1,9 +1,2 @@
 /*! 🐉 404.css | MIT License */
-/* utils/misc.css — one-off component state overrides */
-
-.adv {
-  opacity: 0.5;
-  #icn_whatsapp {
-    filter: grayscale(88%);
-  }
-}
+/* utils/misc.css — one-off utility overrides */

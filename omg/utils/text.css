@@ -1,31 +1,119 @@
 /*! 🐉 404.css | MIT License */
-/* utils/text.css — text alignment, transform, wrap */
+/* utils/text.css — text utilities */
+
+/* ── ALIGNMENT & TRANSFORM ──────────────────────── */
 
 .center,
 .centre,
 .centered {
-  text-align: center;
+    text-align: center;
 }
 
 .uppercase,
 .uppercase > * {
-  text-transform: uppercase !important;
+    text-transform: uppercase !important;
 }
 
 .capitalize,
 .capitalise,
 .titlecase {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 .strikethrough {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .pretty {
-  text-wrap: pretty;
+    text-wrap: pretty;
 }
 
+/* ── FONT FAMILY ────────────────────────────────── */
+
 .mono {
-  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+}
+
+.typewriter {
+    font-family: var(--font_serif);
+}
+
+/* ── DECORATION ─────────────────────────────────── */
+
+.underline {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ── WEIGHT ─────────────────────────────────────── */
+
+.weight_thin     { font-weight: var(--weight_thin); }
+.weight_light    { font-weight: var(--weight_light); }
+.weight_regular  { font-weight: var(--weight_regular); }
+.weight_medium   { font-weight: var(--weight_medium); }
+.weight_bold     { font-weight: var(--weight_bold); }
+
+/* numeric scale */
+.weight_100 { font-weight: var(--weight_100); }
+.weight_200 { font-weight: var(--weight_200); }
+.weight_300 { font-weight: var(--weight_300); }
+.weight_400 { font-weight: var(--weight_400); }
+.weight_500 { font-weight: var(--weight_500); }
+.weight_600 { font-weight: var(--weight_600); }
+.weight_700 { font-weight: var(--weight_700); }
+.weight_800 { font-weight: var(--weight_800); }
+
+/* ── SIZE & WEIGHT ──────────────────────────────── */
+
+.dim {
+    color: var(--text);
+    font-size: calc(var(--font_size) * 0.95);
+}
+
+/* ── PROSE ──────────────────────────────────────── */
+
+.prose {
+    max-width: 66ch;
+    margin-inline: auto;
+}
+
+/* ── CAT ────────────────────────────────────────── */
+
+.cat {
+    text-transform: capitalize;
+}
+
+/* ── HEADING SCALE ──────────────────────────────── */
+/* Apply heading styles to any element, decoupled from heading semantics.
+ * Usage: <p class="h2">Display heading</p>
+ */
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    user-select: none !important;
+    line-height: 1.2 !important;
+    font-family: var(--font_family) !important;
+}
+.h1 { font-size: calc(var(--font_size) * 2.5) !important; font-weight: var(--weight_light) !important; }
+.h2 { font-size: calc(var(--font_size) * 2) !important; font-weight: var(--weight_light) !important; }
+.h3 { font-size: calc(var(--font_size) * 1.75) !important; font-weight: var(--weight_thin) !important; }
+.h4 { font-size: calc(var(--font_size) * 1.5) !important; font-weight: var(--weight_thin) !important; }
+.h5 { font-size: calc(var(--font_size) * 1.25) !important; font-weight: var(--weight_thin) !important; }
+.h6 { font-size: calc(var(--font_size) * 1) !important; font-weight: var(--weight_light) !important; }
+
+/* ── DOT LEADER ─────────────────────────────────── */
+/* Usage: <span class="dots"> between label and value in menus/TOC */
+
+.dots {
+    flex: 8;
+    border-bottom: max(2px, var(--borderpx)) dotted currentColor;
+    margin: 0 0 0 8px;
+    height: var(--borderpx);
+    position: relative;
+    top: 0;
+    opacity: 0.25;
 }

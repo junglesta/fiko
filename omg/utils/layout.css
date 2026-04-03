@@ -1,27 +1,165 @@
 /*! 🐉 404.css | MIT License */
-/* utils/layout.css — flex, positioning, writing mode */
+/* utils/layout.css — flex, grid, container, bento, positioning, writing mode */
+
+/* ── FLEX ───────────────────────────────────────── */
 
 .flex {
-  display: flex;
+    display: flex;
 }
 
 .flex_col {
-  flex-direction: column;
+    flex-direction: column;
 }
+
+.flex_wrap {
+    flex-wrap: wrap;
+}
+
+.flex_1 {
+    flex: 1;
+}
+
+.fill {
+    flex: 1;
+    min-width: 0;
+}
+
+.w_full {
+    width: 100%;
+}
+
+/* ── ALIGN ──────────────────────────────────────── */
+
+.align_start   { align-items: flex-start; }
+.align_center  { align-items: center; }
+.align_end     { align-items: flex-end; }
+.align_stretch { align-items: stretch; }
+.align_baseline { align-items: baseline; }
+
+/* ── JUSTIFY ────────────────────────────────────── */
+
+.justify_start   { justify-content: flex-start; }
+.justify_center  { justify-content: center; }
+.justify_end     { justify-content: flex-end; }
+.justify_between { justify-content: space-between; }
+.justify_around  { justify-content: space-around; }
+
+/* ── POSITIONING ────────────────────────────────── */
 
 .sticky {
-  position: sticky;
-  top: 0;
+    position: sticky;
+    top: 0;
 }
 
+/* ── WRITING MODE ───────────────────────────────── */
+
 .vertical {
-  display: block;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  text-transform: uppercase;
-  position: relative;
-  top: -10px;
-  .active & {
-    font-size: 200%;
-  }
+    display: block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-transform: uppercase;
+    position: relative;
+    top: -10px;
+    .active & {
+        font-size: 200%;
+    }
+}
+
+/* ── CONTAINER ──────────────────────────────────── */
+/* Container query setup — wraps sections for responsive children */
+
+.container {
+    container-type: inline-size;
+    container-name: main-container;
+    width: min(100% - (var(--breath) * 2), var(--container_xl));
+    margin-inline: auto;
+}
+
+/* ── GRID ───────────────────────────────────────── */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid_cols, 1), 1fr);
+    gap: var(--breath);
+}
+
+@container main-container (min-width: var(--bp_sm)) {
+    .grid {
+        --grid_cols: 2;
+    }
+}
+
+@container main-container (min-width: var(--bp_md)) {
+    .grid {
+        --grid_cols: 3;
+    }
+}
+
+@container main-container (min-width: var(--bp_lg)) {
+    .grid {
+        --grid_cols: 4;
+    }
+}
+
+/* ── BENTO BOX ──────────────────────────────────── */
+/* Mosaic product grid. Wrap cards in <div class="bento">
+ *
+ * Token-driven: adjust --bento_cols / --bento_rows at any level.
+ * aspect-ratio keeps cells proportional automatically.
+ * grid-auto-flow: dense fills gaps — add items in any order.
+ *
+ * Quick override examples:
+ *   style="--bento_cols:4; --bento_rows:2"   → 4×2 landscape
+ *   style="--bento_cols:2; --bento_rows:4"   → 2×4 portrait
+ *
+ * Span modifiers on children:
+ *   .bento_col_2 / .bento_col_3   → span N columns
+ *   .bento_row_2 / .bento_row_3   → span N rows
+ *   .bento_full                    → full width
+ */
+
+.bento {
+    --bento_cols: 3;
+    --bento_rows: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--bento_cols), 1fr);
+    grid-template-rows: repeat(var(--bento_rows), 1fr);
+    grid-auto-flow: dense;
+    gap: calc(var(--spaceV) * 0.5) calc(var(--spaceH) * 0.5);
+    width: 100%;
+    aspect-ratio: var(--bento_cols) / var(--bento_rows);
+}
+
+/* Featured first child: 2×2 */
+.bento > :first-child { grid-column: span 2; grid-row: span 2; }
+
+/* ── Span modifiers ─────────────────────────────── */
+.bento > .bento_col_2  { grid-column: span 2; }
+.bento > .bento_col_3  { grid-column: span 3; }
+.bento > .bento_full   { grid-column: 1 / -1; }
+.bento > .bento_row_2  { grid-row: span 2; }
+.bento > .bento_row_3  { grid-row: span 3; }
+
+/* ── Responsive defaults ────────────────────────── */
+@container main-container (max-width: 479px) {
+    .bento { --bento_cols: 1; --bento_rows: 6; }
+    .bento > :first-child { grid-column: span 1; grid-row: span 1; }
+}
+
+@container main-container (min-width: 480px) and (max-width: 639px) {
+    .bento { --bento_cols: 2; --bento_rows: 4; }
+    .bento > :first-child { grid-column: span 2; grid-row: span 2; }
+}
+
+/* ── BREAKOUT ───────────────────────────────────── */
+/* Pull an element outside the container margins */
+
+.maximise {
+    margin-inline: var(--maximise);
+}
+
+/* ── CLIP ───────────────────────────────────────── */
+
+.clipped_circle {
+    clip-path: circle(50px at center);
 }

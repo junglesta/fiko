@@ -1,6 +1,6 @@
 {
   "name": "@toybreaker/fiko",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "LOOK GOOD OR DIE! — cascade layers, OKLCH colors, design tokens. Zero specificity wars. Smiling DX.",
   "license": "MIT",
   "author": "Toybreaker <hello@junglestar.co>",
@@ -22,7 +22,7 @@
     "modern-css"
   ],
   "scripts": {
-    "dev": "serve . & sleep 1 && open http://localhost:3000/demo/",
+    "dev": "serve . -p 5555 & sleep 1 && open http://localhost:5555/",
     "build": "node scripts/build-demo.mjs",
     "deploy": "node scripts/build-demo.mjs && netlify deploy --prod --dir=dist --site=922d0a52-64e0-4eda-9fd9-742aa8619a87"
   },

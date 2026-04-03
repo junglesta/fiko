@@ -23,6 +23,32 @@
   display: none;
 }
 
+/* ── SKIP TO CONTENT ────────────────────────────── */
+/* Usage: <a class="skip_to_content" href="#main">Skip to content</a>
+ * Place as the very first element inside <body>.
+ * Invisible until focused — keyboard users can jump past nav.
+ */
+
+.skip_to_content {
+    position: absolute;
+    inset-block-start: var(--spaceV);
+    inset-inline-start: var(--spaceH);
+    z-index: 9999;
+    padding: var(--spaceV) var(--spaceH);
+    background: var(--surface);
+    border: var(--borderpx) solid var(--border_color);
+    border-radius: var(--radius);
+    font-weight: var(--weight_bold);
+    translate: 0 -200%;
+    transition: translate var(--transition);
+}
+
+.skip_to_content:focus-visible {
+    translate: 0 0;
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 /* visually hidden but accessible to screen readers */
 .visually_hidden,
 .sr_only {

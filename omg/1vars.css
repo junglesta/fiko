@@ -3,6 +3,8 @@
 /* Brand palette overrides live in branding/palette.css */
 
 :root {
+  color-scheme: light dark;
+
   /* ── COLOR NEUTRALS ──────────────────────────── */
   --dark:    oklch(0.20 0 0);
   --darkT25: color-mix(in oklch, var(--dark),  transparent 75%);
@@ -19,9 +21,14 @@
   /* ── SIZING ─────────────────────────────────── */
   --tap_size:             clamp(42px, 5vw, 52px);
   --radius:               6px;
-  --borderpx:             3px;
+  --radius_sm:            3px;
+  --borderpx:             1px;
   --sticky_header_height: 88px;  /* override in 000/ per client */
+  --sticky_z:             20;
   --maximise:             -1.5rem; /* negative container bleed  */
+
+  /* ── TYPOGRAPHY EXTRAS ───────────────────────── */
+  --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
 
   /* ── SPACING ─────────────────────────────────── */
   --spaceH: 1.75svw;

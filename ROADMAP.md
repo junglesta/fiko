@@ -5,17 +5,20 @@
 ---
 
 ## NEXT
-- [ ] **Aside nav** — soften borders; align visual style with ca/dv footer accordion
-- [ ] **`currentColor` audit** — sweep remaining components for `var(--cta)` on decorative elements (markers, borders, icons); default to `currentColor`; expose `var(--cta)` as opt-in override
-- [ ] **Missing utilities** — `.weight_*`, `.flex_wrap`, `.align_*`, `.flex_1` (surfaced by kitchen testbed)
+
+- [ ] **Kitchen: replace `.k_*` shims with framework classes** — now that `.weight_*`, `.flex_wrap`, `.align_*`, `.fill`, `.w_full` are in the framework, remove the kitchen shim versions and use the real classes directly
+- [ ] `@starting-style` — browser support note (baseline 2024); consider `@supports` guard in docs
 - [ ] `apple-touch-icon.png` auto-generated from `favicon.svg`
-- [ ] Dark mode token layer (opt-in)
+- [ ] **Kitchen: theme toggle demo section** — add `#util_theme` section documenting `.theme_toggle` / `.theme_toggle_labeled` as a component with live demo + source
 
 ## LATER
 
-- [ ] `.fiko_orbital` orb: third variant token
+- [ ] `.fiko_glow` orb: third variant token
 - [ ] Stagger animation utility
 - [ ] `.fiko` shake: horizontal variant (`.fiko_x`, `.fiko_x_hover`)
+- [ ] `@layer print` — print styles layer for clean print output
+- [ ] **Aside nav** — soften borders; align visual style with accordion
+- [ ] **`@toybreaker/fiko` v1.0** — API freeze, full docs site
 
 ## DONE
 
@@ -23,21 +26,28 @@
 - [x] OKLCH color tokens
 - [x] `.accordion` + `.accordion_chevron` components
 - [x] `.bento` grid with span modifiers
-- [x] `.fiko` animated warm orb utility
 - [x] Hamburger/aside nav — mobile overlay + desktop sidebar
 - [x] snake_case audit — all class names standardised
-- [x] `pnpm dev` auto-opens demo
 - [x] Demo build pipeline (`scripts/build-demo.mjs` → `dist/`)
 - [x] CLAUDE.md with CSS conventions
-- [x] CNAME in `demo/` — survives CI rebuilds
-- [x] Duplicate `publish.yml` removed
-- [x] `@toybreaker/fiko@0.5.1` — live on npm + `fiko.junglestar.org`
-- [x] `@toybreaker/fiko@0.5.2` — accordion summary alignment (flexbox, Safari-safe)
-- [x] README npm syntax highlight fix
-- [x] Unscoped `fiko` package deprecated → `@toybreaker/fiko`
-- [x] `@toybreaker/fiko@0.5.3` — deploy switched to Netlify (instant propagation)
-- [x] `@toybreaker/fiko@0.6.0` — commit format + preflight rules in CLAUDE.md; CA/DV/MOM upgraded
-- [x] `@toybreaker/fiko@0.6.1` — accordion redesign: row-separator style, `currentColor` down-chevron, `margin-left: auto` right-align; `.dotted` opt-in modifier for dot leader (vertically centered); `accordion_chevron` switched to `currentColor`; demo mobile overflow fixed; aside nav plain-text summaries
-- [x] `@toybreaker/fiko@0.6.2` — FIKO brand uppercase in CLAUDE.md; `fiko_shake_vertical_lg` keyframe; `cite` font-size 77%; palette `--brandT75`/`--brandT25` tokens; 4-space CSS formatting
-- [x] `@toybreaker/fiko@0.6.3` — `kitchen/` testbed page; demo banner linking to kitchen
-- [x] `@toybreaker/fiko@0.6.4` — `.fiko` shake utility (on-load / hover / loop); `.fiko_orbital` rename; kitchen shake demos
+- [x] `@toybreaker/fiko@0.5.1` → `0.7.0` — see git log for details
+- [x] `color-scheme: light dark` in `omg/1vars.css`
+- [x] Light / dark mode — kitchen tokens + `@media (prefers-color-scheme: dark)` + `[data-theme]` three-state toggle; consumer pattern in `template/branding/roles.css`
+- [x] Light / dark toggle button in kitchen — cycles system → light → dark, persists to `localStorage`; top nav (icon-only) + footer (icon + word label via `.theme_toggle_labeled`)
+- [x] Kitchen promoted to sole dev + demo page; root `index.html`
+- [x] `.fiko_glow` + `.fiko_orbital` + `.fiko` shake utilities
+- [x] **CSS architecture refactor** — semantic-only layer files; all utility classes in `omg/utils/`
+- [x] `--borderpx` default `1px`; nav redesign (single scrollable row)
+- [x] **Missing tokens** — `--mono`, `--sticky_z`, `--radius_sm` added to `omg/1vars.css`
+- [x] **Missing utility classes** — `.weight_*`, `.flex_wrap`, `.flex_1`, `.fill`, `.w_full`, `.align_*`, `.justify_*` added to `utils/layout.css` + `utils/text.css`
+- [x] **CSS logical properties** — `padding-top/bottom` → `padding-block-start/end`; `margin-left/right` → `margin-inline` across all `omg/`
+- [x] **Form elements** — inputs, textarea, select, `.field` wrapper, focus/disabled/invalid states; `.select_wrap` with `currentColor` chevron mask
+- [x] **Skip-to-content** — `.skip_to_content` in `utils/visibility.css`
+- [x] **`@starting-style` enter animations** — `.fade_in`, `.slide_up`, `.slide_down`, `.scale_in` in `utils/animation.css`
+- [x] **View Transitions helpers** — `.vt_hero`, `.vt_header`, `.vt_image`, `.vt_title`, `.vt_card`, `.vt_custom`, `.vt_page` in `utils/transitions.css`
+- [x] **`accordion_chevron` → `accordion_pm`** — plus/minus swap (`content: "+"/"−"`), brand color, larger size; old chevron rotation removed
+- [x] **`nav` overflow fix** — `overflow-y: hidden` added; vertical scroll clipped
+- [x] **Sticky nav scroll offset** — `scroll-margin-top: var(--k_nav_h)` on all `[id]` targets; `--k_nav_h` measured live via `ResizeObserver`
+- [x] **`theme-toggle.js`** — `template/branding/theme-toggle.js`; consumer snippet; `.theme_toggle_labeled` modifier for icon + word display
+- [x] **Breaking Changes Cheat Sheet** — `UPGRADE.md` at repo root; `/breaking-changes` skill standardises the process; `/preflight` updated to run it before version bump
+- [x] **`currentColor` audit** — no hardcoded colors outside tokens; SVG data-URIs use mask pattern throughout

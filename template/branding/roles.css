@@ -6,9 +6,11 @@
  * Injected into the `theme` layer:
  *   @import url(./branding/roles.css) layer(theme);
  *
- * Permanent light mode — dark mode intentionally excluded.
+ * Light is the default. Dark follows system preference automatically.
+ * Manual override: set data-theme="dark" or data-theme="light" on <html>.
  */
 
+/* ── light mode (default) ──────────────────────────────── */
 :root {
   /* ── SURFACE & TEXT ───────────────────────────────── */
   --surface:            var(--light);
@@ -17,6 +19,7 @@
   --surface_inverseT25: var(--darkT25);
   --text:               var(--dark);
   --textT50:            var(--darkT50);
+  --border_color:       color-mix(in oklch, var(--dark), transparent 75%);
 
   /* ── LOGO ─────────────────────────────────────────── */
   --logo: var(--dark);
@@ -28,10 +31,39 @@
 
   /* ── CTA — interactive (buttons, links, actions) ──── */
   --cta:       var(--brand);
-  --cta_text:  var(--light);
+  --cta_text:  var(--dark);
   --cta_hover: var(--brand_lighter);
 
-  /* ── BORDERS & FOCUS ──────────────────────────────── */
-  --border_color: var(--dark);
-  --focus_color:  var(--brand);
+  /* ── FOCUS ────────────────────────────────────────── */
+  --focus_color: var(--brand);
+}
+
+/* ── dark mode — system preference ─────────────────────── */
+/* Respects system setting unless data-theme="light" forces light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface:            var(--dark);
+    --surface_inverse:    var(--light);
+    --surfaceT25:         var(--darkT25);
+    --surface_inverseT25: var(--lightT25);
+    --text:               var(--light);
+    --textT50:            var(--lightT50);
+    --border_color:       color-mix(in oklch, var(--light), transparent 75%);
+    --logo:               var(--light);
+    --cta_text:           var(--light);
+  }
+}
+
+/* ── dark mode — explicit override ─────────────────────── */
+/* data-theme="dark" on <html> forces dark regardless of system */
+:root[data-theme="dark"] {
+  --surface:            var(--dark);
+  --surface_inverse:    var(--light);
+  --surfaceT25:         var(--darkT25);
+  --surface_inverseT25: var(--lightT25);
+  --text:               var(--light);
+  --textT50:            var(--lightT50);
+  --border_color:       color-mix(in oklch, var(--light), transparent 75%);
+  --logo:               var(--light);
+  --cta_text:           var(--light);
 }

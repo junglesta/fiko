@@ -1,0 +1,22 @@
+/*! 🐉 404.css | MIT License */
+/* utils/transitions.css — View Transitions API helpers */
+
+/* ── VIEW TRANSITIONS ── */
+/* Assign view-transition-name to elements that should animate between pages/states.
+ * Usage: <img class="vt_hero"> on both pages — browser morphs between them.
+ * Names must be unique per page. Use inline style="--vt_name: my-name" for dynamic names.
+ */
+
+.vt_hero    { view-transition-name: hero; }
+.vt_header  { view-transition-name: header; }
+.vt_image   { view-transition-name: image; }
+.vt_title   { view-transition-name: title; }
+.vt_card    { view-transition-name: card; }
+
+/* token-driven — override with inline style="--vt_name: my-name" */
+.vt_custom  { view-transition-name: var(--vt_name, none); }
+
+/* opt in to cross-fade for the whole page */
+.vt_page {
+    view-transition-name: root;
+}

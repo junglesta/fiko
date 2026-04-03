@@ -1,67 +1,123 @@
 /*! fiko | MIT License */
 /* utils/fiko.css — FIKO signature utilities
  *
- * .fiko_orbital  — warm animated orb glow (needs dimensions; override --fiko_orb_a / --fiko_orb_b)
+ * .fiko_glow     — ambient blurred orb glow; slow drift (no orbit)
+ *                  Override: --fiko_orb_a / --fiko_orb_b
+ *
+ * .fiko_orbital  — true elliptical orbit via CSS Motion Path
+ *                  Same tokens; super-slow so it reads as ambient, not busy
+ *
  * .fiko          — one-shot vertical shake on page load (no JS)
  * .fiko_hover    — vertical shake on :hover
  * .fiko_loop     — continuous vertical shake
- *                  Override: style="--shake_distance: 12px; --shake_duration: 0.4s"
+ *                  Override: --shake_distance / --shake_duration
+ *
+ * Both glow utilities: element needs dimensions (height / min-height).
+ * Pseudo-elements carry the orbs; direct children stay above via z-index.
  */
 
-.fiko_orbital {
-  --fiko_orb_a: oklch(0.65 0.22 40);   /* warm orange */
-  --fiko_orb_b: oklch(0.72 0.20 65);   /* amber */
-  position: relative;
-  overflow: hidden;
-  background: var(--dark, oklch(0.12 0.01 265));
-}
-
+/* ── shared orb pseudo-element base ────────────────────── */
+.fiko_glow::before,
+.fiko_glow::after,
 .fiko_orbital::before,
 .fiko_orbital::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── .fiko_glow — ambient drift ────────────────────────── */
+
+.fiko_glow {
+    --fiko_orb_a: oklch(0.65 0.22 40);   /* warm orange */
+    --fiko_orb_b: oklch(0.72 0.20 65);   /* amber */
+    position: relative;
+    overflow: hidden;
+    background: var(--surface, oklch(0.12 0.01 265));
 }
 
 /* primary orb — top-right */
-.fiko_orbital::before {
-  width: 60%;
-  aspect-ratio: 1;
-  background: var(--fiko_orb_a);
-  filter: blur(80px);
-  opacity: 0.22;
-  top: -20%;
-  right: -10%;
-  animation: fiko_orb_drift 9s ease-in-out infinite;
+.fiko_glow::before {
+    width: 60%;
+    aspect-ratio: 1;
+    background: var(--fiko_orb_a);
+    filter: blur(80px);
+    opacity: 0.22;
+    top: -20%;
+    right: -10%;
+    animation: fiko_orb_drift 9s ease-in-out infinite;
 }
 
 /* secondary orb — bottom-right */
-.fiko_orbital::after {
-  width: 40%;
-  aspect-ratio: 1;
-  background: var(--fiko_orb_b);
-  filter: blur(60px);
-  opacity: 0.15;
-  bottom: -10%;
-  right: 25%;
-  animation: fiko_orb_drift 13s ease-in-out infinite reverse;
+.fiko_glow::after {
+    width: 40%;
+    aspect-ratio: 1;
+    background: var(--fiko_orb_b);
+    filter: blur(60px);
+    opacity: 0.15;
+    bottom: -10%;
+    right: 25%;
+    animation: fiko_orb_drift 13s ease-in-out infinite reverse;
 }
 
-/* keep children above orbs */
-.fiko_orbital > * { position: relative; z-index: 1; }
+.fiko_glow > * { position: relative; z-index: 1; }
 
 @keyframes fiko_orb_drift {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(30px, -20px) scale(1.05); }
-  66%  { transform: translate(-20px, 15px) scale(0.96); }
-  100% { transform: translate(0, 0) scale(1); }
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(30px, -20px) scale(1.05); }
+    66%  { transform: translate(-20px, 15px) scale(0.96); }
+    100% { transform: translate(0, 0) scale(1); }
 }
 
+/* ── .fiko_orbital — true elliptical orbit ─────────────── */
+/* CSS Motion Path (offset-path). Super slow — ambient, not busy.    */
+/* Two orbs on slightly different ellipses, opposite directions.      */
+
+.fiko_orbital {
+    --fiko_orb_a: oklch(0.65 0.22 40);   /* warm orange */
+    --fiko_orb_b: oklch(0.72 0.20 65);   /* amber */
+    position: relative;
+    overflow: hidden;
+    background: var(--surface, oklch(0.12 0.01 265));
+}
+
+.fiko_orbital::before {
+    width: 55%;
+    aspect-ratio: 1;
+    background: var(--fiko_orb_a);
+    filter: blur(70px);
+    opacity: 0.20;
+    offset-path: ellipse(30% 18% at 50% 50%);
+    offset-distance: 0%;
+    animation: fiko_orbit 38s linear infinite;
+}
+
+.fiko_orbital::after {
+    width: 40%;
+    aspect-ratio: 1;
+    background: var(--fiko_orb_b);
+    filter: blur(55px);
+    opacity: 0.14;
+    offset-path: ellipse(36% 22% at 50% 50%);
+    offset-distance: 50%;
+    animation: fiko_orbit 54s linear infinite reverse;
+}
+
+.fiko_orbital > * { position: relative; z-index: 1; }
+
+@keyframes fiko_orbit {
+    from { offset-distance: 0%; }
+    to   { offset-distance: 100%; }
+}
+
+/* ── motion safety ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .fiko_orbital::before,
-  .fiko_orbital::after { animation: none; }
+    .fiko_glow::before,
+    .fiko_glow::after,
+    .fiko_orbital::before,
+    .fiko_orbital::after { animation: none; }
 }
 
 /* ─── .fiko shake utility ───────────────────────────────────────────────────
@@ -76,40 +132,33 @@
  */
 
 .fiko,
-.fiko_hover,
-.fiko_loop {
-  --shake_distance: 18px;
-  --shake_duration: 0.6s;
+.fiko_hover {
+    --shake_distance: 18px;
+    --shake_duration: 0.6s;
 }
 
 /* default: one-shot on load */
 .fiko {
-  animation: fiko_shake var(--shake_duration) ease-out both;
+    animation: fiko_shake var(--shake_duration) ease-out both;
 }
 
 /* hover: re-triggers each time cursor enters */
 .fiko_hover:hover {
-  animation: fiko_shake var(--shake_duration) ease-out both;
-}
-
-/* loop: runs continuously */
-.fiko_loop {
-  animation: fiko_shake var(--shake_duration) ease-out infinite;
+    animation: fiko_shake var(--shake_duration) ease-out both;
 }
 
 @keyframes fiko_shake {
-  0%   { transform: translateY(0); }
-  10%  { transform: translateY(calc(var(--shake_distance) * -1)); }
-  22%  { transform: translateY(calc(var(--shake_distance) * 0.78)); }
-  36%  { transform: translateY(calc(var(--shake_distance) * -0.56)); }
-  50%  { transform: translateY(calc(var(--shake_distance) * 0.44)); }
-  64%  { transform: translateY(calc(var(--shake_distance) * -0.22)); }
-  78%  { transform: translateY(calc(var(--shake_distance) * 0.11)); }
-  100% { transform: translateY(0); }
+    0%   { transform: translateY(0); }
+    10%  { transform: translateY(calc(var(--shake_distance) * -1)); }
+    22%  { transform: translateY(calc(var(--shake_distance) * 0.78)); }
+    36%  { transform: translateY(calc(var(--shake_distance) * -0.56)); }
+    50%  { transform: translateY(calc(var(--shake_distance) * 0.44)); }
+    64%  { transform: translateY(calc(var(--shake_distance) * -0.22)); }
+    78%  { transform: translateY(calc(var(--shake_distance) * 0.11)); }
+    100% { transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fiko,
-  .fiko_hover:hover,
-  .fiko_loop { animation: none; }
+    .fiko,
+    .fiko_hover:hover { animation: none; }
 }

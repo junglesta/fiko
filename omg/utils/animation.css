@@ -1,0 +1,54 @@
+/*! 🐉 404.css | MIT License */
+/* utils/animation.css — @starting-style on-enter helpers */
+
+/* ── ENTER TRANSITIONS ── */
+/* Apply to any element that should animate in when first rendered.
+ * Requires a transition on the property being animated.
+ * Usage: <div class="fade_in"> or <dialog class="slide_up">
+ */
+
+.fade_in {
+    opacity: 1;
+    transition: opacity var(--transition);
+}
+@starting-style {
+    .fade_in {
+        opacity: 0;
+    }
+}
+
+.slide_up {
+    translate: 0 0;
+    opacity: 1;
+    transition: translate var(--transition), opacity var(--transition);
+}
+@starting-style {
+    .slide_up {
+        translate: 0 1rem;
+        opacity: 0;
+    }
+}
+
+.slide_down {
+    translate: 0 0;
+    opacity: 1;
+    transition: translate var(--transition), opacity var(--transition);
+}
+@starting-style {
+    .slide_down {
+        translate: 0 -1rem;
+        opacity: 0;
+    }
+}
+
+.scale_in {
+    scale: 1;
+    opacity: 1;
+    transition: scale var(--transition), opacity var(--transition);
+}
+@starting-style {
+    .scale_in {
+        scale: 0.95;
+        opacity: 0;
+    }
+}

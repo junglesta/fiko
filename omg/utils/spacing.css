@@ -16,19 +16,19 @@
 .pad_block_xl  { padding-block: calc(var(--spaceV) * 9);   }
 .pad_block_xxl { padding-block: calc(var(--spaceV) * 12);  }
 
-.pad_top_sm  { padding-top: calc(var(--spaceV) * 1.5); }
-.pad_top_md  { padding-top: calc(var(--spaceV) * 3);   }
-.pad_top_lg  { padding-top: calc(var(--spaceV) * 6);   }
-.pad_top_xl  { padding-top: calc(var(--spaceV) * 9);   }
-.pad_top_xxl { padding-top: calc(var(--spaceV) * 12);  }
+.pad_top_sm  { padding-block-start: calc(var(--spaceV) * 1.5); }
+.pad_top_md  { padding-block-start: calc(var(--spaceV) * 3);   }
+.pad_top_lg  { padding-block-start: calc(var(--spaceV) * 6);   }
+.pad_top_xl  { padding-block-start: calc(var(--spaceV) * 9);   }
+.pad_top_xxl { padding-block-start: calc(var(--spaceV) * 12);  }
 
-.pad_bottom_sm  { padding-bottom: calc(var(--spaceV) * 1.5); }
-.pad_bottom_md  { padding-bottom: calc(var(--spaceV) * 3);   }
-.pad_bottom_lg  { padding-bottom: calc(var(--spaceV) * 6);   }
-.pad_bottom_xl  { padding-bottom: calc(var(--spaceV) * 9);   }
-.pad_bottom_xxl { padding-bottom: calc(var(--spaceV) * 12);  }
+.pad_bottom_sm  { padding-block-end: calc(var(--spaceV) * 1.5); }
+.pad_bottom_md  { padding-block-end: calc(var(--spaceV) * 3);   }
+.pad_bottom_lg  { padding-block-end: calc(var(--spaceV) * 6);   }
+.pad_bottom_xl  { padding-block-end: calc(var(--spaceV) * 9);   }
+.pad_bottom_xxl { padding-block-end: calc(var(--spaceV) * 12);  }
 
-.top_padding { padding-top: var(--spaceV); }
+.top_padding { padding-block-start: var(--spaceV); }
 
 /* ── SPACER BLOCKS ───────────────────────────────── */
 

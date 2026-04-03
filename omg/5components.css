@@ -1,7 +1,8 @@
 /*! 🐉 404.css | MIT License */
-/* 5components.css — interactive elements */
+/* 5components.css — interactive element defaults and component classes */
 
-/* BUTTON / INPUT — shape & layout */
+/* ── BUTTON / INPUT ─────────────────────────────── */
+
 button,
 .button input[type="submit"],
 input[type="button"],
@@ -26,7 +27,7 @@ input[type="reset"],
     user-select: none;
 }
 
-/* BUTTON CLASS — wraps a <button> inside an <a> */
+/* .button — wraps a <button> inside an <a> */
 .button {
     border: none;
     border-radius: var(--radius);
@@ -45,7 +46,8 @@ button:hover {
     transform: translateY(3px);
 }
 
-/* LINK defaults */
+/* ── LINK ───────────────────────────────────────── */
+
 a:not(.underline),
 [role="link"] {
     outline: none;
@@ -71,7 +73,9 @@ a input[type="reset"] {
     user-select: none;
 }
 
-/* CTA BUTTON — filled, primary action */
+/* ── CTA BUTTON ─────────────────────────────────── */
+/* .button_cta — filled primary action */
+
 .button_cta button {
     background-color: var(--cta);
     border-color: var(--cta);
@@ -82,12 +86,15 @@ a input[type="reset"] {
     border-color: var(--cta_hover);
 }
 
-/* SVG overflow fix */
+/* ── SVG ────────────────────────────────────────── */
+
 svg:not(:root) {
     overflow: hidden;
 }
 
-/* STICKY HEADER */
+/* ── CONTROLS ───────────────────────────────────── */
+/* Sticky header shell — fixed height for layout stability */
+
 .controls {
     height: var(--sticky_header_height);
     min-height: var(--sticky_header_height);
@@ -100,90 +107,14 @@ svg:not(:root) {
     z-index: 20;
 }
 
-/* ── HEADING SCALE ──────────────────────────────── */
-
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-    user-select: none !important;
-    line-height: 1.2 !important;
-    font-family: var(--font_family) !important;
-}
-.h1 {
-    font-size: calc(var(--font_size) * 2.5) !important;
-    font-weight: var(--weight_light) !important;
-}
-.h2 {
-    font-size: calc(var(--font_size) * 2) !important;
-    font-weight: var(--weight_light) !important;
-}
-.h3 {
-    font-size: calc(var(--font_size) * 1.75) !important;
-    font-weight: var(--weight_thin) !important;
-}
-.h4 {
-    font-size: calc(var(--font_size) * 1.5) !important;
-    font-weight: var(--weight_thin) !important;
-}
-.h5 {
-    font-size: calc(var(--font_size) * 1.25) !important;
-    font-weight: var(--weight_thin) !important;
-}
-.h6 {
-    font-size: calc(var(--font_size) * 1) !important;
-    font-weight: var(--weight_light) !important;
-}
-
-/* ── TEXT UTILITIES ─────────────────────────────── */
-
-.dim {
-    color: var(--text);
-    font-size: calc(var(--font_size) * 0.95);
-}
-
-.underline {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-.prose {
-    max-width: 66ch;
-    margin-inline: auto;
-}
-
-.typewriter {
-    font-family: var(--font_serif);
-}
-
-.cat {
-    text-transform: capitalize;
-}
-
-/* ── LAYOUT UTILITIES ───────────────────────────── */
-
-.maximise {
-    margin-left: var(--maximise);
-    margin-right: var(--maximise);
-}
-
-.clipped_circle {
-    clip-path: circle(50px at center);
-}
-
 /* ── ACCORDION ──────────────────────────────────── */
 /* Usage: <details class="accordion"><summary>Title</summary><div>…</div></details>
- * Icon tokens: --accordion_icon_open / --accordion_icon_closed (default + / ×)
- * Override per-element: style="--accordion_icon_closed: '▶'; --accordion_icon_open: '▼'"
+ * Chevron rotates 180° when open. Use .dotted modifier for dot-leader.
+ * Use .accordion_chevron modifier for right-pointing arrow style.
  */
 
-details.accordion {
-    border-bottom: var(--borderpx) solid var(--border_color);
-}
-
 details.accordion > summary {
+    border-bottom: var(--borderpx) solid var(--border_color);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -228,7 +159,7 @@ details.accordion > summary::after {
     transform: rotate(0deg);
     transition: transform var(--transition);
     order: 2;
-    margin-left: auto;
+    margin-inline-start: auto;
 }
 
 details.accordion[open] > summary::after {
@@ -243,66 +174,193 @@ details.accordion > :not(summary) {
     padding: var(--spaceV) var(--spaceH);
 }
 
-/* ── ACCORDION DOTTED — dot-leader modifier ─────── */
-/* Usage: <details class="accordion dotted">
+/* ── ACCORDION DOTTED ───────────────────────────── */
+/* Modifier: <details class="accordion dotted">
  * Adds a dotted leader between the label and the chevron.
  */
+
+details.accordion.dotted > summary {
+    border-bottom: none;
+}
 
 details.accordion.dotted > summary::before {
     content: "";
     flex: 1;
-    border-bottom: var(--borderpx) dotted currentColor;
+    border-bottom: max(2px, var(--borderpx)) dotted currentColor;
     margin-inline: 0.5rem;
     align-self: center;
     opacity: 0.3;
     order: 1;
 }
 
-/* ── ACCORDION CHEVRON — SVG arrow marker ────────── */
-/* Modifier: <details class="accordion accordion_chevron">
- * Overrides default down-chevron with a right-pointing SVG arrow.
- * Closed: → pointing right. Open: rotated 90° pointing down.
- * Composable: stack with other modifiers for full editorial style.
- * Color: currentColor by default; override with CSS custom property.
+/* ── ACCORDION PLUS/MINUS ───────────────────────── */
+/* Modifier: <details class="accordion accordion_pm">
+ * Plus when closed, minus when open. No rotation — clean toggle symbol.
  */
 
-details.accordion.accordion_chevron > summary::after,
-details.accordion.accordion_chevron[open] > summary::after {
+details.accordion.accordion_pm > summary::after {
+    content: "+";
+    background-color: transparent;
+    -webkit-mask-image: none;
+    mask-image: none;
+    width: auto;
+    height: auto;
+    font-size: 1.75em;
+    font-weight: var(--weight_thin);
+    line-height: 1;
+    color: var(--primary);
+    transition: color var(--transition);
+    transform: none;
+}
+
+details.accordion.accordion_pm[open] > summary::after {
+    content: "−";
+    transform: none;
+}
+
+/* ── FORM ELEMENTS ──────────────────────────────── */
+/* Inputs, textarea, select. Wrap with .field for labelled stacks. */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+select {
+    height: var(--tap_size);
+    padding-inline: var(--spaceH);
+    padding-block: var(--spaceV);
+    border: var(--borderpx) solid var(--border_color);
+    border-radius: var(--radius);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    outline: none;
+    transition: border-color var(--transition);
+    width: 100%;
+}
+
+textarea {
+    min-height: calc(var(--tap_size) * 2);
+    padding-inline: var(--spaceH);
+    padding-block: var(--spaceV);
+    border: var(--borderpx) solid var(--border_color);
+    border-radius: var(--radius);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    outline: none;
+    resize: vertical;
+    transition: border-color var(--transition);
+    width: 100%;
+}
+
+/* focus — highlight border, suppress default outline (reset handles :focus-visible) */
+input[type="text"]:focus-visible,
+input[type="email"]:focus-visible,
+input[type="password"]:focus-visible,
+input[type="search"]:focus-visible,
+input[type="tel"]:focus-visible,
+input[type="url"]:focus-visible,
+input[type="number"]:focus-visible,
+input[type="date"]:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    border-color: var(--primary);
+}
+
+/* disabled */
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="password"]:disabled,
+input[type="search"]:disabled,
+input[type="tel"]:disabled,
+input[type="url"]:disabled,
+input[type="number"]:disabled,
+input[type="date"]:disabled,
+textarea:disabled,
+select:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* invalid — semantic red (OKLCH) */
+input[type="text"]:invalid,
+input[type="email"]:invalid,
+input[type="password"]:invalid,
+input[type="search"]:invalid,
+input[type="tel"]:invalid,
+input[type="url"]:invalid,
+input[type="number"]:invalid,
+input[type="date"]:invalid,
+textarea:invalid,
+select:invalid,
+input[type="text"][aria-invalid="true"],
+input[type="email"][aria-invalid="true"],
+input[type="password"][aria-invalid="true"],
+input[type="search"][aria-invalid="true"],
+input[type="tel"][aria-invalid="true"],
+input[type="url"][aria-invalid="true"],
+input[type="number"][aria-invalid="true"],
+input[type="date"][aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: oklch(0.6 0.22 25);
+}
+
+/* select — hide native arrow, inject currentColor chevron via mask */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-inline-end: calc(var(--spaceH) + 1.75em);
+    background-image: none;
+    /* chevron pseudo not possible on replaced elements; use wrapper .select_wrap instead */
+}
+
+/* .select_wrap — wraps <select> to inject a currentColor chevron via ::after */
+.select_wrap {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+}
+
+.select_wrap select {
+    width: 100%;
+}
+
+.select_wrap::after {
     content: "";
-    display: block;
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: var(--spaceH);
     width: 1.25em;
     height: 1.25em;
-    flex-shrink: 0;
+    margin-block: auto;
     background-color: currentColor;
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 6L15 12L9 18'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9'/%3E%3C/svg%3E");
     -webkit-mask-size: contain;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;
-    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 6L15 12L9 18'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9'/%3E%3C/svg%3E");
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
-    transform: rotate(0deg);
-    transition:
-        transform 200ms ease,
-        background-color var(--transition);
-    line-height: 1;
-    font-size: 1em;
+    pointer-events: none;
 }
 
-details.accordion.accordion_chevron[open] > summary::after {
-    transform: rotate(90deg);
+/* ── FIELD WRAPPER ──────────────────────────────── */
+/* Usage: <div class="field"><label>…</label><input …></div> */
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spaceV) * 0.5);
 }
 
-/* ── DOT LEADER ─────────────────────────────────── */
-/* Usage: <span class="dots"> between label and value in menus/TOC */
-
-.dots {
-    flex: 8;
-    border-bottom: var(--borderpx) dotted currentColor;
-    margin: 0 0 0 8px;
-    height: var(--borderpx);
-    position: relative;
-    top: 0;
-    opacity: 0.25;
+.field label {
+    font-weight: var(--weight_regular);
+    user-select: none;
 }
